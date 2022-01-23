@@ -45,8 +45,51 @@
     background: #fff;
     list-style: none;
   }
+
+  &.hide {
+    .content {
+      animation: slideLeft 1s;
+    }
+  }
 }
 // NAV .//
+
+// HOME MAIN BLOG
+.home {
+  .card {
+    background: #fff;
+    border-radius: 1rem;
+
+    .card-title {
+      width: 100%;
+      letter-spacing: 0.1rem;
+      text-align: center;
+    }
+  }
+
+  .home__tabs {
+    .active p{
+      width: 100%;
+      height: 100%;
+      background: $primary-color-trans-1;
+    }
+
+    .feeds p{
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+  }
+}
+// HOME MAIN BLOG .//
+
+@keyframes slideLeft {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
 
 @media screen and (min-width: 576px) {
   .cus__navbar {
@@ -59,8 +102,13 @@
     }
   }
 
-  .cus__row {
-    display: flex;
-    justify-content: space-between;
+  .flex-1 {
+    flex: 1 0;
+    margin: 1rem;
+  }
+
+  .flex-2 {
+    flex: 2 0;
+    margin: 0.8rem;
   }
 }

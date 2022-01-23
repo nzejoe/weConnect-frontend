@@ -1,3 +1,92 @@
+// NAVBAR
+.cus__navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 1rem 0;
+  z-index: 2;
+  background: #fff;
+}
+// NAVBAR .//
+
+// NAV
+.cus__nav {
+  &.show {
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+    left: 0;
+    background: #fff;
+
+    .backdrop {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: $secondary-color-trans-2;
+      cursor: pointer;
+    }
+
+    .content {
+      left: 0;
+      height: 100vh;
+      width: 50%;
+      z-index: 3;
+      transition: all 0.2s;
+    }
+  }
+
+  .content {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    background: #fff;
+    list-style: none;
+  }
+
+  &.hide {
+    .content {
+      animation: slideLeft 1s;
+    }
+  }
+}
+// NAV .//
+
+// HOME MAIN BLOG
+.home{
+    .card{
+        background: #fff;
+    }
+}
+// HOME MAIN BLOG .//
+
+@keyframes slideLeft {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .cus__navbar {
+    display: none;
+  }
+
+  .cus__nav {
+    .content {
+      position: static; // return to normal positon
+    }
+  }
+
+  .cus__row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 // NAV TOGGLER
 .nav__toggler {
   width: 3rem;

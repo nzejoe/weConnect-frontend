@@ -23,7 +23,7 @@ const Base = ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <div className="py-4">
       <Container className="cus__navbar">
         <div className="cus__brand">
           <Link to="/">weConnect</Link>
@@ -35,7 +35,7 @@ const Base = ({ children }) => {
           <span></span>
         </div>
       </Container>
-      <Container className="cus__row">
+      <Container className="d-sm-flex">
         <CusNav show={show} setShow={setShow} />
         {children}
         <SideBlog />
