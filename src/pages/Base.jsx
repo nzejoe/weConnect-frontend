@@ -1,33 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { } from 'react-bootstrap'
+import { Container } from "react-bootstrap";
 import { CusNav, SideBlog } from "../components";
 
-// bootstrap
-import { Container } from "react-bootstrap";
-
-// import './Pages.scss'
-
 const Base = ({ children }) => {
-    const [show, setShow] = useState(false);
-    console.log(show)
+  const [show, setShow] = useState(false);
+
+useEffect(()=>{
+     window.addEventListener('resize',(e)=>{
+        if(e.target.innerWidth > 576){
+            setShow(false);
+        }
+    })
+}, [])
+ 
   return (
     <div>
-      <Container>
-        <div className="cus__row">
-          <div className="cus__navbar">
+        <Container className="cus__navbar">
             <div className="cus__brand">
               <Link to="/">weConnect</Link>
             </div>
-            <div className={`nav__toggler ${show? 'show': ''}`} onClick={()=>setShow(!show)}>
+            <div
+              className={`nav__toggler ${show ? "show" : ""}`}
+              onClick={() => setShow(!show)}
+            >
               <span></span>
             </div>
-          </div>
-          <CusNav />
+        </Container>
+        <Container className="cus__row">
+          <CusNav show={show} setShow={setShow}/>
           {children}
           <SideBlog />
-        </div>
-      </Container>
+        </Container>
     </div>
   );
 };

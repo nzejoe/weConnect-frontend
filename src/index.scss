@@ -1,9 +1,10 @@
 @import "./styles/_variable";
 @import "./styles/_pages";
 @import "./styles/_components";
+@import "./styles/_layout";
 
 * {
-  &::before,
+  &,&::before,
   &::after {
     margin: 0;
     padding: 0;
