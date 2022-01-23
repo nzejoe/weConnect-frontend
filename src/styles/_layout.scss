@@ -68,15 +68,28 @@
   }
 
   .home__tabs {
-    .active p{
+    .col {
+      cursor: pointer;
+      p{
+          font-size: .85rem;
+          letter-spacing: .1rem;
+      }
+    }
+    .active p {
       width: 100%;
       height: 100%;
-      background: $primary-color-trans-1;
+      background: $primary-color-trans-2;
+      border-bottom: 2px solid $primary-color;
     }
 
-    .feeds p{
-        border-top-left-radius: 1rem;
-        border-bottom-left-radius: 1rem;
+    .feeds p {
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+
+    .trending p {
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
     }
   }
 }
