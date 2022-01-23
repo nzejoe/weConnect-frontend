@@ -3,11 +3,12 @@
   width: 3rem;
   height: 3rem;
   border: 3px solid $primary-color-trans-1;
+  padding: 0 1rem;
   position: relative;
   cursor: pointer;
 
   span {
-    width: 100%;
+    width: 80%;
     height: 3px;
     display: block;
     background: $primary-color;
