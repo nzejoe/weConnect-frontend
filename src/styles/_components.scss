@@ -105,6 +105,18 @@
 }
 // BRAND .//
 
+// FEED
+.feed-content{
+  .input-group{
+    height: 3.5rem;
+
+    .icon{
+      font-size: 1.5rem;
+    }
+  }
+}
+// FEED .//
+
 
 // MAX SCREEN ( mobile devices )
 @media screen and (max-width: 600px) {
