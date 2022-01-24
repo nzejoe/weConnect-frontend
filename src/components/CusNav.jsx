@@ -18,67 +18,67 @@ const CusNav = ({ show, setShow }) => {
     <aside className={`cus__col cus__nav ${show ? "show" : "hide"}`}>
       <div className="backdrop" onClick={() => setShow(false)}></div>
       <Nav className="content navbar-nav justify-content-center flex-grow-1">
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
             to="/"
-            className="text-dark text-upper text-muted"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdHome /> Home
+            <MdHome  className="icon"/> Home
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
             to="/profile/2345/"
-            className="text-dark text-upper text-muted"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdAccountCircle /> Profile
+            <MdAccountCircle  className="icon"/> Profile
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/profile/2345/"
-            className="text-dark text-upper text-muted"
+            to="/explore"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-           <MdExplore/> Explore
+           <MdExplore className="icon"/> Explore
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/profile/2345/"
-            className="text-dark text-upper text-muted"
+            to="/language/"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdOutlineTranslate/> Language
+            <MdOutlineTranslate className="icon"/> Language
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/profile/2345/"
-            className="text-dark text-upper text-muted"
+            to="/logout/"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdOutlineLogout/> Logout
+            <MdOutlineLogout className="icon"/> Logout
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/"
-            className="text-dark text-upper text-muted"
+            to="/pages/"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdOutlineWeb/> Pages
+            <MdOutlineWeb className="icon"/> Pages
           </NavLink>
         </NavItem>
-        <NavItem className="mb-4">
+        <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/"
-            className="text-dark text-upper text-muted"
+            to="/trending/"
+            className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdOutlineLocalFireDepartment/> Trending
+            <MdOutlineLocalFireDepartment className="icon"/> Trending
           </NavLink>
         </NavItem>
       </Nav>
