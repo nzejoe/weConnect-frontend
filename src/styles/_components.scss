@@ -69,24 +69,24 @@
 // NAV TOGGLER .//
 
 // NAV
-.cus__nav{
-  .nav-link{
+.cus__nav {
+  .nav-link {
     background: transparent;
 
-    &.active, &:hover{
+    &.active,
+    &:hover {
       background: #fff;
       color: #000 !important;
       border-radius: 1rem;
       box-shadow: $shadow-light;
 
-      .icon{
+      .icon {
         color: #000;
       }
     }
-
   }
 
-  .icon{
+  .icon {
     display: block;
     margin-right: 1rem;
     font-size: 1.5rem;
@@ -95,32 +95,46 @@
 // NAV .//
 
 // BRAND
-.brand{
+.brand {
   font-size: 1.5rem;
   background: $bg-light;
 
-  .brand-icon{
+  .brand-icon {
     font-size: 3rem;
   }
 }
 // BRAND .//
 
 // FEED
-.feed-content{
-  .input-group{
+.feed-content {
+  .input-group {
     height: 3.5rem;
 
-    .icon{
+    .icon {
       font-size: 1.5rem;
+    }
+  }
+}
+
+#feed-modal {
+  .modal-header {
+    .icon {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  }
+  .modal-footer {
+    .icon {
+      font-size: 3rem;
+      cursor: pointer;
     }
   }
 }
 // FEED .//
 
-
 // MAX SCREEN ( mobile devices )
 @media screen and (max-width: 600px) {
-  .brand{
+  .brand {
     position: relative;
     z-index: inherit;
     width: 50%;
