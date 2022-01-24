@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { CusNav, SideBlog } from "../components";
 
 const Base = ({ children }) => {
@@ -23,7 +23,7 @@ const Base = ({ children }) => {
   }, []);
 
   return (
-    <div className="py-4">
+    <div className="main-content">
       <Container className="cus__navbar">
         <div className="cus__brand">
           <Link to="/">weConnect</Link>
@@ -35,10 +35,16 @@ const Base = ({ children }) => {
           <span></span>
         </div>
       </Container>
-      <Container className="d-sm-flex">
-        <CusNav show={show} setShow={setShow} />
-        {children}
-        <SideBlog />
+      <Container className="h-sm-100">
+        <Row sm={1} md={3}>
+          <Col md={3}>
+            <CusNav show={show} setShow={setShow} />
+          </Col>
+          <Col md={6}>{children}</Col>
+          <Col md={3}>
+            <SideBlog />
+          </Col>
+        </Row>
       </Container>
     </div>
   );

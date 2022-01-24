@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SideBlog = () => {
-  return <div className="cus__col flex-1">side blog</div>;
+  return <aside className="cus__col col-sm-3">side blog</aside>;
 };
 
 export default SideBlog;

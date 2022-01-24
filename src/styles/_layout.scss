@@ -1,9 +1,16 @@
+.main-content {
+  min-height: 100vh;
+}
+
 // NAVBAR
 .cus__navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   padding: 1rem 0;
   z-index: 2;
   background: #fff;
@@ -12,46 +19,17 @@
 
 // NAV
 .cus__nav {
-  &.show {
-    height: 100vh;
-    width: 100%;
-    z-index: 5;
-    left: 0;
-    background: #fff;
 
-    .backdrop {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      background: $secondary-color-trans-2;
-      cursor: pointer;
-    }
+  .navbar-nav{
+    height: 100%;
 
-    .content {
-      left: 0;
-      height: 100vh;
-      width: 50%;
-      z-index: 3;
-      transition: all 0.2s;
-    }
   }
 
-  .content {
-    position: fixed;
-    left: -100%;
-    top: 0;
-    background: #fff;
-    list-style: none;
-  }
-
-  &.hide {
-    .content {
-      animation: slideLeft 1s;
-    }
+  .content{
+    background: $bg-light;
   }
 }
+
 // NAV .//
 
 // HOME MAIN BLOG
@@ -68,17 +46,20 @@
   }
 
   .home__tabs {
+    position: sticky;
+    top: 25px;
+
     .col {
       cursor: pointer;
-      p{
-          font-size: .85rem;
-          letter-spacing: .1rem;
+      p {
+        font-size: 0.85rem;
+        letter-spacing: 0.1rem;
       }
     }
     .active p {
       width: 100%;
       height: 100%;
-      background: $primary-color-trans-2;
+      background: $bg-light;
       border-bottom: 2px solid $primary-color;
     }
 
@@ -104,24 +85,80 @@
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 600px) {
   .cus__navbar {
     display: none;
   }
 
+  .h-sm-100 {
+    min-height: 100vh;
+  }
+
   .cus__nav {
+    position: sticky !important;
+    top: 200px;
+
+    .backdrop {
+      display: none;
+    }
+
     .content {
       position: static; // return to normal positon
     }
   }
+}
 
-  .flex-1 {
-    flex: 1 0;
-    margin: 1rem;
+// MAX SCREEN ( mobile devices )
+@media screen and (max-width: 600px) {
+  .cus__nav {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    transition: all 0.2s;
+
+    &.show {
+      width: 100%;
+      z-index: 5;
+      left: 0;
+
+      .backdrop {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: $secondary-color-trans-2;
+        cursor: pointer;
+      }
+
+      .content {
+        position: relative;
+        left: 0;
+        width: 50%;
+        z-index: 3;
+      }
+    }
+
+    &.hide {
+      .content {
+        animation: slideLeft 1s;
+      }
+    }
+
+    .content {
+      height: 100vh;
+      width: 50%;
+    }
   }
 
-  .flex-2 {
-    flex: 2 0;
-    margin: 0.8rem;
+  .home{
+    .home__tabs{
+      top: 6rem;
+    }
+
+    .blog-post{
+      margin-top: 6rem;
+    }
   }
 }
