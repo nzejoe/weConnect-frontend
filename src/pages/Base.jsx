@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { CusNav, SideBlog } from "../components";
+import { CusNav, SideBlog, NavTabs } from "../components";
+import { MdPeople } from "react-icons/md";
 
 const Base = ({ children }) => {
   const [show, setShow] = useState(false);
 
+  
   useEffect(() => {
     if (show) {
       document.querySelector("body").classList.add("nav__shown");
@@ -23,10 +25,10 @@ const Base = ({ children }) => {
   }, []);
 
   return (
-    <div className="main-content">
+    <div className="main-content py-4">
       <Container className="cus__navbar">
-        <div className="cus__brand">
-          <Link to="/">weConnect</Link>
+        <div className="cus__brand d-flex align-items-center">
+          <Link to="/" className="nav-link"><MdPeople className="icon"/>weConnect</Link>
         </div>
         <div
           className={`nav__toggler ${show ? "show" : ""}`}
@@ -37,10 +39,13 @@ const Base = ({ children }) => {
       </Container>
       <Container className="h-sm-100">
         <Row sm={1} md={3}>
-          <Col md={3}>
+          <Col md={3} className="h-100 sticky-top">
             <CusNav show={show} setShow={setShow} />
           </Col>
-          <Col md={6}>{children}</Col>
+          <Col md={6}>
+            <NavTabs />
+            {children}
+          </Col>
           <Col md={3}>
             <SideBlog />
           </Col>

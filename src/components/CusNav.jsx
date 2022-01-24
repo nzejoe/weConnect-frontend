@@ -11,13 +11,17 @@ import {
   MdOutlineLogout,
   MdOutlineWeb,
   MdOutlineLocalFireDepartment,
+  MdPeople,
 } from "react-icons/md";
 
 const CusNav = ({ show, setShow }) => {
   return (
     <aside className={`cus__col cus__nav ${show ? "show" : "hide"}`}>
       <div className="backdrop" onClick={() => setShow(false)}></div>
-      <Nav className="content navbar-nav justify-content-center flex-grow-1">
+      <div className="brand py-5 px-2 d-flex align-items-center">
+      <MdPeople className="brand-icon text-primary"/> weConnect
+      </div>
+      <Nav className="content navbar-nav">
         <NavItem className="mb-2">
           <NavLink
             as={RLink}

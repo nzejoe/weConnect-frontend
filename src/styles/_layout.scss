@@ -1,5 +1,10 @@
 .main-content {
   min-height: 100vh;
+
+  .sticky-top{
+    position: sticky;
+    top: 30px;
+  }
 }
 
 // NAVBAR
@@ -14,27 +19,35 @@
   padding: 1rem 0;
   z-index: 2;
   background: #fff;
+
+  .cus__brand{
+    font-size: 1.2rem;
+
+    .icon{
+      font-size: 2rem;
+    }
+  }
 }
 // NAVBAR .//
 
 // NAV
 .cus__nav {
-
-  .navbar-nav{
+  .navbar-nav {
     height: 100%;
-
   }
 
-  .content{
+  .content {
     background: $bg-light;
   }
-
 }
 
 // NAV .//
 
-// HOME MAIN BLOG
-.home {
+// NAV TABS
+.nav-tabs {
+  position: sticky;
+  top: 25px;
+
   .card {
     background: #fff;
     border-radius: 1rem;
@@ -46,9 +59,7 @@
     }
   }
 
-  .home__tabs {
-    position: sticky;
-    top: 25px;
+  .tabs {
 
     .col {
       cursor: pointer;
@@ -75,6 +86,9 @@
     }
   }
 }
+// NAV TABS .//
+
+// HOME MAIN BLOG
 // HOME MAIN BLOG .//
 
 @keyframes slideLeft {
@@ -96,8 +110,6 @@
   }
 
   .cus__nav {
-    position: sticky !important;
-    top: 200px;
 
     .backdrop {
       display: none;
@@ -153,12 +165,12 @@
     }
   }
 
-  .home{
-    .home__tabs{
-      top: 6rem;
-    }
+  .nav-tabs {
+    top: 6rem;
+  }
 
-    .blog-post{
+  .home {
+    .blog-post {
       margin-top: 6rem;
     }
   }
