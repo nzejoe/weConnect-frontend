@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, Image } from "react-bootstrap";
-import { MdMoreVert } from "react-icons/md";
+import {
+  MdMoreVert,
+  MdChatBubbleOutline,
+  MdOutlineThumbUp,
+} from "react-icons/md";
 
 const PostList = () => {
   return (
@@ -34,6 +38,10 @@ const PostList = () => {
               adipisicing elit. Enim, unde!
             </p>
             <Card.Img className="post-img" src="img/post/post-3.jpg"></Card.Img>
+          </div>
+          <div className="post-actions d-flex p-2 text-muted">
+              <div className="like me-5"><MdOutlineThumbUp/> 20k</div>
+              <div className="comment-count"><MdChatBubbleOutline/> 10k</div>
           </div>
         </Card>
       </div>
