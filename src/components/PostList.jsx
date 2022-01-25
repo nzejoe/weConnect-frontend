@@ -22,7 +22,7 @@ const PostList = () => {
               <Image
                 fluid
                 roundedCircle
-                width={50}
+                width={60}
                 src="img/profile/profile-4.jpg"
               />
               <div className="author-info ms-2">
@@ -47,11 +47,11 @@ const PostList = () => {
           </div>
           <div className="post-actions py-2">
             <div className="count d-flex text-muted mb-1 px-4">
-              <div className="like me-5">
-                <MdOutlineThumbUp /> 20k
+              <div className="like clickable me-5">
+                <MdOutlineThumbUp className="count-icon" /> 20k
               </div>
-              <div className="comment-count">
-                <MdChatBubbleOutline /> 10k
+              <div className="comment-count clickable">
+                <MdChatBubbleOutline className="count-icon" /> 10k
               </div>
             </div>
 

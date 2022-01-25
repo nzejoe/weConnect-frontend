@@ -91,7 +91,7 @@ const Feeds = () => {
                 roundedCircle={true}
                 fluid={true}
                 src="img/profile/profile-4.jpg"
-                width={50}
+                width={60}
               />
               <div className="text-center">
                 <Card.Title className="m-0">Maya Jonathan</Card.Title>
@@ -106,7 +106,7 @@ const Feeds = () => {
                 roundedCircle={true}
                 fluid={true}
                 src="img/profile/profile-5.jpg"
-                width={50}
+                width={60}
               />
               <div className="text-center">
                 <Card.Title className="m-0">Sara Williams</Card.Title>
@@ -125,7 +125,7 @@ const Feeds = () => {
                 roundedCircle={true}
                 fluid={true}
                 src="img/profile/profile-2.jpg"
-                width={50}
+                width={60}
               />
               <div className="text-center">
                 <Card.Title className="m-0">Oke Emmanuel</Card.Title>
@@ -144,7 +144,7 @@ const Feeds = () => {
                 roundedCircle={true}
                 fluid={true}
                 src="img/profile/profile-3.jpg"
-                width={50}
+                width={60}
               />
               <div className="text-center">
                 <Card.Title className="m-0">David Max</Card.Title>
@@ -163,7 +163,7 @@ const Feeds = () => {
                 roundedCircle={true}
                 fluid={true}
                 src="img/profile/profile-1.jpg"
-                width={50}
+                width={60}
               />
               <div className="text-center">
                 <Card.Title className="m-0">Mabel Olaniyi</Card.Title>
