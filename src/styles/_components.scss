@@ -130,6 +130,44 @@
     }
   }
 }
+
+.active-users {
+  .body {
+    overflow-x: hidden;
+
+    .card-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+
+    .card {
+      border-radius: 1rem;
+      // flex: 0 0 calc((100 / 5) - 1rem);
+      min-width: 150px;
+      height: 180px;
+      margin-right: 0.5rem;
+
+      .card-title {
+        font-size: 0.8rem;
+      }
+
+      .card-text {
+        color: $secondary-color-trans-2;
+      }
+
+      .btn {
+        border-radius: 1rem;
+
+        &.btn-follow {
+          // this is for follow btn
+          display: inline-flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
 // FEED .//
 
 // MAX SCREEN ( mobile devices )
