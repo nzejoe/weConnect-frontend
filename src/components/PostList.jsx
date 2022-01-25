@@ -7,7 +7,7 @@ const PostList = () => {
     <div className="post-list my-4">
       <div className="post my-2">
         <Card>
-          <div className="header  p-3 d-flex justify-content-between align-items-center">
+          <div className="post-header mb-3 p-3 d-flex justify-content-between align-items-center">
             <div className="post-author d-flex">
               <Image
                 fluid
@@ -25,6 +25,15 @@ const PostList = () => {
                 23 Dec <MdMoreVert className="option-icon ms-2 p-1" />
               </p>
             </div>
+          </div>
+          <div className="post-body">
+            <p className="post-text text-muted px-3">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam
+              tempore ratione perferendis iure quisquam consectetur. Est magni
+              ut possimus rem! Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Enim, unde!
+            </p>
+            <Card.Img className="post-img" src="img/post/post-3.jpg"></Card.Img>
           </div>
         </Card>
       </div>
