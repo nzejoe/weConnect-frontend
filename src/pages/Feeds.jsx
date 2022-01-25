@@ -128,8 +128,8 @@ const Feeds = () => {
                 width={60}
               />
               <div className="text-center">
-                <Card.Title className="m-0">Oke Emmanuel</Card.Title>
-                <Card.Text classname="text-muted">@oke</Card.Text>
+                <Card.Title className="m-0">Mel Emmanuel</Card.Title>
+                <Card.Text classname="text-muted">@mel</Card.Text>
               </div>
               <Button
                 variant="sm"

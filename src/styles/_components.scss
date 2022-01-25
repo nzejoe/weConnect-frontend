@@ -194,7 +194,7 @@
     }
 
     .count{
-      
+
       .count-icon{
         font-size: 1.5rem;
       }
@@ -213,15 +213,27 @@
   .comment-form{
 
     .icon{
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
   }
 
   .comment-list{
       .comment{
+        width: 100%;
+
         .card-text{
           font-size: .8rem;
           line-height: 1.3;
+        }
+
+        .img-container{
+          min-width: 40px;
+          height: 40px;
+
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
         .footer{
           small{
