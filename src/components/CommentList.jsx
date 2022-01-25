@@ -3,7 +3,6 @@ import { FormControl, Form, Card, Image, Modal, Button } from "react-bootstrap";
 import {
   MdAccountCircle,
   MdOutlineArrowBackIosNew,
-  MdImage,
   MdOutlineSend,
 } from "react-icons/md";
 

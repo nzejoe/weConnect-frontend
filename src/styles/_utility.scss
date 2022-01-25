@@ -5,3 +5,25 @@
 .bg-light-cus{
     background-color: $bg-light !important;
 }
+
+.aside-right{
+    .trending{
+        hr{
+            margin: 0;
+        }
+
+        h6{
+            font-size: .8rem;
+            margin: 0;
+        }
+
+        p{
+            margin: 0;
+        }
+    }
+}
+
+.text-small{
+    font-size: .8rem;
+    opacity: .8;
+}
