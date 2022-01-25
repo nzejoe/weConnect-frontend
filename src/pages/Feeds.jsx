@@ -16,6 +16,7 @@ import {
   MdOutlineSend,
   MdAdd,
 } from "react-icons/md";
+import { PostList } from "../components";
 
 const Feeds = () => {
   const [show, setShow] = useState(false);
@@ -179,6 +180,7 @@ const Feeds = () => {
           </div>
         </div>
       </div>
+      <PostList/>
     </div>
   );
 };

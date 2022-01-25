@@ -168,6 +168,33 @@
     }
   }
 }
+
+// post
+.post{
+  .card{
+    border-radius: 1rem;
+
+    .card-title{
+      font-size: .8rem;
+    }
+    .username{
+      font-size: small;
+    }
+
+    .date{
+      font-size: .7rem;
+
+      .option-icon{
+        width: 30px;
+        height: 30px;
+        background-color: $bg-light;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+// post .//
 // FEED .//
 
 // MAX SCREEN ( mobile devices )
