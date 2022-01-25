@@ -1,12 +1,18 @@
 import React from "react";
-import { Card, Image } from "react-bootstrap";
+import {
+  Card,
+  Image,
+} from "react-bootstrap";
 import {
   MdMoreVert,
   MdChatBubbleOutline,
   MdOutlineThumbUp,
 } from "react-icons/md";
 
+import { CommentList } from ".";
+
 const PostList = () => {
+  
   return (
     <div className="post-list my-4">
       <div className="post my-2">
@@ -39,9 +45,18 @@ const PostList = () => {
             </p>
             <Card.Img className="post-img" src="img/post/post-3.jpg"></Card.Img>
           </div>
-          <div className="post-actions d-flex p-2 text-muted">
-              <div className="like me-5"><MdOutlineThumbUp/> 20k</div>
-              <div className="comment-count"><MdChatBubbleOutline/> 10k</div>
+          <div className="post-actions py-2">
+            <div className="count d-flex text-muted mb-1 px-4">
+              <div className="like me-5">
+                <MdOutlineThumbUp /> 20k
+              </div>
+              <div className="comment-count">
+                <MdChatBubbleOutline /> 10k
+              </div>
+            </div>
+
+            {/* comment list */}
+            <CommentList />
           </div>
         </Card>
       </div>

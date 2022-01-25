@@ -1,8 +1,8 @@
 import CusNav from "./CusNav";
 import SideBlog from "./SideBlog";
-import NavTabs from "./NavTabs"; 
+import NavTabs from "./NavTabs";
 import Feeds from "../pages/Feeds";
 import PostList from "./PostList";
+import CommentList from "./CommentList";
 
-
-export { CusNav, SideBlog, NavTabs, Feeds, PostList };
+export { CusNav, SideBlog, NavTabs, Feeds, PostList, CommentList };
