@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { MdOutlineKeyboardBackspace } from 'react-icons/md'
+import { PostForm, PostList } from '.';
 
 const TrendingTabContent = () => {
-  return <div className='trending-content'>
-    <div className="header">
-      <Link to="/"><MdOutlineKeyboardBackspace/></Link>
+  return (
+    <div className="trending-content">
+      <PostForm/>
+      <PostList/>
     </div>
-  </div>;
+  );
 };
 
 export default TrendingTabContent;
