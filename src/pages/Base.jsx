@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { CusNav, SideBlog, NavTabs } from "../components";
 import { MdPeople } from "react-icons/md";
 
-const Base = ({ children }) => {
+const Base = ({ children, indexHandler }) => {
   const [show, setShow] = useState(false);
 
   
@@ -28,7 +28,10 @@ const Base = ({ children }) => {
     <div className="main-content py-4">
       <Container className="cus__navbar">
         <div className="cus__brand d-flex align-items-center">
-          <Link to="/" className="nav-link"><MdPeople className="icon"/>weConnect</Link>
+          <Link to="/" className="nav-link">
+            <MdPeople className="icon" />
+            weConnect
+          </Link>
         </div>
         <div
           className={`nav__toggler ${show ? "show" : ""}`}
@@ -43,7 +46,7 @@ const Base = ({ children }) => {
             <CusNav show={show} setShow={setShow} />
           </Col>
           <Col md={6}>
-            <NavTabs />
+            <NavTabs indexHandler={indexHandler} />
             {children}
           </Col>
           <Col md={3}>

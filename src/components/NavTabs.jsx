@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 
-const NavTabs = () => {
+const NavTabs = ({ indexHandler }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   const getIndex = (index) => {
     setTabIndex(index);
   };
+
+  useEffect(()=>{
+    indexHandler(tabIndex);
+  }, [tabIndex, indexHandler])
 
   return (
     <div className="nav-tabs mb-4">
@@ -28,7 +33,9 @@ const NavTabs = () => {
             className={`trending ${tabIndex === 2 ? "active" : ""}`}
             onClick={() => getIndex(2)}
           >
-            <p className="text-dark text-muted m-0 text-center py-3">TRENDING</p>
+            <p className="text-dark text-muted m-0 text-center py-3">
+              TRENDING
+            </p>
           </Col>
         </Row>
       </Card>

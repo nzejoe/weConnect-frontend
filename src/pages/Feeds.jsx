@@ -53,7 +53,7 @@ const Feeds = () => {
                 />
                 <div className="text-center">
                   <Card.Title className="m-0">Maya Jonathan</Card.Title>
-                  <Card.Text classname="text-muted">@maya</Card.Text>
+                  <Card.Text className="text-muted">@maya</Card.Text>
                 </div>
                 <Button variant="sm" className="btn-primary">
                   Following
@@ -68,7 +68,7 @@ const Feeds = () => {
                 />
                 <div className="text-center">
                   <Card.Title className="m-0">Sara Williams</Card.Title>
-                  <Card.Text classname="text-muted">@sara</Card.Text>
+                  <Card.Text className="text-muted">@sara</Card.Text>
                 </div>
                 <Button
                   variant="sm"
@@ -87,7 +87,7 @@ const Feeds = () => {
                 />
                 <div className="text-center">
                   <Card.Title className="m-0">Mel Emmanuel</Card.Title>
-                  <Card.Text classname="text-muted">@mel</Card.Text>
+                  <Card.Text className="text-muted">@mel</Card.Text>
                 </div>
                 <Button
                   variant="sm"
@@ -106,7 +106,7 @@ const Feeds = () => {
                 />
                 <div className="text-center">
                   <Card.Title className="m-0">David Max</Card.Title>
-                  <Card.Text classname="text-muted">@daveyoung</Card.Text>
+                  <Card.Text className="text-muted">@daveyoung</Card.Text>
                 </div>
                 <Button
                   variant="sm"
@@ -125,7 +125,7 @@ const Feeds = () => {
                 />
                 <div className="text-center">
                   <Card.Title className="m-0">Mabel Olaniyi</Card.Title>
-                  <Card.Text classname="text-muted">@mabel265</Card.Text>
+                  <Card.Text className="text-muted">@mabel265</Card.Text>
                 </div>
                 <Button
                   variant="sm"
