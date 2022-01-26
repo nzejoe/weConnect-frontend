@@ -5,6 +5,7 @@ import Feeds from "../pages/Feeds";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PeopleTabContent from "./PeopleTabContent";
+import PeopleToFollow from "./PeopleToFollow";
 
 export {
   CusNav,
@@ -14,4 +15,5 @@ export {
   PostList,
   CommentList,
   PeopleTabContent,
+  PeopleToFollow,
 };
