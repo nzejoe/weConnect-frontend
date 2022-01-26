@@ -11,6 +11,7 @@ import Music from "./Music";
 import ActiveUsersCard from "./ActiveUsersCard";
 import PostForm from "./PostForm";
 import TrendingTabContent from './TrendingTabContent'
+import PageHeader from "./PageHeader";
 
 export {
   CusNav,
@@ -26,4 +27,5 @@ export {
   ActiveUsersCard,
   PostForm,
   TrendingTabContent,
+  PageHeader,
 };

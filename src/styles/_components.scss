@@ -292,9 +292,16 @@
 }
 // ASIDE RIGHT .//
 
-// PEOPLE TAB CONTENT
-
-// PEOPLE TAB CONTENT .//
+// PAGE
+.page-header{
+  .home-link{
+    color: $gray-800;
+  }
+  .back-btn{
+    font-size: 2rem;
+  }
+}
+// PAGE .//
 
 // MAX SCREEN ( mobile devices )
 @media screen and (max-width: 600px) {
