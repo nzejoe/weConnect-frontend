@@ -9,6 +9,7 @@ import PeopleToFollow from "./PeopleToFollow";
 import PopularPeople from "./PopularPeople";
 import Music from "./Music";
 import ActiveUsersCard from "./ActiveUsersCard";
+import PostForm from "./PostForm";
 
 export {
   CusNav,
@@ -22,4 +23,5 @@ export {
   PopularPeople,
   Music,
   ActiveUsersCard,
+  PostForm,
 };
