@@ -56,12 +56,63 @@ const ProfilePage = () => {
             </span>
             <span className="text-small">
               {" "}
-              <MdOutlineCalendarToday className="me-1" /> Date Joined Jan 2022
+              <MdOutlineCalendarToday className="me-1" /> Joined on Jan 2022
             </span>
           </p>
         </Card.Body>
-        <Card.Body>
-
+        <Card.Body className="pt-0">
+          <div className="user-follow d-flex">
+            <div className="followers me-5">
+              <p className="text-small m-0">12k Followers</p>
+              <div className="images">
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-1.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-2.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-3.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-4.jpg"
+                  width={20}
+                />
+              </div>
+            </div>
+            <div className="followering">
+              <p className="text-small m-0">4 Following</p>
+              <div className="images">
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-4.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-2.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-3.jpg"
+                  width={20}
+                />
+                <Image
+                  roundedCircle
+                  src="/img/profile/profile-5.jpg"
+                  width={20}
+                />
+              </div>
+            </div>
+          </div>
         </Card.Body>
       </Card>
     </div>
