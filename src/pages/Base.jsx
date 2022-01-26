@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { CusNav, SideBlog, NavTabs } from "../components";
+import { CusNav, SideBlog } from "../components";
 import { MdPeople } from "react-icons/md";
 
 const Base = ({ children, indexHandler }) => {
@@ -46,7 +46,6 @@ const Base = ({ children, indexHandler }) => {
             <CusNav show={show} setShow={setShow} />
           </Col>
           <Col md={6}>
-            <NavTabs indexHandler={indexHandler} />
             {children}
           </Col>
           <Col md={3}>

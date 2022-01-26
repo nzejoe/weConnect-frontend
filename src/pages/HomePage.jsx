@@ -1,10 +1,16 @@
-import React from "react"
-import { Feeds, PeopleTabContent } from '../components'
-const HomePage = ({ tabIndex }) => {
+import React, { useState, useCallback } from "react"
+import { Feeds, PeopleTabContent, NavTabs } from '../components'
+const HomePage = () => {
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabIndex = useCallback((index) => {
+    setTabIndex(index);
+  }, []);
   
   return (
     <div className="home">
-      <div className="blog-post">
+      <NavTabs handleTabIndex={handleTabIndex} />
+      <div className="Tab-content">
         {tabIndex === 0 && <Feeds />}
         {tabIndex === 1 && <PeopleTabContent />}
       </div>

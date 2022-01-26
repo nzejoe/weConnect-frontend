@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 
-const NavTabs = ({ indexHandler }) => {
+const NavTabs = ({ handleTabIndex }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
   const getIndex = (index) => {
@@ -10,8 +10,8 @@ const NavTabs = ({ indexHandler }) => {
   };
 
   useEffect(()=>{
-    indexHandler(tabIndex);
-  }, [tabIndex, indexHandler])
+    handleTabIndex(tabIndex);
+  }, [tabIndex, handleTabIndex])
 
   return (
     <div className="nav-tabs mb-4">
