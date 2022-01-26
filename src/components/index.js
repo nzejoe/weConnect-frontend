@@ -6,6 +6,7 @@ import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PeopleTabContent from "./PeopleTabContent";
 import PeopleToFollow from "./PeopleToFollow";
+import PopularPeople from "./PopularPeople";
 
 export {
   CusNav,
@@ -16,4 +17,5 @@ export {
   CommentList,
   PeopleTabContent,
   PeopleToFollow,
+  PopularPeople,
 };

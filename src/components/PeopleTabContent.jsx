@@ -1,11 +1,12 @@
 import React from "react";
-import { PeopleToFollow} from '.'
+import { PeopleToFollow, PopularPeople } from '.'
 
 const PeopleTabContent = () => {
   return (
     <div className="people-tab">
       <div className="list">
         <PeopleToFollow/>
+        <PopularPeople/>
       </div>
     </div>
   );
