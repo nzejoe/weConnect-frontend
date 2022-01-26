@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import { Card, Image, Button } from "react-bootstrap";
 import { MdAdd, MdOutlineOpenInNew, MdDone } from "react-icons/md";
 
-const PopularPeople = () => {
+const Music = () => {
   return (
-    <div className="popular-people  mb-3">
-      <h6 className="mb-3">Popular People</h6>
+    <div className="music mb-3">
+      <h6 className="mb-3">Music</h6>
       <Card>
         <Card.Body className="d-flex justify-content-between align-items-center clickable">
           <div className="user-container d-flex align-items-center">
@@ -98,4 +98,4 @@ const PopularPeople = () => {
   );
 };
 
-export default PopularPeople;
+export default Music;

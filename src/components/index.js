@@ -7,6 +7,7 @@ import CommentList from "./CommentList";
 import PeopleTabContent from "./PeopleTabContent";
 import PeopleToFollow from "./PeopleToFollow";
 import PopularPeople from "./PopularPeople";
+import Music from "./Music";
 
 export {
   CusNav,
@@ -18,4 +19,5 @@ export {
   PeopleTabContent,
   PeopleToFollow,
   PopularPeople,
+  Music,
 };

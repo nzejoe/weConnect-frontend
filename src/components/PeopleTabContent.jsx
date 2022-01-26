@@ -1,5 +1,5 @@
 import React from "react";
-import { PeopleToFollow, PopularPeople } from '.'
+import { PeopleToFollow, PopularPeople, Music } from '.'
 
 const PeopleTabContent = () => {
   return (
@@ -7,6 +7,7 @@ const PeopleTabContent = () => {
       <div className="list">
         <PeopleToFollow/>
         <PopularPeople/>
+        <Music/>
       </div>
     </div>
   );
