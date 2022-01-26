@@ -30,7 +30,7 @@ const SideBlog = () => {
               <h6 className="text-primary">#HappyBirthday</h6>
             </div>
             <div className="img-wrapper">
-              <Card.Img src="img/profile/profile-1.jpg"></Card.Img>
+              <Card.Img src="/img/profile/profile-1.jpg"></Card.Img>
             </div>
           </Card.Body>
           <hr />
@@ -77,7 +77,7 @@ const SideBlog = () => {
               <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, mollitia!</h6>
             </div>
             <div className="img-wrapper design">
-              <Card.Img src="img/other/design.jpg"></Card.Img>
+              <Card.Img src="/img/other/design.jpg"></Card.Img>
             </div>
           </Card.Body>
           <hr />

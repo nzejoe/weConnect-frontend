@@ -246,7 +246,7 @@
 // ASIDE RIGHT
 .aside-right {
   .search-form {
-    .input-group{
+    .input-group {
       height: 3.5rem;
     }
     .icon {
@@ -293,13 +293,19 @@
 // ASIDE RIGHT .//
 
 // PAGE
-.page-header{
-  .home-link{
+.page-header {
+  .home-link {
     color: $gray-800;
   }
-  .back-btn{
+  .back-btn {
     font-size: 2rem;
   }
+}
+
+a.user-link,
+a.user-link:link,
+a.user-link:visited {
+  text-decoration: none !important;
 }
 // PAGE .//
 
