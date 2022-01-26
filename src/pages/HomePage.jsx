@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react"
-import { Feeds, PeopleTabContent, NavTabs } from '../components'
+import { Feeds, PeopleTabContent, NavTabs, TrendingTabContent } from '../components'
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -13,6 +13,7 @@ const HomePage = () => {
       <div className="Tab-content">
         {tabIndex === 0 && <Feeds />}
         {tabIndex === 1 && <PeopleTabContent />}
+        {tabIndex === 2 && <TrendingTabContent/>}
       </div>
     </div>
   );

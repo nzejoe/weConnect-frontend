@@ -10,6 +10,7 @@ import PopularPeople from "./PopularPeople";
 import Music from "./Music";
 import ActiveUsersCard from "./ActiveUsersCard";
 import PostForm from "./PostForm";
+import TrendingTabContent from './TrendingTabContent'
 
 export {
   CusNav,
@@ -24,4 +25,5 @@ export {
   Music,
   ActiveUsersCard,
   PostForm,
+  TrendingTabContent,
 };

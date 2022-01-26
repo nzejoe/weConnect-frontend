@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { CusNav, SideBlog } from "../components";
 import { MdPeople } from "react-icons/md";
 
-const Base = ({ children, indexHandler }) => {
+const Base = ({ children }) => {
   const [show, setShow] = useState(false);
 
   
