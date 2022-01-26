@@ -8,6 +8,7 @@ import PeopleTabContent from "./PeopleTabContent";
 import PeopleToFollow from "./PeopleToFollow";
 import PopularPeople from "./PopularPeople";
 import Music from "./Music";
+import ActiveUsersCard from "./ActiveUsersCard";
 
 export {
   CusNav,
@@ -20,4 +21,5 @@ export {
   PeopleToFollow,
   PopularPeople,
   Music,
+  ActiveUsersCard,
 };
