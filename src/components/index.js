@@ -12,6 +12,7 @@ import ActiveUsersCard from "./ActiveUsersCard";
 import PostForm from "./PostForm";
 import TrendingTabContent from './TrendingTabContent'
 import PageHeader from "./PageHeader";
+import ProfileTabs from "./ProfileTabs";
 
 export {
   CusNav,
@@ -28,4 +29,5 @@ export {
   PostForm,
   TrendingTabContent,
   PageHeader,
+  ProfileTabs,
 };

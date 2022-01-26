@@ -307,6 +307,30 @@ a.user-link:link,
 a.user-link:visited {
   text-decoration: none !important;
 }
+
+.profile-tabs{
+  height: 3.5rem;
+
+  h6{
+    flex: 1 0;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    cursor: pointer;
+
+    &.tab-active{
+      background-color: $bg-white-faded !important;
+      border-bottom: 3px solid $primary-color;
+    }
+
+    &:not(.tab-active){
+      color: $secondary-color-trans-2;
+    }
+  }
+}
 // PAGE .//
 
 // MAX SCREEN ( mobile devices )

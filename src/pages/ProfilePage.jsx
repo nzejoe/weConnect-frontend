@@ -7,7 +7,7 @@ import {
   MdOutlineCalendarToday,
 } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { PageHeader } from '../components';
+import { PageHeader, ProfileTabs } from '../components';
 
 const ProfilePage = () => {
   return (
@@ -115,6 +115,7 @@ const ProfilePage = () => {
           </div>
         </Card.Body>
       </Card>
+      <ProfileTabs/>
     </div>
   );
 };
