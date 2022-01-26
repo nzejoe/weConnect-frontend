@@ -12,7 +12,7 @@ const SideBlog = () => {
             <InputGroup.Text className="bg-white">
               <MdSearch className="icon text-primary" />
             </InputGroup.Text>
-            <FormControl size="lg" placeholder="Search weConnect" />
+            <FormControl placeholder="Search weConnect" />
           </InputGroup>
         </Card>
       </div>

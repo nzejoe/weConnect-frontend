@@ -23,6 +23,10 @@
   }
 }
 
+.card{
+    border-radius: 1rem !important;
+}
+
 .home {
   .user-container {
     hr {
@@ -42,6 +46,7 @@
 
 hr {
   background-color: $secondary-color-trans-2 !important;
+  margin: 0 !important;
 }
 
 .clickable {

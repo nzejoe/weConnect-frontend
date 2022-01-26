@@ -5,7 +5,7 @@ import { MdAdd, MdOutlineOpenInNew, MdDone } from "react-icons/md";
 
 const PeopleToFollow = ()=>{
     return (
-      <div className="people-to-follow">
+      <div className="people-to-follow mb-3">
         <h6 className="mb-3">People you can follow</h6>
         <Card>
           <Card.Body className="d-flex justify-content-between align-items-center clickable">
