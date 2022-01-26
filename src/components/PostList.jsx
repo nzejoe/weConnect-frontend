@@ -23,7 +23,7 @@ const PostList = () => {
                 fluid
                 roundedCircle
                 width={60}
-                src="img/profile/profile-4.jpg"
+                src="/img/profile/profile-4.jpg"
               />
               <div className="author-info ms-2">
                 <Card.Title className="m-0">Maya Jonathan</Card.Title>
@@ -45,7 +45,7 @@ const PostList = () => {
             </p>
             <Card.Img
               className="post-img"
-              src="img/post/post-3.jpg"
+              src="/img/post/post-3.jpg"
             ></Card.Img>
           </div>
           <div className="post-actions py-2">
@@ -72,7 +72,7 @@ const PostList = () => {
                 fluid
                 roundedCircle
                 width={60}
-                src="img/profile/profile-5.jpg"
+                src="/img/profile/profile-5.jpg"
               />
               <div className="author-info ms-2">
                 <Card.Title className="m-0">Sara Williams</Card.Title>
@@ -94,7 +94,7 @@ const PostList = () => {
             </p>
             <Card.Img
               className="post-img"
-              src="img/post/post-2.jpg"
+              src="/img/post/post-2.jpg"
             ></Card.Img>
           </div>
           <div className="post-actions py-2">

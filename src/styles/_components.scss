@@ -322,7 +322,7 @@ a.user-link:visited {
     cursor: pointer;
 
     &.tab-active{
-      background-color: $bg-white-faded !important;
+      background-color: $bg-white-faded;
       border-bottom: 3px solid $primary-color;
     }
 

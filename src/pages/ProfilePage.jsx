@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Image, Button } from "react-bootstrap";
 import {
   MdDone,
@@ -7,9 +7,15 @@ import {
   MdOutlineCalendarToday,
 } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { PageHeader, ProfileTabs } from '../components';
+import { PageHeader, ProfileTabs, PostList } from '../components';
 
 const ProfilePage = () => {
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const tabIndexHandler = (index) => {
+    setTabIndex(index)
+  }
+
   return (
     <div className="profile-page">
       <PageHeader />
@@ -49,7 +55,7 @@ const ProfilePage = () => {
           </h6>
           <p>
             <span className="me-3">
-              <MdOutlineLink className="me-1" />
+              <MdOutlineLink className="me-1 text-muted" />
               <Link to="/profile/2443/" className="text-small user-link">
                 /profile/mayajonathan/
               </Link>
@@ -115,7 +121,11 @@ const ProfilePage = () => {
           </div>
         </Card.Body>
       </Card>
-      <ProfileTabs/>
+      <ProfileTabs getTabIndex={tabIndexHandler}/>
+      <div className="tab-contents">
+        {tabIndex === 0 && <PostList/> }
+        {tabIndex === 1 && <PostList/> }
+      </div>
     </div>
   );
 };

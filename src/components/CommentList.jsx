@@ -29,7 +29,7 @@ const CommentList = () => {
           <div className="comment mb-2">
             <div className="comment-inner d-flex justify-content-start">
               <div className="img-container">
-                <Image fluid roundedCircle src="img/profile/profile-2.jpg" />
+                <Image fluid roundedCircle src="/img/profile/profile-2.jpg" />
               </div>
               <Card className="ms-2 p-2 bg-light-cus mb-0">
                 <Card.Title>Mel Emmanuel</Card.Title>
@@ -48,7 +48,7 @@ const CommentList = () => {
           <div className="comment mb-2">
             <div className="comment-inner d-flex justify-content-start">
               <div className="img-container">
-                <Image fluid roundedCircle src="img/profile/profile-5.jpg" />
+                <Image fluid roundedCircle src="/img/profile/profile-5.jpg" />
               </div>
               <Card className="ms-2 p-2 bg-light-cus mb-0">
                 <Card.Title>Sara Wiliams</Card.Title>
@@ -69,7 +69,7 @@ const CommentList = () => {
           <div className="comment mb-2">
             <div className="comment-inner d-flex justify-content-start">
               <div className="img-container">
-                <Image fluid roundedCircle src="img/profile/profile-1.jpg" />
+                <Image fluid roundedCircle src="/img/profile/profile-1.jpg" />
               </div>
               <Card className="ms-2 p-2 bg-light-cus mb-0">
                 <Card.Title>David Max</Card.Title>

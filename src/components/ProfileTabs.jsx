@@ -6,6 +6,7 @@ const ProfileTabs = ({ getTabIndex }) => {
 
   const tabIndexHandler = (index) => {
     setTabIndex(index);
+    getTabIndex(index);
   };
 
   return (
