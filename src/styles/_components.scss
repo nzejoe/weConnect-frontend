@@ -137,12 +137,12 @@
 
     .card-wrapper {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       flex-wrap: nowrap;
 
       .card {
         border-radius: 1rem;
-        flex: 0 0 calc((100% / 3) - 0.5rem);
+        flex: 0 0 calc((100% / 3) - 3rem);
         height: 15rem;
         margin-right: 1rem;
 
@@ -371,10 +371,22 @@ a.user-link:visited {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
   .brand {
     position: relative;
     z-index: inherit;
     width: 50%;
+  }
+
+  .active-users {
+    .body {
+      .card-wrapper {
+        .card {
+          flex: 0 0 calc((100% / 3) - 2rem);
+          height: 13rem;
+          margin-right: 0.5rem;
+        }
+      }
+    }
   }
 }
