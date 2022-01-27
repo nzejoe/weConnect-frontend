@@ -26,7 +26,7 @@ const PostForm = () => {
           </InputGroup.Text>
         </InputGroup>
       </div>
-      
+
       {/* INPUT MODAL */}
       <Modal
         size="md"

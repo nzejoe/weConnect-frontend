@@ -32,3 +32,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@media screen and (max-width: 1200px) {
+  :root{
+    font-size: 82.5%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  :root{
+    font-size: 72.5%;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  :root{
+    font-size: 62.5%;
+  }
+}
