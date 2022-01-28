@@ -38,7 +38,11 @@ const RegisterForm = () => {
         </Row>
         {/* gender */}
         <Form.Group className="mb-3">
-          <Form.Select></Form.Select>
+          <Form.Label>Gender</Form.Label>
+          <Form.Select className="w-25">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </Form.Select>
         </Form.Group>
 
         <Row xs={2}>
