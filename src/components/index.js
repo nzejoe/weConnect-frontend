@@ -14,6 +14,7 @@ import TrendingTabContent from './TrendingTabContent'
 import PageHeader from "./PageHeader";
 import ProfileTabs from "./ProfileTabs";
 import PageUnavailable from "./PageUnavailable";
+import Base from "./Base";
 
 export {
   CusNav,
@@ -32,4 +33,5 @@ export {
   PageHeader,
   ProfileTabs,
   PageUnavailable,
+  Base,
 };

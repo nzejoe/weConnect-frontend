@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { CusNav, SideBlog } from "../components";
+import { CusNav, SideBlog } from ".";
 import { MdPeople } from "react-icons/md";
 
 const Base = ({ children }) => {

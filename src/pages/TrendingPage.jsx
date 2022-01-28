@@ -1,11 +1,15 @@
 import React from 'react';
-import { PageHeader, PostList } from '../components';
+import { PageHeader, PostList, Base } from '../components';
 
 const TrendingPage = () => {
-  return <div className='trending-page'>
-      <PageHeader pageTitle={'#Trending'}/>
-      <PostList/>
-  </div>;
+  return (
+    <Base>
+      <div className="trending-page">
+        <PageHeader pageTitle={"#Trending"} />
+        <PostList />
+      </div>
+    </Base>
+  );
 };
 
 export default TrendingPage;

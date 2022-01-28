@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageHeader, PageUnavailable } from '../components';
+import { PageHeader, PageUnavailable, Base } from '../components';
 
 const LanguagePage = () => {
   return (
-    <div className="language-page not-available">
-      <PageHeader pageTitle={"Language"} />
-      <PageUnavailable />
-    </div>
+    <Base>
+      <div className="language-page not-available">
+        <PageHeader pageTitle={"Language"} />
+        <PageUnavailable />
+      </div>
+    </Base>
   );
 };
 
