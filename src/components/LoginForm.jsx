@@ -1,10 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Form,
+  FormGroup,
+  FormControl,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
+import {} from 'react-icons/md'
 
 const LoginForm = () => {
+  const [show, setShow] = useState(false);
+
+  const toggleShow = () => {
+    setShow(!show);
+  };
+
   return (
-    <div >
+    <div>
       <Form>
         <FormGroup className="mb-3">
           <FormControl
@@ -13,15 +26,16 @@ const LoginForm = () => {
             className="form-control-lg"
           />
         </FormGroup>
-        <FormGroup className="mb-3">
+        <InputGroup className="mb-3">
           <FormControl
-            type="password"
+            type={`${!show ? 'password' : 'text'}`}
             placeholder="Password"
             className="form-control-lg"
           />
-        </FormGroup>
+          <InputGroup.Text onClick={toggleShow} className="bg-white">show</InputGroup.Text>
+        </InputGroup>
         <FormGroup className="mb-3">
-          <Button type="submit" variant="primary" className="w-100 btn-md">
+          <Button type="submit" variant="primary" className="w-100 btn-lg">
             Log in
           </Button>
         </FormGroup>
@@ -33,8 +47,13 @@ const LoginForm = () => {
       </div>
       <hr />
       <div className="text-center mt-3">
-        <Button variant='success' as={Link} to="/" className="text-center btn-lg">
-         Create new account
+        <Button
+          variant="success"
+          as={Link}
+          to="/"
+          className="text-center btn-lg"
+        >
+          Create new account
         </Button>
       </div>
     </div>
