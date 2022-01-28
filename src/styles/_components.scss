@@ -371,12 +371,23 @@ a.user-link:visited {
       font-size: 2em;
     }
   }
-  .user-form{
+
+  .login-form{
     width: 60%;
 
-    a, a:link, a:visited{
-        text-decoration: none;
+  }
+
+  .register-form{
+    width: 100%;
+
+    label{
+      font-size: 1.3rem;
+      opacity: .7;
     }
+  }
+
+  a, a:link, a:visited{
+      text-decoration: none;
   }
 }
 // UNAUTHENTICATED_USER .//

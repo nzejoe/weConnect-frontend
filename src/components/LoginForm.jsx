@@ -41,7 +41,7 @@ const LoginForm = () => {
         </FormGroup>
       </Form>
       <div className="text-center mb-3">
-        <Link to="/" className="text-center">
+        <Link to="/account/register/" className="text-center">
           Forgot password?
         </Link>
       </div>
@@ -50,7 +50,7 @@ const LoginForm = () => {
         <Button
           variant="success"
           as={Link}
-          to="/"
+          to="/account/register/"
           className="text-center btn-lg"
         >
           Create new account

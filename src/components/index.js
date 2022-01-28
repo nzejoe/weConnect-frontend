@@ -17,6 +17,7 @@ import PageUnavailable from "./PageUnavailable";
 import Base from "./Base";
 import UnauthenticatedUser from "./UnauthenticatedUser";
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 export {
   CusNav,
@@ -38,4 +39,5 @@ export {
   Base,
   UnauthenticatedUser,
   LoginForm,
+  RegisterForm,
 };

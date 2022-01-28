@@ -1,10 +1,15 @@
 import React from 'react';
-import { UnauthenticatedUser } from '../components';
+import { Card } from 'react-bootstrap';
+import { UnauthenticatedUser, RegisterForm } from '../components';
 
 const RegisterPage = () => {
-  return <UnauthenticatedUser>
-      register
-  </UnauthenticatedUser>;
+  return (
+    <UnauthenticatedUser>
+      <Card className="register-form p-3 shadow-lg">
+        <RegisterForm/>
+      </Card>
+    </UnauthenticatedUser>
+  );
 };
 
 export default RegisterPage;
