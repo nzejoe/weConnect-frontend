@@ -6,6 +6,7 @@ import TrendingPage from "./TrendingPage";
 import LanguagePage from "./LanguagePage";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 
 export {
@@ -17,4 +18,5 @@ export {
   LanguagePage,
   PublicRoute,
   LoginPage,
+  RegisterPage,
 };

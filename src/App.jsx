@@ -8,6 +8,7 @@ import {
   LanguagePage,
   PublicRoute,
   LoginPage,
+  RegisterPage,
 } from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/trending/" element={<TrendingPage />} />
         <Route path="/language/" element={<LanguagePage />} />
         <Route path="/account/login/" element={<PublicRoute children={<LoginPage/>}/>} />
+        <Route path="/account/register/" element={<PublicRoute children={<RegisterPage/>}/>} />
         <Route path="*" element={<PublicRoute children={<NotFound />} />} />
       </Routes>
     </Router>
