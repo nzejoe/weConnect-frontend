@@ -21,7 +21,7 @@ function App() {
         <Route path="/explore/" element={<ExplorePage />} />
         <Route path="/trending/" element={<TrendingPage />} />
         <Route path="/language/" element={<LanguagePage />} />
-        <Route path="/account/login/" element={<PublicRoute />} />
+        <Route path="/account/login/" element={<PublicRoute children={<p>login</p>}/>} />
         <Route path="*" element={<PublicRoute children={<NotFound />} />} />
       </Routes>
     </Router>
