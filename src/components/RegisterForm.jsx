@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 const RegisterForm = () => {
   const [showPassword1, setShowPassword1] = useState(false);
@@ -20,7 +21,6 @@ const RegisterForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Username"
-                className="form-control-lg"
               />
             </Form.Group>
           </Col>
@@ -31,7 +31,28 @@ const RegisterForm = () => {
               <Form.Control
                 type="email"
                 placeholder="Email"
-                className="form-control-lg"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row xs={2}>
+          {/* first name */}
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="First name"
+              />
+            </Form.Group>
+          </Col>
+          {/* last name */}
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Last name"
               />
             </Form.Group>
           </Col>
@@ -54,13 +75,16 @@ const RegisterForm = () => {
                 <Form.Control
                   type={`${!showPassword1 ? "password" : "text"}`}
                   placeholder="Password"
-                  className="form-control-lg"
                 />
                 <InputGroup.Text
                   onClick={toggleShowPassword1}
                   className="bg-white"
                 >
-                  show
+                  {showPassword1 ? (
+                    <BsEye className="clickable" />
+                  ) : (
+                    <BsEyeSlash className="clickable" />
+                  )}
                 </InputGroup.Text>
               </InputGroup>
             </Form.Group>
@@ -73,18 +97,23 @@ const RegisterForm = () => {
                 <Form.Control
                   type={`${!showPassword2 ? "password" : "text"}`}
                   placeholder="Confirm password"
-                  className="form-control-lg"
+
                 />
                 <InputGroup.Text
                   onClick={toggleShowPassword2}
                   className="bg-white b-0"
                 >
-                  show
+                  {showPassword2 ? (
+                    <BsEye className="clickable" />
+                  ) : (
+                    <BsEyeSlash className="clickable" />
+                  )}
                 </InputGroup.Text>
               </InputGroup>
             </Form.Group>
           </Col>
         </Row>
+        {/* submit button */}
         <Form.Group className="mb-3">
           <Button type="submit" variant="primary" className="btn-lg">
             Create account

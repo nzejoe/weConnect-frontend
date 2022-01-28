@@ -7,7 +7,7 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
-import {} from 'react-icons/md'
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 const LoginForm = () => {
   const [show, setShow] = useState(false);
@@ -32,7 +32,9 @@ const LoginForm = () => {
             placeholder="Password"
             className="form-control-lg"
           />
-          <InputGroup.Text onClick={toggleShow} className="bg-white">show</InputGroup.Text>
+          <InputGroup.Text onClick={toggleShow} className="bg-white">
+            {show ? <BsEye className="clickable"/> : <BsEyeSlash className="clickable"/> }
+          </InputGroup.Text>
         </InputGroup>
         <FormGroup className="mb-3">
           <Button type="submit" variant="primary" className="w-100 btn-lg">
