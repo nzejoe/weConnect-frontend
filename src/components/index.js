@@ -13,6 +13,7 @@ import PostForm from "./PostForm";
 import TrendingTabContent from './TrendingTabContent'
 import PageHeader from "./PageHeader";
 import ProfileTabs from "./ProfileTabs";
+import PageUnavailable from "./PageUnavailable";
 
 export {
   CusNav,
@@ -30,4 +31,5 @@ export {
   TrendingTabContent,
   PageHeader,
   ProfileTabs,
+  PageUnavailable,
 };
