@@ -252,42 +252,6 @@
       font-size: 2rem;
     }
   }
-
-  .trending {
-    .card {
-      .card-title {
-        font-size: 0.8rem;
-        font-weight: bold;
-      }
-
-      .card-body {
-        cursor: pointer;
-      }
-
-      .img-wrapper {
-        width: 30%;
-      }
-
-      .option-icon {
-        width: 30px;
-        height: 30px;
-        background-color: $bg-light;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .img-wrapper.design {
-        min-width: 30%;
-        height: 100%;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-    }
-  }
 }
 // ASIDE RIGHT .//
 
@@ -330,6 +294,50 @@ a.user-link:visited {
     }
   }
 }
+
+// explore
+.trending {
+    .card {
+      .card-title {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+
+      .card-body {
+        cursor: pointer;
+        max-height: 6rem;
+      }
+
+      .img-wrapper {
+        width: 4rem;
+        height: 100%;
+
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      h6, p{
+        margin: 0;
+      }
+
+      .option-icon {
+        width: 30px;
+        height: 30px;
+        background-color: $bg-light;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  } 
+  
+  .explore-page{
+    h6{
+      font-size: .8rem;
+    }
+  }// explore .//
+
 // PAGE .//
 
 // MIN HEIGHT

@@ -76,7 +76,7 @@ const SideBlog = () => {
               </div>
               <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, mollitia!</h6>
             </div>
-            <div className="img-wrapper design">
+            <div className="img-wrapper">
               <Card.Img src="/img/other/design.jpg"></Card.Img>
             </div>
           </Card.Body>

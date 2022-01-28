@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      <PageHeader />
+      <PageHeader pageTitle={'Maya Jonathan'}/>
       <Card>
         <Card.Body className="d-flex justify-content-between align-items-center">
           <div className="user-container d-flex align-items-center">

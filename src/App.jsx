@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Base, HomePage, ProfilePage, NotFound } from "./pages";
+import { Base, HomePage, ProfilePage, NotFound, ExplorePage } from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile/:id/" element={<ProfilePage />} />
+          <Route path="/explore/" element={<ExplorePage/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Base>
