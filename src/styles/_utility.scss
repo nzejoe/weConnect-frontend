@@ -23,8 +23,8 @@
   }
 }
 
-.card{
-    border-radius: 1rem !important;
+.card {
+  border-radius: 1rem !important;
 }
 
 .home {
@@ -75,12 +75,23 @@ p.text {
   margin-left: 3px;
 }
 
-.radius-left{
+.radius-left {
   border-bottom-left-radius: 1rem;
   border-top-left-radius: 1rem;
 }
 
-.radius-right{
+.radius-right {
   border-bottom-right-radius: 1rem;
   border-top-right-radius: 1rem;
+}
+
+.center {
+  position: relative;
+
+  & > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

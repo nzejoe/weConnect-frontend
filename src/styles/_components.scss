@@ -363,6 +363,17 @@ a.user-link:visited {
 }
 // page unavailable component
 
+// UNAUTHENTICATED_USER
+.unauthenticated-user{
+  .brand-container{
+    font-size: 2rem;
+    .icon{
+      font-size: 2em;
+    }
+  }
+}
+// UNAUTHENTICATED_USER .//
+
 // MIN HEIGHT
 @media screen and (min-width: 768px) {
   .active-users {

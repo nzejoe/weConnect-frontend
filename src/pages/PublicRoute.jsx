@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 const PublicRoute = ({ children }) => {
     const isAthenticated = false;
-  return !isAthenticated ? children : <Navigate replace='/' /> ;
+  return !isAthenticated ? children : <Navigate replace to='/' /> ;
 };
 
 export default PublicRoute;

@@ -15,6 +15,7 @@ import PageHeader from "./PageHeader";
 import ProfileTabs from "./ProfileTabs";
 import PageUnavailable from "./PageUnavailable";
 import Base from "./Base";
+import UnauthenticatedUser from "./UnauthenticatedUser";
 
 export {
   CusNav,
@@ -34,4 +35,5 @@ export {
   ProfileTabs,
   PageUnavailable,
   Base,
+  UnauthenticatedUser,
 };
