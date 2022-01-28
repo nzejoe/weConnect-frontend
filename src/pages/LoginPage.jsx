@@ -1,10 +1,13 @@
 import React from 'react';
-import { UnauthenticatedUser } from '../components';
+import { Card } from 'react-bootstrap';
+import { UnauthenticatedUser, LoginForm } from '../components';
 
 const LoginPage = () => {
   return (
     <UnauthenticatedUser>
-      <div className="login-form">LoginPage</div>
+      <Card className="login-form p-3 shadow-lg">
+        <LoginForm />
+      </Card>
     </UnauthenticatedUser>
   );
 };
