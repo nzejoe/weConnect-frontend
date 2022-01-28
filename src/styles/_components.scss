@@ -338,7 +338,30 @@ a.user-link:visited {
     }
   }// explore .//
 
+
+  // not available 
+  .not-available{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .page-unavailable{
+      flex: 1 0;
+    }
+  }// not available .//
+
 // PAGE .//
+
+
+// page unavailable component
+.page-unavailable{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+// page unavailable component
 
 // MIN HEIGHT
 @media screen and (min-width: 768px) {
