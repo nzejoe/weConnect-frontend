@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
+import { Input } from ".";
+
 const RegisterForm = () => {
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -16,13 +18,11 @@ const RegisterForm = () => {
         <Row xs={2}>
           {/* username */}
           <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Username"
-              />
-            </Form.Group>
+           <Input
+            label={'Username'}
+            type={'text'}
+            placeholder={'Username'}
+           />
           </Col>
           {/* email */}
           <Col>
