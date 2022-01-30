@@ -8,6 +8,7 @@ import PublicRoute from "./PublicRoute";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import PasswordResetPage from "./PasswordResetPage";
+import PasswordResetComplete from "./PasswordResetComplete";
 
 
 export {
@@ -21,4 +22,5 @@ export {
   LoginPage,
   RegisterPage,
   PasswordResetPage,
+  PasswordResetComplete,
 };

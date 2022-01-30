@@ -10,6 +10,7 @@ import {
   LoginPage,
   RegisterPage,
   PasswordResetPage,
+  PasswordResetComplete,
 } from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,6 +36,10 @@ function App() {
         <Route
           path="/account/password_reset/"
           element={<PublicRoute children={<PasswordResetPage />} />}
+        />
+        <Route
+          path="/account/password_reset_complete/"
+          element={<PublicRoute children={<PasswordResetComplete />} />}
         />
         <Route path="*" element={<PublicRoute children={<NotFound />} />} />
       </Routes>
