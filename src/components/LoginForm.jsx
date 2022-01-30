@@ -43,7 +43,7 @@ const LoginForm = () => {
         </FormGroup>
       </Form>
       <div className="text-center mb-3">
-        <Link to="/account/register/" className="text-center">
+        <Link to="/account/password_reset/" className="text-center">
           Forgot password?
         </Link>
       </div>

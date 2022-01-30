@@ -7,6 +7,7 @@ import LanguagePage from "./LanguagePage";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import PasswordResetPage from "./PasswordResetPage";
 
 
 export {
@@ -19,4 +20,5 @@ export {
   PublicRoute,
   LoginPage,
   RegisterPage,
+  PasswordResetPage,
 };

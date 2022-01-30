@@ -228,7 +228,7 @@ const RegisterForm = () => {
               type={`${!showPassword2 ? "password" : "text"}`}
               name="password2"
               icon={
-                showPassword1 ? (
+                showPassword2 ? (
                   <BsEye
                     className="icon clickable"
                     onClick={toggleShowPassword2}

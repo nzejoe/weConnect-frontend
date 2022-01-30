@@ -9,6 +9,7 @@ import {
   PublicRoute,
   LoginPage,
   RegisterPage,
+  PasswordResetPage,
 } from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,8 +24,18 @@ function App() {
         <Route path="/explore/" element={<ExplorePage />} />
         <Route path="/trending/" element={<TrendingPage />} />
         <Route path="/language/" element={<LanguagePage />} />
-        <Route path="/account/login/" element={<PublicRoute children={<LoginPage/>}/>} />
-        <Route path="/account/register/" element={<PublicRoute children={<RegisterPage/>}/>} />
+        <Route
+          path="/account/login/"
+          element={<PublicRoute children={<LoginPage />} />}
+        />
+        <Route
+          path="/account/register/"
+          element={<PublicRoute children={<RegisterPage />} />}
+        />
+        <Route
+          path="/account/password_reset/"
+          element={<PublicRoute children={<PasswordResetPage />} />}
+        />
         <Route path="*" element={<PublicRoute children={<NotFound />} />} />
       </Routes>
     </Router>
