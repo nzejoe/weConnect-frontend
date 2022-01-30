@@ -372,9 +372,9 @@ a.user-link:visited {
     }
   }
 
-  .login-form{
-    width: 60%;
-
+  .login-form, .password-reset-form{
+    width: 100%;
+    max-width: 25rem;
   }
 
   .register-form{
