@@ -9,6 +9,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import PasswordResetPage from "./PasswordResetPage";
 import PasswordResetComplete from "./PasswordResetComplete";
+import PrivateRoute from './PrivateRoute';
 
 
 export {
@@ -23,4 +24,5 @@ export {
   RegisterPage,
   PasswordResetPage,
   PasswordResetComplete,
+  PrivateRoute,
 };

@@ -11,6 +11,7 @@ import {
   RegisterPage,
   PasswordResetPage,
   PasswordResetComplete,
+  PrivateRoute
 } from "./pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,11 +21,49 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile/:id/" element={<ProfilePage />} />
-        <Route path="/explore/" element={<ExplorePage />} />
-        <Route path="/trending/" element={<TrendingPage />} />
-        <Route path="/language/" element={<LanguagePage />} />
+        {/* PRIVATE ROUTES */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:id/"
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/explore/"
+          element={
+            <PrivateRoute>
+              <ExplorePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/trending/"
+          element={
+            <PrivateRoute>
+              <TrendingPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/language/"
+          element={
+            <PrivateRoute>
+              <LanguagePage />
+            </PrivateRoute>
+          }
+        />
+        
+        {/* PUBLIC ROUTES */}
         <Route
           path="/account/login/"
           element={<PublicRoute children={<LoginPage />} />}
