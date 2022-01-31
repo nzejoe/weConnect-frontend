@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Button } from "react-bootstrap";
+import { Form, FormGroup, Button, Alert } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import axios from 'axios'
 
 import { Input } from ".";
 import useInput from "../hooks/use-input";
@@ -9,6 +10,8 @@ import useInput from "../hooks/use-input";
 const LoginForm = () => {
   const [show, setShow] = useState(false);
   const [formHasError, setFormHasError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState({error: false, msg: ''})
 
   const toggleShow = () => {
     setShow(!show);
@@ -22,7 +25,7 @@ const LoginForm = () => {
   }
   const {
     value: email,
-    isValid: isEmailValid,
+    // isValid: isEmailValid,
     hasError: emailHasError,
     onChange: onEmailChange,
     onBlur: onEmailBlur,
@@ -40,9 +43,35 @@ const LoginForm = () => {
     onBlur: onPasswordBlur,
   } = useInput(validatePassword);
 
+
+  // this function will send request to database
+  const sendLoginRequest = async(data) => {
+    setLoading(true)
+    try {
+      const response = await axios({
+        url: "auth/token",
+        method: "POST",
+        "Content-type": "json/application",
+        data: data,
+      })
+      console.log(response.data);
+      setLoginError({ error: false, msg: "" });
+      setLoading(false);
+
+    } catch (error) {
+      setLoading(false);
+      const resError = { ...error }
+      setLoginError({ error: true, msg: resError.response.data.error_description });
+      console.log(resError.response);
+    }
+  }
+
   useEffect(() => {
     setFormHasError(emailHasError || passwordHasError);
   }, [emailHasError, passwordHasError]);
+
+  // get client id and client secret from evironment variable
+  const {REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET} = process.env;
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -50,12 +79,16 @@ const LoginForm = () => {
       const data = {
         username: email,
         password: password,
+        grant_type: "password",
+        client_id: REACT_APP_CLIENT_ID,
+        client_secret: REACT_APP_CLIENT_SECRET,
       };
-      console.log(data);
+      
+      sendLoginRequest(data);
+     
     }
   };
 
-  console.log(formHasError);
 
   return (
     <div>
@@ -64,7 +97,6 @@ const LoginForm = () => {
           type="email"
           placeholder="Email"
           value={email}
-          isValid={isEmailValid}
           hasError={emailHasError}
           onChange={onEmailChange}
           onBlur={onEmailBlur}
@@ -88,8 +120,14 @@ const LoginForm = () => {
             )
           }
         />
+        {loginError.error && <Alert variant="danger" className="p-1">{loginError.msg}</Alert>}
         <FormGroup className="mb-3">
-          <Button type="submit" variant="primary" className="w-100 btn-lg">
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-100 btn-lg"
+            disabled={loading || formHasError}
+          >
             Log in
           </Button>
         </FormGroup>

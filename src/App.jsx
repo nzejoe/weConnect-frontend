@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import {
   HomePage,
   ProfilePage,
@@ -16,6 +17,9 @@ import {
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
+
+// set default base url
+axios.defaults.baseURL = 'http://localhost:8000/'
 
 function App() {
   return (
