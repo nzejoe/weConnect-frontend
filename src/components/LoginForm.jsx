@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Button, Alert } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from 'axios'
@@ -11,7 +11,10 @@ const LoginForm = () => {
   const [show, setShow] = useState(false);
   const [formHasError, setFormHasError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [loginError, setLoginError] = useState({error: false, msg: ''})
+  const [loginError, setLoginError] = useState({error: false, msg: ''});
+  const[authenticated, setAuthenticated] = useState(false);
+
+  const navigate = useNavigate()
 
   const toggleShow = () => {
     setShow(!show);
@@ -54,10 +57,16 @@ const LoginForm = () => {
         "Content-type": "json/application",
         data: data,
       })
-      console.log(response.data);
-      setLoginError({ error: false, msg: "" });
-      setLoading(false);
 
+      setLoginError({ error: false, msg: "" });
+      const user = {
+        access_toten: response.data.access_token,
+        refresh_token: response.data.refresh_token
+      }
+      // save user access token to localstorage
+      localStorage.setItem('weConnect_user', JSON.stringify(user));
+      setLoading(false);
+      setAuthenticated(true);
     } catch (error) {
       setLoading(false);
       const resError = { ...error }
@@ -69,6 +78,13 @@ const LoginForm = () => {
   useEffect(() => {
     setFormHasError(emailHasError || passwordHasError);
   }, [emailHasError, passwordHasError]);
+
+  // user authentication handler
+  useEffect(()=>{
+    if(authenticated){
+      navigate('/', {replace: true}); // redirect to home page
+    }
+  },[authenticated, navigate]);
 
   // get client id and client secret from evironment variable
   const {REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET} = process.env;
