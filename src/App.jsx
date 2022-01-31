@@ -62,7 +62,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        
+
         {/* PUBLIC ROUTES */}
         <Route
           path="/account/login/"

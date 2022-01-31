@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputGroup, FormControl, Modal, Button, Form } from "react-bootstrap";
 import {
   MdAccountCircle,
@@ -9,10 +9,60 @@ import {
 } from "react-icons/md";
 
 const PostForm = () => {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const [image, setImage] = useState(null);
+  const [text, setText] = useState("");
+  const [formTouched, setFormTouched] = useState(false);
+  const [formValid, setFormValid] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    if (!text && formTouched) {
+      setFormValid(false);
+      return;
+    }
+    setFormValid(true);
+  }, [text, formTouched]);
+
+  // FILE HANDLER
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file.type.indexOf("image") !== -1) {
+      console.log("it's image file");
+      setImage(file);
+    } else {
+      console.log("Sorry only images allowed");
+    }
+  };
+
+  // TEXT HANDLER
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
+
+  console.log(formValid);
+
+  // SUBMIT HANDLER
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formValid) {
+      const formData = new FormData();
+      formData.append("text", text);
+      // check if image was uploaded
+      if (image) {
+        formData.append("image", image, image.name);
+      } else {
+        formData.append("image", "null");
+        formData.delete("image");
+      }
+
+      setShow(false);
+    }
+  };
+
   return (
     <>
       <div className="post-form">
@@ -20,7 +70,10 @@ const PostForm = () => {
           <InputGroup.Text className="bg-white">
             <MdAccountCircle className="icon text-primary" />
           </InputGroup.Text>
-          <FormControl placeholder="What's on your mind?" />
+          <FormControl
+            placeholder="What's on your mind?"
+            onChange={(e) => setText(e.target.value)}
+          />
           <InputGroup.Text className="bg-white">
             <MdAddCircleOutline className="icon text-primary" />
           </InputGroup.Text>
@@ -43,10 +96,18 @@ const PostForm = () => {
           />
           <MdAccountCircle className="icon text-muted" />
         </Modal.Header>
+        {!formValid && (
+          <div className="error-msg p-0 px-2 pt-2 text-danger">
+            <p className="">Please write a short note about your post.</p>
+          </div>
+        )}
         <Modal.Body>
           <textarea
             name=""
             id=""
+            value={text}
+            onBlur={() => setFormTouched(true)}
+            onChange={handleTextChange}
             rows="8"
             className="form-control"
             placeholder="What's on your mind?"
@@ -57,10 +118,15 @@ const PostForm = () => {
             <Form.Label>
               <MdImage className="icon text-muted" />
             </Form.Label>
-            <Form.Control type="file" size="sm" hidden />
+            <Form.Control
+              type="file"
+              size="sm"
+              hidden
+              onChange={handleFileChange}
+            />
           </Form.Group>
           <Button
-            onClick={handleClose}
+            onClick={handleSubmit}
             className="d-flex justify-content-center align-items-center btn-primary"
             variant="lg"
           >
