@@ -7,3 +7,6 @@ export const getJoinedDate = (date) => {
     const formattedDate = `${monthString[month]} ${year}`
     return formattedDate
 }
+
+export const baseURL = "http://localhost:8000";
+export const debug = true

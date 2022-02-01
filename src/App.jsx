@@ -17,11 +17,14 @@ import {
 
 import AuthUserProvider from "./store/auth-user-context";
 
+// utils
+import { baseURL } from "./utils";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
 // set default base url
-axios.defaults.baseURL = 'http://localhost:8000/'
+axios.defaults.baseURL = baseURL;
 
 function App() {
   return (

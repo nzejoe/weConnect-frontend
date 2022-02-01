@@ -52,7 +52,7 @@ const LoginForm = () => {
     setLoading(true)
     try {
       const response = await axios({
-        url: "auth/token",
+        url: "/auth/token",
         method: "POST",
         "Content-type": "json/application",
         data: data,

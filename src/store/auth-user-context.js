@@ -26,7 +26,7 @@ const AuthUserProvider = ({ children })=>{
 
         try {
             const response = await axios({
-              url: "users/my_details/",
+              url: "/users/my_details/",
               method: 'GET',
               headers: {
                 authorization: `Bearer ${accessToken.access_token}`,

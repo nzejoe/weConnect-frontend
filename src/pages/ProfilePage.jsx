@@ -1,27 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Card, Image, Button } from "react-bootstrap";
-import {
-  MdDone,
-  MdAdd,
-  MdOutlineLink,
-  MdOutlineCalendarToday,
-} from "react-icons/md";
+import { MdDone, MdOutlineLink, MdOutlineCalendarToday } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { AuthUserContext } from '../store/auth-user-context'
+import { AuthUserContext } from "../store/auth-user-context";
 import { PageHeader, ProfileTabs, PostList, Base } from "../components";
 
 // utils
-import { getJoinedDate } from "../utils";
+import { getJoinedDate, debug, baseURL } from "../utils";
 
 const ProfilePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { user, getUserInfo } = useContext(AuthUserContext);
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line
-  },[])
-
+  }, []);
 
   const tabIndexHandler = (index) => {
     setTabIndex(index);
@@ -39,7 +33,7 @@ const ProfilePage = () => {
                   fluid
                   roundedCircle
                   width={80}
-                  src="/img/profile/profile-4.jpg"
+                  src={`${debug ? baseURL + user.avatar : user.avatar}`}
                   className="me-2"
                 />
                 <div className="user-info">
@@ -54,8 +48,7 @@ const ProfilePage = () => {
               </div>
               <div className="btn-follow">
                 <Button variant="outline-primary d-flex align-items-center">
-                  <MdAdd />
-                  Follow
+                  Edit profile
                 </Button>
               </div>
             </Card.Body>
@@ -75,60 +68,53 @@ const ProfilePage = () => {
                 </span>
                 <span className="text-small">
                   {" "}
-                  <MdOutlineCalendarToday className="me-1" /> Joined on {getJoinedDate(user.date_joined)}
+                  <MdOutlineCalendarToday className="me-1" /> Joined on{" "}
+                  {getJoinedDate(user.date_joined)}
                 </span>
               </p>
             </Card.Body>
             <Card.Body className="pt-0">
               <div className="user-follow d-flex">
                 <div className="followers me-5">
-                  <p className="text-small m-0">12k Followers</p>
+                  <p className="text-small m-0">
+                    {user.followers.length} Followers
+                  </p>
                   <div className="images">
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-1.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-2.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-3.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-4.jpg"
-                      width={20}
-                    />
+                    {user.followers.slice(0, 4).map((fw, idx) => {
+                      return (
+                        <Image
+                          key={idx}
+                          roundedCircle
+                          src={`${
+                            debug
+                              ? baseURL + fw.follower.avatar
+                              : fw.follower.avatar
+                          }`}
+                          width={20}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="followering">
-                  <p className="text-small m-0">4 Following</p>
+                  <p className="text-small m-0">
+                    {user.following.length} Following
+                  </p>
                   <div className="images">
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-4.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-2.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-3.jpg"
-                      width={20}
-                    />
-                    <Image
-                      roundedCircle
-                      src="/img/profile/profile-5.jpg"
-                      width={20}
-                    />
+                    {user.following.slice(0, 4).map((fw, idx) => {
+                      return (
+                        <Image
+                          key={idx}
+                          roundedCircle
+                          src={`${
+                            debug
+                              ? baseURL + fw.following.avatar
+                              : fw.following.avatar
+                          }`}
+                          width={20}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>
