@@ -75,7 +75,6 @@ const CusNav = ({ show, setShow }) => {
         <NavItem className="mb-2">
           <button
             as={RLink}
-            to='/account/logout/'
             onClick={handleLogout}
             className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
