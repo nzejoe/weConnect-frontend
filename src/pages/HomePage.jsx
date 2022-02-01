@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react"
+import React, { useState, useCallback, useContext, useEffect } from "react"
 import { Feeds, PeopleTabContent, NavTabs, TrendingTabContent } from '../components'
 import { Base } from '../components';
 
@@ -8,7 +8,12 @@ const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { user, getUserInfo } = useContext(AuthUserContext);
 
-  getUserInfo()
+  console.log(user)
+
+  useEffect(()=>{
+    getUserInfo();
+    // eslint-disable-next-line
+  },[])
  
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);

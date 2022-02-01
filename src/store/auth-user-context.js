@@ -2,12 +2,13 @@ import { createContext, useReducer } from 'react'
 import axios from 'axios';
 
 const initialState = {
-    user: {name: 'Maya', email: 'maya@company.com'},
+    user: {},
 }
 
 const reducer = (state, actions)=>{
 
     if(actions.type === "SET_USER"){
+        return {...state, user: actions.payload }
     }
     return state
 }
@@ -24,20 +25,21 @@ const AuthUserProvider = ({ children })=>{
         const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
         try {
-            const response = axios({
+            const response = await axios({
               url: "users/my_details/",
               method: 'GET',
               headers: {
                 authorization: `Bearer ${accessToken.access_token}`,
               },
             });
-           console.log(response)
+            if(response.status === 200){
+                 dispatch({ type: "SET_USER", payload: response.data });
+            }
         } catch (error) {
             const err = {...error}
             console.log(err.response.data)
         }
 
-        dispatch({ type: "SET_USER", payload: accessToken.access_token });
     }
 
     const context = {
