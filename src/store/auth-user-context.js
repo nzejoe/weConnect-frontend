@@ -32,9 +32,11 @@ const AuthUserProvider = ({ children })=>{
                 authorization: `Bearer ${accessToken.access_token}`,
               },
             });
+
             if(response.status === 200){
                  dispatch({ type: "SET_USER", payload: response.data });
             }
+            
         } catch (error) {
             const err = {...error}
             console.log(err.response.data)

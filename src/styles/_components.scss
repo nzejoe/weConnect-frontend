@@ -70,8 +70,10 @@
 
 // NAV
 .cus__nav {
-  .nav-link {
+  .nav-link, button{
     background: transparent;
+    width: 100%;
+    border: none;
 
     &.active,
     &:hover {

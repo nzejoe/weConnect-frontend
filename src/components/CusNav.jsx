@@ -73,14 +73,14 @@ const CusNav = ({ show, setShow }) => {
           </NavLink>
         </NavItem>
         <NavItem className="mb-2">
-          <NavLink
+          <button
             as={RLink}
-            to='/'
+            to='/account/logout/'
             onClick={handleLogout}
             className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
             <MdOutlineLogout className="icon"/> Logout
-          </NavLink>
+          </button>
         </NavItem>
         <NavItem className="mb-2">
           <NavLink

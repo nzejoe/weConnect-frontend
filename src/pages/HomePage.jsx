@@ -8,7 +8,6 @@ const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { user, getUserInfo } = useContext(AuthUserContext);
 
-  console.log(user)
 
   useEffect(()=>{
     getUserInfo();
