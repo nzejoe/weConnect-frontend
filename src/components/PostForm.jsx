@@ -42,8 +42,6 @@ const PostForm = () => {
     setText(e.target.value);
   };
 
-  console.log(formValid);
-
   // SUBMIT HANDLER
   const handleSubmit = (e) => {
     e.preventDefault();

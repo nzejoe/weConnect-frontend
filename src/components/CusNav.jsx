@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, NavItem, NavLink } from "react-bootstrap";
-import { NavLink as RLink } from "react-router-dom";
+import { NavLink as RLink, useNavigate } from "react-router-dom";
 
 // react icons
 import {
@@ -15,6 +15,20 @@ import {
 } from "react-icons/md";
 
 const CusNav = ({ show, setShow }) => {
+  const[loggedOut, setLoggedOut] = useState(false);
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('weConnect_user');
+    setLoggedOut(true);
+  }
+
+  useEffect(()=>{
+    if(loggedOut){
+      navigate("/account/login/", { replace: true });
+    }
+  },[loggedOut, navigate])
+
   return (
     <aside className={`cus__col cus__nav ${show ? "show" : "hide"}`}>
       <div className="backdrop" onClick={() => setShow(false)}></div>
@@ -61,7 +75,8 @@ const CusNav = ({ show, setShow }) => {
         <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/logout/"
+            to='/'
+            onClick={handleLogout}
             className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
             <MdOutlineLogout className="icon"/> Logout
