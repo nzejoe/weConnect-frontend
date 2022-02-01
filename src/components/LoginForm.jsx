@@ -60,9 +60,9 @@ const LoginForm = () => {
 
       setLoginError({ error: false, msg: "" });
       const user = {
-        access_toten: response.data.access_token,
-        refresh_token: response.data.refresh_token
-      }
+        access_token: response.data.access_token,
+        refresh_token: response.data.refresh_token,
+      };
       // save user access token to localstorage
       localStorage.setItem('weConnect_user', JSON.stringify(user));
       setLoading(false);

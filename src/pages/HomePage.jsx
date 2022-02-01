@@ -1,9 +1,15 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useContext } from "react"
 import { Feeds, PeopleTabContent, NavTabs, TrendingTabContent } from '../components'
 import { Base } from '../components';
+
+// context 
+import { AuthUserContext } from "../store/auth-user-context";
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const { user, getUserInfo } = useContext(AuthUserContext);
 
+  getUserInfo()
+ 
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);
   }, []);
