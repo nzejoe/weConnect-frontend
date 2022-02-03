@@ -14,17 +14,17 @@ const PostForm = () => {
   const [text, setText] = useState("");
   const [formTouched, setFormTouched] = useState(false);
   const [formValid, setFormValid] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setText("");
+    setErrorMsg("");
+    setFormTouched(false);
+    setImage(null);
+  };
+
   const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    if (!text && formTouched) {
-      setFormValid(false);
-      return;
-    }
-    setFormValid(true);
-  }, [text, formTouched]);
 
   // FILE HANDLER
   const handleFileChange = (e) => {
@@ -33,20 +33,31 @@ const PostForm = () => {
       console.log("it's image file");
       setImage(file);
     } else {
-      console.log("Sorry only images allowed");
+      setErrorMsg("Sorry only images allowed");
     }
   };
 
   // TEXT HANDLER
+  useEffect(()=>{
+    if (!text && formTouched) {
+      setFormValid(false);
+      setErrorMsg("Please write a short note about your post.");
+      return;
+    }
+    setFormValid(true);
+  },[text, formTouched])
+
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
 
+  console.log(formValid)
   // SUBMIT HANDLER
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formValid) {
+
+    if (formValid && formTouched) {
       const formData = new FormData();
       formData.append("text", text);
       // check if image was uploaded
@@ -56,8 +67,12 @@ const PostForm = () => {
         formData.append("image", "null");
         formData.delete("image");
       }
-
+     
       setShow(false);
+      setText('');
+      setErrorMsg('');
+      setFormTouched(false);
+      setImage(null);
     }
   };
 
@@ -96,7 +111,7 @@ const PostForm = () => {
         </Modal.Header>
         {!formValid && (
           <div className="error-msg p-0 px-2 pt-2 text-danger">
-            <p className="">Please write a short note about your post.</p>
+            <p className="">{errorMsg}</p>
           </div>
         )}
         <Modal.Body>

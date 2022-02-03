@@ -19,7 +19,6 @@ import { PostContext } from "../store/post-context";
 const PostList = () => {
   const { authUserPosts } = useContext(PostContext);
 
-  console.log(authUserPosts)
   
   return (
     <div className="post-list my-4">
