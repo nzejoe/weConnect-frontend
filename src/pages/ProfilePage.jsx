@@ -6,7 +6,7 @@ import { AuthUserContext } from "../store/auth-user-context";
 import { PageHeader, ProfileTabs, PostList, Base } from "../components";
 
 // utils
-import { getJoinedDate, debug, baseURL } from "../utils";
+import { getJoinedDate, debug, baseURL, getProfileImage } from "../utils";
 
 const ProfilePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -74,6 +74,7 @@ const ProfilePage = () => {
               </p>
             </Card.Body>
             <Card.Body className="pt-0">
+              {/* followers */}
               <div className="user-follow d-flex">
                 <div className="followers me-5">
                   <p className="text-small m-0">
@@ -82,20 +83,12 @@ const ProfilePage = () => {
                   <div className="images">
                     {user.followers.slice(0, 4).map((fw, idx) => {
                       return (
-                        <Image
-                          key={idx}
-                          roundedCircle
-                          src={`${
-                            debug
-                              ? baseURL + fw.follower.avatar
-                              : fw.follower.avatar
-                          }`}
-                          width={20}
-                        />
+                        <Image key={idx} roundedCircle src={getProfileImage(fw.follower)} width={20} />
                       );
                     })}
                   </div>
                 </div>
+                {/* following */}
                 <div className="followering">
                   <p className="text-small m-0">
                     {user.following.length} Following
@@ -106,11 +99,7 @@ const ProfilePage = () => {
                         <Image
                           key={idx}
                           roundedCircle
-                          src={`${
-                            debug
-                              ? baseURL + fw.following.avatar
-                              : fw.following.avatar
-                          }`}
+                          src={getProfileImage(fw.following)}
                           width={20}
                         />
                       );

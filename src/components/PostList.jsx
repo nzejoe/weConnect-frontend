@@ -9,7 +9,7 @@ import {
   MdOutlineThumbUp,
 } from "react-icons/md";
 
-import { baseURL, debug } from "../utils";
+import { baseURL, debug, getProfileImage } from "../utils";
 
 import { CommentList } from ".";
 
@@ -34,11 +34,7 @@ const PostList = () => {
                     fluid
                     roundedCircle
                     width={60}
-                    src={
-                      debug
-                        ? `${baseURL + post.author.avatar}`
-                        : `${post.author.avatar}`
-                    }
+                    src={ getProfileImage(post.author) }
                   />
                   <div className="author-info ms-2">
                     <Card.Title className="m-0">{fullName}</Card.Title>
@@ -59,11 +55,7 @@ const PostList = () => {
                 {post.image && (
                   <Card.Img
                     className="post-img"
-                    src={
-                      debug
-                        ? `${baseURL + post.image}`
-                        : `${post.image}`
-                    }
+                    src={debug ? `${baseURL + post.image}` : `${post.image}`}
                   ></Card.Img>
                 )}
               </div>
