@@ -8,7 +8,7 @@ import {
   MdChatBubbleOutline,
   MdOutlineThumbUp,
 } from "react-icons/md";
-
+// utils
 import { baseURL, debug, getProfileImage } from "../utils";
 
 import { CommentList } from ".";
@@ -25,6 +25,8 @@ const PostList = () => {
     <div className="post-list my-4">
       { authUserPosts && authUserPosts.map(post=>{
         const fullName = `${post.author.first_name} ${post.author.last_name}`;
+        const likes = post.likes.length
+        const comments = post.comments;
         return (
           <div className="post my-3" key={post.id}>
             <Card>
@@ -34,7 +36,7 @@ const PostList = () => {
                     fluid
                     roundedCircle
                     width={60}
-                    src={ getProfileImage(post.author) }
+                    src={getProfileImage(post.author)}
                   />
                   <div className="author-info ms-2">
                     <Card.Title className="m-0">{fullName}</Card.Title>
@@ -62,15 +64,15 @@ const PostList = () => {
               <div className="post-actions py-2">
                 <div className="count d-flex text-muted mb-1 px-4">
                   <div className="like clickable me-5">
-                    <MdOutlineThumbUp className="count-icon" /> 20k
+                    <MdOutlineThumbUp className="count-icon" /> {likes}
                   </div>
                   <div className="comment-count clickable">
-                    <MdChatBubbleOutline className="count-icon" /> 10k
+                    <MdChatBubbleOutline className="count-icon" /> {comments.length}
                   </div>
                 </div>
 
                 {/* comment list */}
-                <CommentList />
+                <CommentList comments={comments} />
               </div>
             </Card>
           </div>

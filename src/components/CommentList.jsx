@@ -6,7 +6,11 @@ import {
   MdOutlineSend,
 } from "react-icons/md";
 
-const CommentList = () => {
+// utils
+import { getProfileImage } from "../utils";
+
+
+const CommentList = ({ comments }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -26,65 +30,34 @@ const CommentList = () => {
           />
         </Form>
         <div className="comment-list px-2 mt-3">
-          <div className="comment mb-2">
-            <div className="comment-inner d-flex justify-content-start">
-              <div className="img-container">
-                <Image fluid roundedCircle src="/img/profile/profile-2.jpg" />
+          
+          {comments && comments.map(comment => {
+            const fullName = `${comment.author.first_name} ${comment.author.last_name}`;
+            return (
+              <div className="comment mb-2" key={comment.id}>
+                <div className="comment-inner d-flex justify-content-start">
+                  <div className="img-container">
+                    <Image
+                      fluid
+                      roundedCircle
+                      src={getProfileImage(comment.author)}
+                    />
+                  </div>
+                  <Card className="ms-2 p-2 bg-light-cus mb-0">
+                    <Card.Title>{fullName}</Card.Title>
+                    <Card.Text className="text-muted">
+                      {" "}
+                      accusantium blanditiis aut esse aliquid culpa cAtque culpa{" "}
+                    </Card.Text>
+                  </Card>
+                </div>
+                <div className="footer ms-5 px-3 text-muted">
+                  <small className="clickable">Like</small> .{" "}
+                  <small className="clickable">Reply</small> . <small>1h</small>
+                </div>
               </div>
-              <Card className="ms-2 p-2 bg-light-cus mb-0">
-                <Card.Title>Mel Emmanuel</Card.Title>
-                <Card.Text className="text-muted">
-                  {" "}
-                  accusantium blanditiis aut esse aliquid culpa cAtque culpa{" "}
-                </Card.Text>
-              </Card>
-            </div>
-            <div className="footer ms-5 px-3 text-muted">
-              <small className="clickable">Like</small> .{" "}
-              <small className="clickable">Reply</small> . <small>1h</small>
-            </div>
-          </div>
-
-          <div className="comment mb-2">
-            <div className="comment-inner d-flex justify-content-start">
-              <div className="img-container">
-                <Image fluid roundedCircle src="/img/profile/profile-5.jpg" />
-              </div>
-              <Card className="ms-2 p-2 bg-light-cus mb-0">
-                <Card.Title>Sara Wiliams</Card.Title>
-                <Card.Text className="text-muted">
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                  vitae fugit odio accusantium blanditiis aut esse aliquid culpa
-                  consectetur! Dolores.{" "}
-                </Card.Text>
-              </Card>
-            </div>
-            <div className="footer ms-5 px-3 text-muted">
-              <small className="clickable">Like</small> .{" "}
-              <small className="clickable">Reply</small> . <small>30min</small>
-            </div>
-          </div>
-
-          <div className="comment mb-2">
-            <div className="comment-inner d-flex justify-content-start">
-              <div className="img-container">
-                <Image fluid roundedCircle src="/img/profile/profile-1.jpg" />
-              </div>
-              <Card className="ms-2 p-2 bg-light-cus mb-0">
-                <Card.Title>David Max</Card.Title>
-                <Card.Text className="text-muted">
-                  {" "}
-                  Lorem ipsum dolor Omnis vitae fugit odio accusantium
-                  blanditiis aut esse aliquid culpa consectetur! Dolores.{" "}
-                </Card.Text>
-              </Card>
-            </div>
-            <div className="footer ms-5 px-3 text-muted">
-              <small className="clickable">Like</small> .{" "}
-              <small className="clickable">Reply</small> . <small>25min</small>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
