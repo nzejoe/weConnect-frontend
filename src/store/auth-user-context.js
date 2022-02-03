@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const initialState = {
     user: {},
+    posts: [],
 }
 
 const reducer = (state, actions)=>{
@@ -15,6 +16,7 @@ const reducer = (state, actions)=>{
 
 export const AuthUserContext = createContext({
   user: {},
+  posts: [],
   getUserInfo: () => {},
 });
 
@@ -25,7 +27,7 @@ const AuthUserProvider = ({ children })=>{
         const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
         try {
-            const response = await axios({
+            const detailResponse = await axios({
               url: "/users/my_details/",
               method: 'GET',
               headers: {
@@ -33,8 +35,20 @@ const AuthUserProvider = ({ children })=>{
               },
             });
 
-            if(response.status === 200){
-                 dispatch({ type: "SET_USER", payload: response.data });
+            if(detailResponse.status === 200){
+                 dispatch({ type: "SET_USER", payload: detailResponse.data });
+            }
+
+            const postRes = await axios({
+              url: "/posts/",
+              method: "GET",
+              headers: {
+                authorization: `Bearer ${accessToken.access_token}`,
+              },
+            });
+
+            if(postRes.status === 200){
+              console.log(postRes.data)
             }
             
         } catch (error) {
@@ -46,6 +60,7 @@ const AuthUserProvider = ({ children })=>{
 
     const context = {
       user: state.user,
+      posts: state.posts,
       getUserInfo,
     };
 
