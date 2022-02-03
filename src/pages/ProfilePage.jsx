@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Card, Image, Button } from "react-bootstrap";
+import { Card, Image, Button, Spinner } from "react-bootstrap";
 import { MdDone, MdOutlineLink, MdOutlineCalendarToday } from "react-icons/md";
 import { Link } from "react-router-dom";
+// context
 import { AuthUserContext } from "../store/auth-user-context";
+import { PostContext } from "../store/post-context";
 import { PageHeader, ProfileTabs, PostList, Base } from "../components";
 
 // utils
@@ -11,9 +13,15 @@ import { getJoinedDate, debug, baseURL, getProfileImage } from "../utils";
 const ProfilePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { user, getUserInfo } = useContext(AuthUserContext);
+  const { loading, getUserPosts } = useContext(PostContext);
 
   useEffect(() => {
     getUserInfo();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    getUserPosts();
     // eslint-disable-next-line
   }, []);
 
@@ -83,7 +91,12 @@ const ProfilePage = () => {
                   <div className="images">
                     {user.followers.slice(0, 4).map((fw, idx) => {
                       return (
-                        <Image key={idx} roundedCircle src={getProfileImage(fw.follower)} width={20} />
+                        <Image
+                          key={idx}
+                          roundedCircle
+                          src={getProfileImage(fw.follower)}
+                          width={20}
+                        />
                       );
                     })}
                   </div>
@@ -110,10 +123,16 @@ const ProfilePage = () => {
             </Card.Body>
           </Card>
           <ProfileTabs getTabIndex={tabIndexHandler} />
-          <div className="tab-contents">
-            {tabIndex === 0 && <PostList />}
-            {tabIndex === 1 && <PostList />}
-          </div>
+          {!loading ? (
+            <div className="tab-contents">
+              {tabIndex === 0 && <PostList />}
+              {tabIndex === 1 && <PostList />}
+            </div>
+          ) : (
+            <div className="w-100 text-center">
+              <Spinner animation="grow" />
+            </div>
+          )}
         </div>
       )}
     </Base>

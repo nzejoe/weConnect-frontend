@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Spinner } from "react-bootstrap";
 import { PostForm, PostList, ActiveUsersCard } from "../components";
 
 // context
@@ -11,7 +12,13 @@ const Feeds = () => {
       <div className="feed-content">
         <PostForm />
         <ActiveUsersCard />
-        {loading ? <p>Loading</p> : <PostList />}
+        {loading ? (
+          <div className="w-100 text-center mt-5">
+            <Spinner animation="grow" />
+          </div>
+        ) : (
+          <PostList />
+        )}
       </div>
     </>
   );
