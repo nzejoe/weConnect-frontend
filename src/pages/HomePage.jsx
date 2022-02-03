@@ -4,15 +4,26 @@ import { Base } from '../components';
 
 // context 
 import { AuthUserContext } from "../store/auth-user-context";
+import { PostContext } from "../store/post-context";
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const { user, getUserInfo } = useContext(AuthUserContext);
+  const { getUserInfo } = useContext(AuthUserContext);
+  const { getUserPosts } = useContext(PostContext);
 
 
+  // user info getter
   useEffect(()=>{
     getUserInfo();
     // eslint-disable-next-line
   },[])
+  
+  // user post getter
+  useEffect(()=>{
+    getUserPosts();
+    // eslint-disable-next-line
+  },[])
+
+ 
  
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);

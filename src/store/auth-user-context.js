@@ -27,7 +27,7 @@ const AuthUserProvider = ({ children })=>{
         const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
         try {
-            const detailResponse = await axios({
+            const response = await axios({
               url: "/users/my_details/",
               method: 'GET',
               headers: {
@@ -35,20 +35,8 @@ const AuthUserProvider = ({ children })=>{
               },
             });
 
-            if(detailResponse.status === 200){
-                 dispatch({ type: "SET_USER", payload: detailResponse.data });
-            }
-
-            const postRes = await axios({
-              url: "/posts/",
-              method: "GET",
-              headers: {
-                authorization: `Bearer ${accessToken.access_token}`,
-              },
-            });
-
-            if(postRes.status === 200){
-              console.log(postRes.data)
+            if(response.status === 200){
+                 dispatch({ type: "SET_USER", payload: response.data });
             }
             
         } catch (error) {
