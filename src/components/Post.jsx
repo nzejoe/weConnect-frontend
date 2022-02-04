@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { Card, Image,  } from 'react-bootstrap'
-import { MdMoreVert, MdOutlineThumbUp, MdChatBubbleOutline } from "react-icons/md";
+import React, { useState } from "react";
+import { Card, Image } from "react-bootstrap";
+import {
+  MdMoreVert,
+  MdOutlineThumbUp,
+  MdChatBubbleOutline,
+} from "react-icons/md";
 
 // utils
-import { debug, getProfileImage, baseURL, } from '../utils';
+import { debug, getProfileImage, baseURL } from "../utils";
 
-import { CommentList } from '.';
+import { CommentList, ClickOutsideDetector } from ".";
 
 const Post = ({ post }) => {
-    const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
-    const likes = post.likes.length;
-    const comments = post.comments;
+  const likes = post.likes.length;
+  const comments = post.comments;
 
-    const handleShowMenu = () => {
-        setShowMenu(!showMenu);
-    }
+  // show menu toggler
+  const handleShowMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <div className="post my-3" key={post.id}>
@@ -39,11 +44,20 @@ const Post = ({ post }) => {
             <div className="text-muted date d-flex align-items-center">
               {post.created} {/* post option */}
               <div className="post-option position-relative">
-                <div className={`option-menu bg-light text-center clickable ${showMenu? 'show-menu': ''}`}>
+                <ClickOutsideDetector
+                  isOpen={showMenu}
+                  closeMenu={handleShowMenu}
+                  className={`option-menu bg-light text-center clickable shadow-lg ${
+                    showMenu ? "show-menu" : ""
+                  }`}
+                >
                   <p className="edit m-0 py-2 px-5">Edit</p>
                   <p className="delete m-0 py-2 px-5">Delete</p>
-                </div>
-                <MdMoreVert className="option-icon ms-2 p-1" onClick={handleShowMenu}/>
+                </ClickOutsideDetector>
+                <MdMoreVert
+                  className="option-icon ms-2 p-1"
+                  onClick={handleShowMenu}
+                />
               </div>
             </div>
           </div>
