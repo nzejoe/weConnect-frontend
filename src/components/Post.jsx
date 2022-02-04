@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Image,  } from 'react-bootstrap'
 import { MdMoreVert, MdOutlineThumbUp, MdChatBubbleOutline } from "react-icons/md";
 
@@ -8,8 +8,15 @@ import { debug, getProfileImage, baseURL, } from '../utils';
 import { CommentList } from '.';
 
 const Post = ({ post }) => {
+    const [showMenu, setShowMenu] = useState(false);
+
     const likes = post.likes.length;
     const comments = post.comments;
+
+    const handleShowMenu = () => {
+        setShowMenu(!showMenu);
+    }
+
   return (
     <div className="post my-3" key={post.id}>
       <Card>
@@ -29,9 +36,16 @@ const Post = ({ post }) => {
             </div>
           </div>
           <div className="post-date">
-            <p className="text-muted date d-flex align-items-center">
-              {post.created} <MdMoreVert className="option-icon ms-2 p-1" />
-            </p>
+            <div className="text-muted date d-flex align-items-center">
+              {post.created} {/* post option */}
+              <div className="post-option position-relative">
+                <div className={`option-menu bg-light text-center clickable ${showMenu? 'show-menu': ''}`}>
+                  <p className="edit m-0 py-2 px-5">Edit</p>
+                  <p className="delete m-0 py-2 px-5">Delete</p>
+                </div>
+                <MdMoreVert className="option-icon ms-2 p-1" onClick={handleShowMenu}/>
+              </div>
+            </div>
           </div>
         </div>
         <div className="post-body">

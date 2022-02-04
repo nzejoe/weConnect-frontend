@@ -200,6 +200,28 @@
       }
     }
   }
+
+  .post-option{
+    .option-menu{
+      display: none;
+      position: absolute;
+      top: 0;
+      left: -8rem;
+
+      &.show-menu{
+        display: block;
+      }
+
+      .edit:hover{
+        background: $primary-color;
+        color: #fff;
+      }
+      .delete:hover{
+        background: $danger-color;
+        color: #fff;
+      }
+    }
+  }
 }
 // post .//
 
