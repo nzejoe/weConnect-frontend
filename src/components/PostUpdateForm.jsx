@@ -14,8 +14,9 @@ import { getImageURL } from "../utils";
 
 const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
   const [image, setImage] = useState(postData.image);
+  const [imageURL, setImageURL] = useState(getImageURL(postData));
   const [text, setText] = useState(postData.text);
-  const [formTouched, setFormTouched] = useState(false);
+  const [formTouched, setFormTouched] = useState(true);
   const [formValid, setFormValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const { postCreate } = useContext(PostContext);
@@ -32,13 +33,18 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.indexOf("image") !== -1) {
-      console.log("it's image file");
       setImage(file);
+      // create a URL path from image file
+      setImageURL(URL.createObjectURL(file));
     } else {
       setFormValid(false);
       setErrorMsg("Sorry only images allowed");
     }
   };
+
+  //   useEffect(()=>{
+
+  //   },[image])
 
   // TEXT HANDLER
   useEffect(() => {
@@ -63,13 +69,19 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
       formData.append("text", text);
       // check if image was uploaded
       if (image) {
-        formData.append("image", image, image.name);
+        if (image.type && image.type.indexOf("image") !== -1) { // if image has been changed
+          formData.append("image", image, image.name);
+        } else {
+          formData.append("image", image);
+        }
       } else {
         formData.append("image", "null");
         formData.delete("image");
       }
 
       //   postCreate(formData);
+
+      console.log(formData.get("image"));
       handleEditing(false);
       setText("");
       setErrorMsg("");
@@ -112,8 +124,9 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
             className="form-control"
             placeholder="What's on your mind?"
           ></textarea>
-          <div>
-            <Image src={getImageURL(postData)} width={100} />
+          {/* IMAGE VIEWER */}
+          <div className="m-0 m-2">
+            {image && <Image src={imageURL} width={100} />}
           </div>
         </Modal.Body>
 
