@@ -69,7 +69,8 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
       formData.append("text", text);
       // check if image was uploaded
       if (image) {
-        if (image.type && image.type.indexOf("image") !== -1) { // if image has been changed
+        if (image.type && image.type.indexOf("image") !== -1) {
+          // if image has been changed
           formData.append("image", image, image.name);
         } else {
           formData.append("image", image);
@@ -80,8 +81,6 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
       }
 
       //   postCreate(formData);
-
-      console.log(formData.get("image"));
       handleEditing(false);
       setText("");
       setErrorMsg("");
@@ -125,9 +124,20 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
             placeholder="What's on your mind?"
           ></textarea>
           {/* IMAGE VIEWER */}
-          <div className="m-0 m-2">
-            {image && <Image src={imageURL} width={100} />}
-          </div>
+          {image && (
+            <div className="m-0 m-2">
+              <Image src={imageURL} width={100} />
+              <br />
+              <Button
+                variant="outline-warning"
+                size="sm"
+                className="text-muted"
+                onClick={() => setImage(null)}
+              >
+                Clear image
+              </Button>
+            </div>
+          )}
         </Modal.Body>
 
         <Modal.Footer className="justify-content-center align-items-center">
