@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Image } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Image, Button } from "react-bootstrap";
 import {
   MdMoreVert,
   MdOutlineThumbUp,
@@ -13,6 +13,7 @@ import { CommentList, ClickOutsideDetector } from ".";
 
 const Post = ({ post }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const likes = post.likes.length;
   const comments = post.comments;
@@ -21,6 +22,18 @@ const Post = ({ post }) => {
   const handleShowMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  const deleteMenuCloseHandler = () => {
+      setIsDelete(false);
+      setShowMenu(false);
+  }
+
+  // handle closing delete menu on click outside the div
+  useEffect(()=>{
+    if(!showMenu){
+        setIsDelete(false);
+    }
+  },[showMenu])
 
   return (
     <div className="post my-3" key={post.id}>
@@ -44,16 +57,49 @@ const Post = ({ post }) => {
             <div className="text-muted date d-flex align-items-center">
               {post.created} {/* post option */}
               <div className="post-option position-relative">
-                <ClickOutsideDetector
-                  isOpen={showMenu}
-                  closeMenu={handleShowMenu}
-                  className={`option-menu bg-light text-center clickable shadow-lg ${
-                    showMenu ? "show-menu" : ""
-                  }`}
-                >
-                  <p className="edit m-0 py-2 px-5">Edit</p>
-                  <p className="delete m-0 py-2 px-5">Delete</p>
-                </ClickOutsideDetector>
+                {!isDelete ? (
+                  <ClickOutsideDetector
+                    isOpen={showMenu}
+                    closeMenu={handleShowMenu}
+                    className={`option-menu bg-light text-center clickable shadow-lg ${
+                      showMenu ? "show-menu" : ""
+                    }`}
+                  >
+                    <div>
+                      <p className="edit m-0 py-2 px-5">Edit</p>
+                      <p
+                        className="delete m-0 py-2 px-5"
+                        onClick={() => setIsDelete(true)}
+                      >
+                        Delete
+                      </p>
+                    </div>
+                  </ClickOutsideDetector>
+                ) : (
+                  <ClickOutsideDetector
+                    isOpen={showMenu}
+                    closeMenu={handleShowMenu}
+                    className={`option-menu delete-option bg-secondary text-white shadow-lg text-small p-2 ${
+                      showMenu ? "show-menu" : ""
+                    }`}
+                  >
+                    <div>
+                      <p>Are sure you want to delete this post?</p>
+                      <div className="d-flex justify-content-end">
+                        <Button className="bg-danger text-white me-1">
+                          Yes, Sure!
+                        </Button>
+                        <Button
+                          className="bg-success text-white"
+                          onClick={deleteMenuCloseHandler}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </div>
+                  </ClickOutsideDetector>
+                )}
+
                 <MdMoreVert
                   className="option-icon ms-2 p-1"
                   onClick={handleShowMenu}

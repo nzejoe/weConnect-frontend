@@ -70,7 +70,8 @@
 
 // NAV
 .cus__nav {
-  .nav-link, button{
+  .nav-link,
+  button {
     background: transparent;
     width: 100%;
     border: none;
@@ -201,25 +202,35 @@
     }
   }
 
-  .post-option{
-    .option-menu{
+  .post-option {
+    .option-menu {
       display: none;
       position: absolute;
       top: 0;
       left: -9rem;
       font-size: 1.1rem;
 
-      &.show-menu{
+      &.show-menu {
         display: block;
       }
 
-      .edit:hover{
-        background: $primary-color;
+      .edit:hover {
+        background: $secondary-color;
         color: #fff;
       }
-      .delete:hover{
+      .delete:hover {
         background: $danger-color;
         color: #fff;
+      }
+    }
+
+    .delete-option {
+      width: 20rem;
+      left: -20rem;
+
+      .btn{
+        border: none;
+        border-radius: 0;
       }
     }
   }
@@ -322,65 +333,64 @@ a.user-link:visited {
 
 // explore
 .trending {
-    .card {
-      .card-title {
-        font-size: 0.8rem;
-        font-weight: bold;
-      }
+  .card {
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
 
-      .card-body {
-        cursor: pointer;
-        max-height: 6rem;
-      }
+    .card-body {
+      cursor: pointer;
+      max-height: 6rem;
+    }
 
-      .img-wrapper {
-        width: 4rem;
+    .img-wrapper {
+      width: 4rem;
+      height: 100%;
+
+      img {
         height: 100%;
-
-        img {
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      h6, p{
-        margin: 0;
-      }
-
-      .option-icon {
-        width: 30px;
-        height: 30px;
-        background-color: $bg-light;
-        border-radius: 50%;
-        cursor: pointer;
+        object-fit: cover;
       }
     }
-  } 
-  
-  .explore-page{
-    h6{
-      font-size: .8rem;
+
+    h6,
+    p {
+      margin: 0;
     }
-  }// explore .//
 
-
-  // not available 
-  .not-available{
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-
-    .page-unavailable{
-      flex: 1 0;
+    .option-icon {
+      width: 30px;
+      height: 30px;
+      background-color: $bg-light;
+      border-radius: 50%;
+      cursor: pointer;
     }
-  }// not available .//
+  }
+}
+
+.explore-page {
+  h6 {
+    font-size: 0.8rem;
+  }
+} // explore .//
+
+// not available
+.not-available {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .page-unavailable {
+    flex: 1 0;
+  }
+} // not available .//
 
 // PAGE .//
 
-
 // page unavailable component
-.page-unavailable{
+.page-unavailable {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -389,30 +399,34 @@ a.user-link:visited {
 // page unavailable component
 
 // UNAUTHENTICATED_USER
-.unauthenticated-user{
-  .brand-container{
+.unauthenticated-user {
+  .brand-container {
     font-size: 2rem;
-    .icon{
+    .icon {
       font-size: 2em;
     }
   }
 
-  .login-form, .password-reset-form, .password-reset-complete-form{
+  .login-form,
+  .password-reset-form,
+  .password-reset-complete-form {
     width: 100%;
     max-width: 25rem;
   }
 
-  .register-form{
+  .register-form {
     width: 100%;
     max-width: 35rem;
 
-    label{
-      opacity: .7;
+    label {
+      opacity: 0.7;
     }
   }
 
-  a, a:link, a:visited{
-      text-decoration: none;
+  a,
+  a:link,
+  a:visited {
+    text-decoration: none;
   }
 }
 // UNAUTHENTICATED_USER .//
@@ -444,7 +458,7 @@ a.user-link:visited {
   }
 }
 
-// MAX SCREEN 
+// MAX SCREEN
 @media screen and (max-width: 768px) {
   .brand {
     position: relative;
