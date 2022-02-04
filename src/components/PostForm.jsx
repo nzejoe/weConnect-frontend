@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { InputGroup, FormControl, Modal, Button, Form } from "react-bootstrap";
+// context
+import { PostContext } from "../store/post-context";
 import {
   MdAccountCircle,
   MdAddCircleOutline,
@@ -15,6 +17,7 @@ const PostForm = () => {
   const [formTouched, setFormTouched] = useState(false);
   const [formValid, setFormValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const { postCreate } = useContext(PostContext);
 
   const handleClose = () => {
     setShow(false);
@@ -33,6 +36,7 @@ const PostForm = () => {
       console.log("it's image file");
       setImage(file);
     } else {
+      setFormValid(false)
       setErrorMsg("Sorry only images allowed");
     }
   };
@@ -51,7 +55,6 @@ const PostForm = () => {
     setText(e.target.value);
   };
 
-  console.log(formValid)
   // SUBMIT HANDLER
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,6 +70,8 @@ const PostForm = () => {
         formData.append("image", "null");
         formData.delete("image");
       }
+
+      postCreate(formData);
      
       setShow(false);
       setText('');

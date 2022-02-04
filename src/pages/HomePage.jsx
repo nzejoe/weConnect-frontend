@@ -8,7 +8,7 @@ import { PostContext } from "../store/post-context";
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { getUserInfo } = useContext(AuthUserContext);
-  const { getUserPosts } = useContext(PostContext);
+  const { getUserPosts, refresh } = useContext(PostContext);
 
 
   // user info getter
@@ -21,9 +21,7 @@ const HomePage = () => {
   useEffect(()=>{
     getUserPosts();
     // eslint-disable-next-line
-  },[])
-
- 
+  },[refresh])
  
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);

@@ -3,9 +3,11 @@ import axios from "axios";
 
 const initialState = {
   authUserPosts: [],
+  refresh: 0,
   loading: false,
 };
 
+// REDUCER
 const reducer = (state, actions) => {
   if (actions.type === "SET_USER_POSTS") {
     return { ...state, authUserPosts: actions.payload };
@@ -14,6 +16,10 @@ const reducer = (state, actions) => {
   if (actions.type === "LOADING") {
     return { ...state, loading: actions.payload };
   }
+
+  if(actions.type === 'REFRESH'){
+    return { ...state, refresh: Math.random() };
+  }
   return state;
 };
 
@@ -21,7 +27,9 @@ const reducer = (state, actions) => {
 export const PostContext = createContext({
   authUserPosts: [],
   loading: false,
+  refresh: 0,
   getUserPosts: () => {},
+  postCreate: () =>{},
 });
 
 // provider
@@ -33,6 +41,7 @@ const PostProvider = ({ children }) => {
     dispatch({ type: "LOADING", payload: status });
   };
 
+  // GET USER POST
   const getUserPosts = async () => {
     setLoading(true);
     try {
@@ -52,12 +61,39 @@ const PostProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
-  };
+  }; // GET USER POST .//
+
+  // CREATE POST
+  const postCreate = async(formData) => {
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: "/posts/",
+        method: "POST",
+        headers: {
+          'Content-type': 'json/application',
+          authorization: `Bearer ${access_token}`,
+        },
+        data: formData,
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "REFRESH"});
+        setLoading(false);
+        console.log(response.data)
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };// CREATE POST .//
 
   const context = {
     authUserPosts: state.authUserPosts,
     loading: state.loading,
+    refresh: state.refresh,
     getUserPosts,
+    postCreate,
   };
 
   return (
