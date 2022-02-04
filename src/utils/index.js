@@ -34,3 +34,9 @@ export const getProfileImage = (user) => {
 
   return defaultImg;
 };
+
+
+export const getImageURL = (data)=>{
+  const imageURL = debug ? baseURL + data.image : data.image;
+  return imageURL
+}
