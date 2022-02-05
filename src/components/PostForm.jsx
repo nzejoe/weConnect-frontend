@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { InputGroup, FormControl, Modal, Button, Form } from "react-bootstrap";
+import { InputGroup, FormControl, Modal, Button, Form, Image } from "react-bootstrap";
 // context
 import { PostContext } from "../store/post-context";
 import {
@@ -13,6 +13,7 @@ import {
 const PostForm = () => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const [text, setText] = useState("");
   const [formTouched, setFormTouched] = useState(false);
   const [formValid, setFormValid] = useState(false);
@@ -33,8 +34,8 @@ const PostForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.indexOf("image") !== -1) {
-      console.log("it's image file");
       setImage(file);
+      setImageURL(URL.createObjectURL(file));
     } else {
       setFormValid(false)
       setErrorMsg("Sorry only images allowed");
@@ -130,6 +131,21 @@ const PostForm = () => {
             className="form-control"
             placeholder="What's on your mind?"
           ></textarea>
+          {/* IMAGE PREVIEWER */}
+          {image && (
+            <div className="m-0 m-2">
+              <Image src={imageURL} width={100} />
+              <br />
+              <Button
+                variant="outline-warning"
+                size="sm"
+                className="text-muted"
+                onClick={() => setImage(null)}
+              >
+                Clear image
+              </Button>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer className="justify-content-center align-items-center">
           <Form.Group controlId="formFileSm" className="h-100">

@@ -124,7 +124,7 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
             className="form-control"
             placeholder="What's on your mind?"
           ></textarea>
-          {/* IMAGE VIEWER */}
+          {/* IMAGE PREVIEWER */}
           {image && (
             <div className="m-0 m-2">
               <Image src={imageURL} width={100} />

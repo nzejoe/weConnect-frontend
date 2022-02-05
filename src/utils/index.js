@@ -35,8 +35,20 @@ export const getProfileImage = (user) => {
   return defaultImg;
 };
 
-
+// this will return post image url
 export const getImageURL = (data)=>{
   const imageURL = debug ? baseURL + data.image : data.image;
   return imageURL
+}
+
+// this will check if logged in user liked a particular post
+export const isLiked = (user, post) => {
+  const likes = post.likes;
+
+  for (let x=0; x<likes.length; x++){
+    if (user.username === likes[x].user) {
+      return true;
+    };
+  }
+  return false
 }

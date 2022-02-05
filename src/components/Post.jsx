@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Card, Image, Button } from "react-bootstrap";
 import {
   MdMoreVert,
+  MdThumbUp,
   MdOutlineThumbUp,
   MdChatBubbleOutline,
 } from "react-icons/md";
@@ -9,7 +10,7 @@ import {
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
 // utils
-import { debug, getProfileImage, baseURL } from "../utils";
+import { debug, getProfileImage, baseURL, isLiked } from "../utils";
 
 import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
@@ -23,6 +24,9 @@ const Post = ({ post }) => {
 
   const likes = post.likes.length;
   const comments = post.comments;
+
+  console.log(isLiked(user, post))
+// console.log(post.likes)
 
   // show menu toggler
   const handleShowMenu = () => {
@@ -148,8 +152,13 @@ const Post = ({ post }) => {
           </div>
           <div className="post-actions py-2">
             <div className="count d-flex text-muted mb-1 px-4">
-              <div className="like clickable me-5">
-                <MdOutlineThumbUp className="count-icon" /> {likes}
+              <div className="like clickable me-5 mb-2">
+                {isLiked(user, post) ? (
+                  <MdThumbUp className="count-icon text-primary" />
+                ) : (
+                  <MdOutlineThumbUp className="count-icon" />
+                )}{" "}
+                {likes}
               </div>
               <div className="comment-count clickable">
                 <MdChatBubbleOutline className="count-icon" /> {comments.length}
