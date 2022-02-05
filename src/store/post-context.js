@@ -33,6 +33,7 @@ export const PostContext = createContext({
   postUpdate: (data) => {},
   postDelete: (postId) => {},
   postLike: (postId) => {},
+  postUnlike: (postId) => {},
 });
 
 // provider
@@ -162,6 +163,29 @@ const PostProvider = ({ children }) => {
     }
   };// LIKE POST .//
 
+  // UNLIKE POST
+  const postUnlike = async(postId) => {
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: `/posts/${postId}/unlike/`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "json/application",
+          authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "REFRESH"});
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };// UNLIKE POST .//
+
 
   const context = {
     authUserPosts: state.authUserPosts,
@@ -172,6 +196,7 @@ const PostProvider = ({ children }) => {
     postUpdate,
     postDelete,
     postLike,
+    postUnlike,
   };
 
   return (

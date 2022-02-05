@@ -16,7 +16,7 @@ import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
 const Post = ({ post }) => {
   const { user } = useContext(AuthUserContext);
-  const { postDelete, postLike } = useContext(PostContext);
+  const { postDelete, postLike, postUnlike } = useContext(PostContext);
 
   const [showMenu, setShowMenu] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -151,9 +151,15 @@ const Post = ({ post }) => {
             <div className="count d-flex text-muted mb-1 px-4">
               <div className="like clickable me-5 mb-2">
                 {isLiked(user, post) ? (
-                  <MdThumbUp className="count-icon text-primary" />
+                  <MdThumbUp
+                    className="count-icon text-primary"
+                    onClick={() => postUnlike(post.id)}
+                  />
                 ) : (
-                  <MdOutlineThumbUp className="count-icon" onClick={()=>postLike(post.id)}/>
+                  <MdOutlineThumbUp
+                    className="count-icon"
+                    onClick={() => postLike(post.id)}
+                  />
                 )}{" "}
                 {likes}
               </div>
