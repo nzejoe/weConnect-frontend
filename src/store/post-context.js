@@ -29,7 +29,8 @@ export const PostContext = createContext({
   loading: false,
   refresh: 0,
   getUserPosts: () => {},
-  postCreate: () =>{},
+  postCreate: (formData) => {},
+  postUpdate: (formData) => {},
 });
 
 // provider
@@ -88,12 +89,39 @@ const PostProvider = ({ children }) => {
     }
   };// CREATE POST .//
 
+  // UPDATE POST
+  const postUpdate = async(data) => {
+    setLoading(true);
+    const { postId, formData } = data;
+    console.log(postId);
+    try {
+      const response = await axios({
+        url: `/posts/${postId}/`,
+        method: "PUT",
+        headers: {
+          "Content-type": "json/application",
+          authorization: `Bearer ${access_token}`,
+        },
+        data: formData,
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "REFRESH"});
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };// UPDATE POST .//
+
   const context = {
     authUserPosts: state.authUserPosts,
     loading: state.loading,
     refresh: state.refresh,
     getUserPosts,
     postCreate,
+    postUpdate,
   };
 
   return (

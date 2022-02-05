@@ -19,7 +19,7 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
   const [formTouched, setFormTouched] = useState(true);
   const [formValid, setFormValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const { postCreate } = useContext(PostContext);
+  const { postUpdate } = useContext(PostContext);
 
   const handleClose = () => {
     handleEditing(false);
@@ -60,6 +60,7 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
     setText(e.target.value);
   };
 
+
   // SUBMIT HANDLER
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,15 +73,19 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
         if (image.type && image.type.indexOf("image") !== -1) {
           // if image has been changed
           formData.append("image", image, image.name);
-        } else {
-          formData.append("image", image);
-        }
+        } 
+        // else {
+        //   formData.append("image", image);
+        // }
       } else {
         formData.append("image", "null");
         formData.delete("image");
+        // add extra attribute to alert the backend that image has been cleared for the post
+        formData.append('clear_image', true);
+        console.log('no image')
       }
-
-      //   postCreate(formData);
+      
+      postUpdate({postId: postData.id, formData});
       handleEditing(false);
       setText("");
       setErrorMsg("");
