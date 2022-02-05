@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { FormControl, Form, Card, Image, Modal, Button } from "react-bootstrap";
+import { FormControl, Form, Modal, Button } from "react-bootstrap";
 import {
   MdAccountCircle,
   MdOutlineArrowBackIosNew,
   MdOutlineSend,
 } from "react-icons/md";
 
-// utils
-import { getProfileImage } from "../utils";
+import { Comment } from '.'
 
 
 const CommentList = ({ comments }) => {
@@ -32,30 +31,8 @@ const CommentList = ({ comments }) => {
         <div className="comment-list px-2 mt-3">
           
           {comments && comments.map(comment => {
-            const fullName = `${comment.author.first_name} ${comment.author.last_name}`;
             return (
-              <div className="comment mb-2" key={comment.id}>
-                <div className="comment-inner d-flex justify-content-start">
-                  <div className="img-container">
-                    <Image
-                      fluid
-                      roundedCircle
-                      src={getProfileImage(comment.author)}
-                    />
-                  </div>
-                  <Card className="ms-2 p-2 bg-light-cus mb-0">
-                    <Card.Title>{fullName}</Card.Title>
-                    <Card.Text className="text-muted">
-                      {" "}
-                      accusantium blanditiis aut esse aliquid culpa cAtque culpa{" "}
-                    </Card.Text>
-                  </Card>
-                </div>
-                <div className="footer ms-5 px-3 text-muted">
-                  <small className="clickable">Like</small> .{" "}
-                  <small className="clickable">Reply</small> . <small>1h</small>
-                </div>
-              </div>
+              <Comment key={comment.id} comment={comment}/>
             );
           })}
         </div>

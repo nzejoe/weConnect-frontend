@@ -22,6 +22,7 @@ import Input from "./Input";
 import Post from "./Post";
 import ClickOutsideDetector from "./ClickOutsideDetector";
 import PostUpdateForm from "./PostUpdateForm";
+import Comment from "./Comment";
 
 export {
   CusNav,
@@ -48,4 +49,5 @@ export {
   Post,
   ClickOutsideDetector,
   PostUpdateForm,
+  Comment,
 };
