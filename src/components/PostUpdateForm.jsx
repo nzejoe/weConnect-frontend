@@ -74,15 +74,11 @@ const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
           // if image has been changed
           formData.append("image", image, image.name);
         } 
-        // else {
-        //   formData.append("image", image);
-        // }
       } else {
         formData.append("image", "null");
         formData.delete("image");
         // add extra attribute to alert the backend that image has been cleared for the post
         formData.append('clear_image', true);
-        console.log('no image')
       }
       
       postUpdate({postId: postData.id, formData});

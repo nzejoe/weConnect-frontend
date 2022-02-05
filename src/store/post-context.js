@@ -93,7 +93,6 @@ const PostProvider = ({ children }) => {
   const postUpdate = async(data) => {
     setLoading(true);
     const { postId, formData } = data;
-    console.log(postId);
     try {
       const response = await axios({
         url: `/posts/${postId}/`,

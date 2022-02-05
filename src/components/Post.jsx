@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Image, Button } from "react-bootstrap";
 import {
   MdMoreVert,
   MdOutlineThumbUp,
   MdChatBubbleOutline,
 } from "react-icons/md";
-
+// contex
+import { AuthUserContext } from "../store/auth-user-context";
 // utils
 import { debug, getProfileImage, baseURL } from "../utils";
 
 import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
 const Post = ({ post }) => {
+  const { user } = useContext(AuthUserContext);
   const [showMenu, setShowMenu] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,20 +27,20 @@ const Post = ({ post }) => {
   };
 
   const deleteMenuCloseHandler = () => {
-      setIsDelete(false);
-      setShowMenu(false);
-  }
+    setIsDelete(false);
+    setShowMenu(false);
+  };
 
   const handleEditing = (bool) => {
-      setIsEditing(bool);
-  }
+    setIsEditing(bool);
+  };
 
   // handle closing delete menu on click outside the div
-  useEffect(()=>{
-    if(!showMenu){
-        setIsDelete(false);
+  useEffect(() => {
+    if (!showMenu) {
+      setIsDelete(false);
     }
-  },[showMenu])
+  }, [showMenu]);
 
   return (
     <>
@@ -62,60 +64,63 @@ const Post = ({ post }) => {
             <div className="post-date">
               <div className="text-muted date d-flex align-items-center">
                 {post.created} {/* post option */}
-                <div className="post-option position-relative">
-                  {!isDelete ? (
-                    <ClickOutsideDetector
-                      isOpen={showMenu}
-                      closeMenu={handleShowMenu}
-                      className={`option-menu bg-light text-center clickable shadow-lg ${
-                        showMenu ? "show-menu" : ""
-                      }`}
-                    >
-                      <div>
-                        <p
-                          className="edit m-0 py-2 px-5"
-                          onClick={() => handleEditing(true)}
-                        >
-                          Edit
-                        </p>
-                        <p
-                          className="delete m-0 py-2 px-5"
-                          onClick={() => setIsDelete(true)}
-                        >
-                          Delete
-                        </p>
-                      </div>
-                    </ClickOutsideDetector>
-                  ) : (
-                    <ClickOutsideDetector
-                      isOpen={showMenu}
-                      closeMenu={handleShowMenu}
-                      className={`option-menu delete-option bg-secondary text-white shadow-lg text-small p-2 ${
-                        showMenu ? "show-menu" : ""
-                      }`}
-                    >
-                      <div>
-                        <p>Are sure you want to delete this post?</p>
-                        <div className="d-flex justify-content-end">
-                          <Button className="bg-danger text-white me-1">
-                            Yes, Sure!
-                          </Button>
-                          <Button
-                            className="bg-success text-white"
-                            onClick={deleteMenuCloseHandler}
+                {/* CHECK IF USER IS OWNER OF THE POST */}
+                {user && user.id === post.author.id && (
+                  <div className="post-option position-relative">
+                    {!isDelete ? (
+                      <ClickOutsideDetector
+                        isOpen={showMenu}
+                        closeMenu={handleShowMenu}
+                        className={`option-menu bg-light text-center clickable shadow-lg ${
+                          showMenu ? "show-menu" : ""
+                        }`}
+                      >
+                        <div>
+                          <p
+                            className="edit m-0 py-2 px-5"
+                            onClick={() => handleEditing(true)}
                           >
-                            Cancel
-                          </Button>
+                            Edit
+                          </p>
+                          <p
+                            className="delete m-0 py-2 px-5"
+                            onClick={() => setIsDelete(true)}
+                          >
+                            Delete
+                          </p>
                         </div>
-                      </div>
-                    </ClickOutsideDetector>
-                  )}
+                      </ClickOutsideDetector>
+                    ) : (
+                      <ClickOutsideDetector
+                        isOpen={showMenu}
+                        closeMenu={handleShowMenu}
+                        className={`option-menu delete-option bg-secondary text-white shadow-lg text-small p-2 ${
+                          showMenu ? "show-menu" : ""
+                        }`}
+                      >
+                        <div>
+                          <p>Are sure you want to delete this post?</p>
+                          <div className="d-flex justify-content-end">
+                            <Button className="bg-danger text-white me-1">
+                              Yes, Sure!
+                            </Button>
+                            <Button
+                              className="bg-success text-white"
+                              onClick={deleteMenuCloseHandler}
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        </div>
+                      </ClickOutsideDetector>
+                    )}
 
-                  <MdMoreVert
-                    className="option-icon ms-2 p-1"
-                    onClick={handleShowMenu}
-                  />
-                </div>
+                    <MdMoreVert
+                      className="option-icon ms-2 p-1"
+                      onClick={handleShowMenu}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -144,7 +149,11 @@ const Post = ({ post }) => {
         </Card>
       </div>
       {isEditing && (
-        <PostUpdateForm isEditing={isEditing} handleEditing={handleEditing} postData={post}/>
+        <PostUpdateForm
+          isEditing={isEditing}
+          handleEditing={handleEditing}
+          postData={post}
+        />
       )}
     </>
   );
