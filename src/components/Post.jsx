@@ -16,7 +16,7 @@ import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
 const Post = ({ post }) => {
   const { user } = useContext(AuthUserContext);
-  const { postDelete } = useContext(PostContext);
+  const { postDelete, postLike } = useContext(PostContext);
 
   const [showMenu, setShowMenu] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -24,9 +24,6 @@ const Post = ({ post }) => {
 
   const likes = post.likes.length;
   const comments = post.comments;
-
-  console.log(isLiked(user, post))
-// console.log(post.likes)
 
   // show menu toggler
   const handleShowMenu = () => {
@@ -156,7 +153,7 @@ const Post = ({ post }) => {
                 {isLiked(user, post) ? (
                   <MdThumbUp className="count-icon text-primary" />
                 ) : (
-                  <MdOutlineThumbUp className="count-icon" />
+                  <MdOutlineThumbUp className="count-icon" onClick={()=>postLike(post.id)}/>
                 )}{" "}
                 {likes}
               </div>
