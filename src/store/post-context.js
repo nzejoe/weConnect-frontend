@@ -30,7 +30,8 @@ export const PostContext = createContext({
   refresh: 0,
   getUserPosts: () => {},
   postCreate: (formData) => {},
-  postUpdate: (formData) => {},
+  postUpdate: (data) => {},
+  postDelete: (postId) => {},
 });
 
 // provider
@@ -114,6 +115,30 @@ const PostProvider = ({ children }) => {
     }
   };// UPDATE POST .//
 
+  // DELETE POST
+  const postDelete = async(postId) => {
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: `/posts/${postId}/`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "json/application",
+          authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "REFRESH"});
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };// DELETE POST .//
+
+
   const context = {
     authUserPosts: state.authUserPosts,
     loading: state.loading,
@@ -121,6 +146,7 @@ const PostProvider = ({ children }) => {
     getUserPosts,
     postCreate,
     postUpdate,
+    postDelete,
   };
 
   return (

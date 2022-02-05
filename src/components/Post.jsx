@@ -7,6 +7,7 @@ import {
 } from "react-icons/md";
 // contex
 import { AuthUserContext } from "../store/auth-user-context";
+import { PostContext } from "../store/post-context";
 // utils
 import { debug, getProfileImage, baseURL } from "../utils";
 
@@ -14,6 +15,8 @@ import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
 const Post = ({ post }) => {
   const { user } = useContext(AuthUserContext);
+  const { postDelete } = useContext(PostContext);
+
   const [showMenu, setShowMenu] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +36,13 @@ const Post = ({ post }) => {
 
   const handleEditing = (bool) => {
     setIsEditing(bool);
+  };
+
+  // post delete handler function
+  const postDeleteHandler = (postId) => {
+    setIsDelete(false);
+    setShowMenu(false);
+    postDelete(postId);
   };
 
   // handle closing delete menu on click outside the div
@@ -101,7 +111,10 @@ const Post = ({ post }) => {
                         <div>
                           <p>Are sure you want to delete this post?</p>
                           <div className="d-flex justify-content-end">
-                            <Button className="bg-danger text-white me-1">
+                            <Button
+                              className="bg-danger text-white me-1"
+                              onClick={() => postDeleteHandler(post.id)}
+                            >
                               Yes, Sure!
                             </Button>
                             <Button
