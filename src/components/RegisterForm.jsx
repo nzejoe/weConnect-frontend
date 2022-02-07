@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from "axios";
 
@@ -14,6 +14,8 @@ const RegisterForm = () => {
   const [gender, setGender] = useState('male');
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   // hook
   //   USERNAME
@@ -133,6 +135,7 @@ const submitHanler = (e) => {
 
 const sendRequestHander = async(data) => {
   setIsLoading(true);
+  setError(false);
   try {
     const response = await axios({
       url: '/users/register/',
@@ -149,7 +152,23 @@ const sendRequestHander = async(data) => {
     }
   } catch (error) {
     const err = {...error}
-    console.log(err.response.data);
+    const errorData = err.response.data
+
+    if(errorData.username){
+      setError({message: errorData.username[0]})
+    }
+
+    if(errorData.email){
+      setError({message: errorData.email[0]})
+    }
+
+    if (errorData.username && errorData.email) {
+      setError({
+        message: "account with this username and email already exists.",
+      });
+    }
+
+    console.log(errorData);
     setIsLoading(false)
   }
 }
@@ -306,6 +325,12 @@ const sendRequestHander = async(data) => {
             />
           </Col>
         </Row>
+              {/* error message */}
+          {
+            error && <Alert variant="danger">
+              {error.message}
+            </Alert>
+          }
         {/* submit button */}
         <Form.Group className="mb-3">
           <Button
