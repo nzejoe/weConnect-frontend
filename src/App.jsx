@@ -13,6 +13,7 @@ import {
   PasswordResetPage,
   PasswordResetComplete,
   PrivateRoute,
+  AccountActivatePage,
 } from "./pages";
 
 import AuthUserProvider from "./store/auth-user-context";
@@ -83,6 +84,10 @@ function App() {
             <Route
               path="/account/register/"
               element={<PublicRoute children={<RegisterPage />} />}
+            />
+            <Route
+              path="/account/activate_user/:uidb64/:token/"
+              element={<PublicRoute children={<AccountActivatePage />} />}
             />
             <Route
               path="/account/password_reset/"
