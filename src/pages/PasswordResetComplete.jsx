@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form, Card, Button, Alert } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from "axios";
@@ -14,8 +14,6 @@ const PasswordResetComplete = () => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordSaved, setIsPasswordSaved] = useState(false);
-
-  const navigate = useNavigate();
 
   const toggleShowPassword1 = () => setShowPassword1(!showPassword1);
   const toggleShowPassword2 = () => setShowPassword2(!showPassword2);
