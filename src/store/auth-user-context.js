@@ -2,26 +2,37 @@ import { createContext, useReducer } from 'react'
 import axios from 'axios';
 
 const initialState = {
-    user: {},
-    posts: [],
-}
+  isAuthenticated: false,
+  user: {},
+  posts: [],
+};
 
-const reducer = (state, actions)=>{
+const reducer = (state, action)=>{
 
-    if(actions.type === "SET_USER"){
-        return {...state, user: actions.payload }
+    if (action.type === "AUTHENTICATE") {
+      return { ...state, isAuthenticated: action.payload };
+    }
+
+    if(action.type === "SET_USER"){
+        return {...state, user: action.payload }
     }
     return state
 }
 
 export const AuthUserContext = createContext({
+  isAuthenticated: false,
   user: {},
   posts: [],
   getUserInfo: () => {},
+  setIsAuthenticated: () => {},
 });
 
 const AuthUserProvider = ({ children })=>{
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    const setIsAuthenticated = (status) => {
+      dispatch({type: 'AUTHENTICATE', payload: status});
+    }
 
     const getUserInfo = async() => {
         const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
@@ -47,9 +58,11 @@ const AuthUserProvider = ({ children })=>{
     }
 
     const context = {
+      isAuthenticated: state.isAuthenticated,
       user: state.user,
       posts: state.posts,
       getUserInfo,
+      setIsAuthenticated,
     };
 
     return <AuthUserContext.Provider value={context}>

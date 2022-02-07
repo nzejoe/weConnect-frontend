@@ -40,7 +40,7 @@ export const PostContext = createContext({
 // provider
 const PostProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { access_token } = JSON.parse(localStorage.getItem("weConnect_user"));
+  const token = JSON.parse(localStorage.getItem("weConnect_user"));
 
   const setLoading = (status) => {
     dispatch({ type: "LOADING", payload: status });
@@ -54,7 +54,7 @@ const PostProvider = ({ children }) => {
         url: "/posts/",
         method: "GET",
         headers: {
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
       });
 
@@ -77,7 +77,7 @@ const PostProvider = ({ children }) => {
         method: "POST",
         headers: {
           'Content-type': 'json/application',
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
         data: formData,
       });
@@ -103,7 +103,7 @@ const PostProvider = ({ children }) => {
         method: "PUT",
         headers: {
           "Content-type": "json/application",
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
         data: formData,
       });
@@ -127,7 +127,7 @@ const PostProvider = ({ children }) => {
         method: "DELETE",
         headers: {
           "Content-type": "json/application",
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
       });
 
@@ -150,7 +150,7 @@ const PostProvider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-type": "json/application",
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
       });
 
@@ -173,7 +173,7 @@ const PostProvider = ({ children }) => {
         method: "DELETE",
         headers: {
           "Content-type": "json/application",
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
       });
 
@@ -198,7 +198,7 @@ const PostProvider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          authorization: `Bearer ${access_token}`,
+          authorization: `Bearer ${token && token.access_token}`,
         },
         data: commentData,
       });

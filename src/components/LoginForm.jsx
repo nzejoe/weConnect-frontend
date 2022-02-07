@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Button, Alert } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from 'axios'
 
+// context
+import { AuthUserContext } from "../store/auth-user-context";
+
 import { Input } from ".";
 import useInput from "../hooks/use-input";
 
 const LoginForm = () => {
+  const {isAuthenticated, setIsAuthenticated } = useContext(AuthUserContext);
   const [show, setShow] = useState(false);
   const [formHasError, setFormHasError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState({error: false, msg: ''});
-  const[authenticated, setAuthenticated] = useState(false);
 
   const navigate = useNavigate()
 
@@ -66,7 +69,7 @@ const LoginForm = () => {
       // save user access token to localstorage
       localStorage.setItem('weConnect_user', JSON.stringify(user));
       setLoading(false);
-      setAuthenticated(true);
+      setIsAuthenticated(true);
     } catch (error) {
       setLoading(false);
       const resError = { ...error }
@@ -80,11 +83,11 @@ const LoginForm = () => {
   }, [emailHasError, passwordHasError]);
 
   // user authentication handler
-  useEffect(()=>{
-    if(authenticated){
-      navigate('/', {replace: true}); // redirect to home page
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", { replace: true }); // redirect to home page
     }
-  },[authenticated, navigate]);
+  }, [isAuthenticated, navigate]);
 
   // get client id and client secret from evironment variable
   const {REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET} = process.env;

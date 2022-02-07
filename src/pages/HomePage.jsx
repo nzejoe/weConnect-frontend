@@ -1,32 +1,40 @@
-import React, { useState, useCallback, useContext, useEffect } from "react"
-import { Feeds, PeopleTabContent, NavTabs, TrendingTabContent } from '../components'
-import { Base } from '../components';
+import React, { useState, useCallback, useContext, useEffect } from "react";
+import {
+  Feeds,
+  PeopleTabContent,
+  NavTabs,
+  TrendingTabContent,
+} from "../components";
+import { Base } from "../components";
 
-// context 
+// context
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const { getUserInfo } = useContext(AuthUserContext);
+  const {isAuthenticated, getUserInfo } = useContext(AuthUserContext);
   const { getUserPosts, refresh } = useContext(PostContext);
 
-
   // user info getter
-  useEffect(()=>{
-    getUserInfo();
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUserInfo();
+    }
     // eslint-disable-next-line
-  },[])
-  
+  }, [isAuthenticated]);
+
   // user post getter
-  useEffect(()=>{
-    getUserPosts();
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUserPosts();
+    }
     // eslint-disable-next-line
-  },[refresh])
- 
+  }, [isAuthenticated, refresh]);
+
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);
   }, []);
-  
+
   return (
     <Base>
       <div className="home">

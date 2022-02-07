@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Nav, NavItem, NavLink } from "react-bootstrap";
 import { NavLink as RLink, useNavigate } from "react-router-dom";
 
@@ -14,12 +14,17 @@ import {
   MdPeople,
 } from "react-icons/md";
 
+// context
+import { AuthUserContext } from "../store/auth-user-context";
+
 const CusNav = ({ show, setShow }) => {
+  const { setIsAuthenticated } = useContext(AuthUserContext);
   const[loggedOut, setLoggedOut] = useState(false);
   const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem('weConnect_user');
+    setIsAuthenticated(false);
     setLoggedOut(true);
   }
 
