@@ -15,7 +15,7 @@ const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   // hook
   //   USERNAME
@@ -126,7 +126,8 @@ const submitHanler = (e) => {
       last_name: firstname,
       password,
       password2,
-      gender
+      gender,
+      avatar: null,
     }
     sendRequestHander(data)
   }
@@ -147,7 +148,8 @@ const sendRequestHander = async(data) => {
     })
 
     if(response.status === 200){
-      console.log(response.data)
+      console.log(response.data);
+      setSuccess(true);
       setIsLoading(false)
     }
   } catch (error) {
@@ -175,181 +177,192 @@ const sendRequestHander = async(data) => {
 
 
   return (
-    <div>
-      <Form onSubmit={submitHanler}>
-        <Row xs={2}>
-          {/* username */}
-          <Col>
-            <Input
-              label={"Username"}
-              type={"text"}
-              name="username"
-              placeholder={"Username"}
-              value={username}
-              isValid={isUsernameValid}
-              onChange={onUsernameChange}
-              onBlur={onUsernameBlur}
-              hasError={usernameHasError}
-              errorMessage={`${
-                username
-                  ? "More than 3 characters for a username"
-                  : "Username is a required field"
-              }`}
-            />
-          </Col>
-          {/* email */}
-          <Col>
-            <Input
-              label={"Email"}
-              type={"email"}
-              name="email"
-              placeholder={"Email"}
-              value={email}
-              isValid={isEmailValid}
-              onChange={onEmailChange}
-              onBlur={onEmailBlur}
-              hasError={emailHasError}
-              errorMessage={`${
-                email
-                  ? "Please enter a valid email"
-                  : "Email is a required field"
-              }`}
-            />
-          </Col>
-        </Row>
-        <Row xs={2}>
-          {/* first name */}
-          <Col>
-            <Input
-              label="First name"
-              type="text"
-              name="firstname"
-              placeholder="First name"
-              value={firstname}
-              isValid={isFirstnameValid}
-              onChange={onFirstnameChange}
-              onBlur={onFirstnameBlur}
-              hasError={firstnameHasError}
-              errorMessage={`${"First name is a required field"}`}
-            />
-          </Col>
+    <>
+      {!success ? (
+        <div>
+          <Form onSubmit={submitHanler}>
+            <Row xs={2}>
+              {/* username */}
+              <Col>
+                <Input
+                  label={"Username"}
+                  type={"text"}
+                  name="username"
+                  placeholder={"Username"}
+                  value={username}
+                  isValid={isUsernameValid}
+                  onChange={onUsernameChange}
+                  onBlur={onUsernameBlur}
+                  hasError={usernameHasError}
+                  errorMessage={`${
+                    username
+                      ? "More than 3 characters for a username"
+                      : "Username is a required field"
+                  }`}
+                />
+              </Col>
+              {/* email */}
+              <Col>
+                <Input
+                  label={"Email"}
+                  type={"email"}
+                  name="email"
+                  placeholder={"Email"}
+                  value={email}
+                  isValid={isEmailValid}
+                  onChange={onEmailChange}
+                  onBlur={onEmailBlur}
+                  hasError={emailHasError}
+                  errorMessage={`${
+                    email
+                      ? "Please enter a valid email"
+                      : "Email is a required field"
+                  }`}
+                />
+              </Col>
+            </Row>
+            <Row xs={2}>
+              {/* first name */}
+              <Col>
+                <Input
+                  label="First name"
+                  type="text"
+                  name="firstname"
+                  placeholder="First name"
+                  value={firstname}
+                  isValid={isFirstnameValid}
+                  onChange={onFirstnameChange}
+                  onBlur={onFirstnameBlur}
+                  hasError={firstnameHasError}
+                  errorMessage={`${"First name is a required field"}`}
+                />
+              </Col>
 
-          {/* last name */}
-          <Col>
-            <Input
-              label={"Last name"}
-              type="text"
-              name="lastname"
-              placeholder={"Last name"}
-              value={lastname}
-              isValid={isLastnameValid}
-              onChange={onLastnameChange}
-              onBlur={onLastnameBlur}
-              hasError={lastnameHasError}
-              errorMessage={`${"Last name is a required field"}`}
-            />
-          </Col>
-        </Row>
-        {/* gender */}
-        <Form.Group className="mb-3">
-          <Form.Label>Gender</Form.Label>
-          <Form.Select className="w-25" onChange={genderHandler} value={gender}>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </Form.Select>
-        </Form.Group>
+              {/* last name */}
+              <Col>
+                <Input
+                  label={"Last name"}
+                  type="text"
+                  name="lastname"
+                  placeholder={"Last name"}
+                  value={lastname}
+                  isValid={isLastnameValid}
+                  onChange={onLastnameChange}
+                  onBlur={onLastnameBlur}
+                  hasError={lastnameHasError}
+                  errorMessage={`${"Last name is a required field"}`}
+                />
+              </Col>
+            </Row>
+            {/* gender */}
+            <Form.Group className="mb-3">
+              <Form.Label>Gender</Form.Label>
+              <Form.Select
+                className="w-25"
+                onChange={genderHandler}
+                value={gender}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </Form.Select>
+            </Form.Group>
 
-        <Row xs={2}>
-          {/* password */}
-          <Col>
-            <Input
-              label={"Password"}
-              type={`${!showPassword1 ? "password" : "text"}`}
-              name="password"
-              icon={
-                showPassword1 ? (
-                  <BsEye
-                    className="icon clickable"
-                    onClick={toggleShowPassword1}
-                  />
-                ) : (
-                  <BsEyeSlash
-                    className="icon clickable"
-                    onClick={toggleShowPassword1}
-                  />
-                )
-              }
-              placeholder={"Password"}
-              value={password}
-              isValid={isPasswordValid}
-              onChange={onPasswordChange}
-              onBlur={onPasswordBlur}
-              hasError={passwordHasError}
-              errorMessage={`${
-                password
-                  ? "More than 5 characters for a password"
-                  : "Please provide a password"
-              }`}
-            />
-          </Col>
-          {/* confirm password */}
-          <Col>
-            <Input
-              label={"Confirm password"}
-              type={`${!showPassword2 ? "password" : "text"}`}
-              name="password2"
-              icon={
-                showPassword2 ? (
-                  <BsEye
-                    className="icon clickable"
-                    onClick={toggleShowPassword2}
-                  />
-                ) : (
-                  <BsEyeSlash
-                    className="icon clickable"
-                    onClick={toggleShowPassword2}
-                  />
-                )
-              }
-              placeholder={"Confirm password"}
-              value={password2}
-              isValid={isPassword2Valid}
-              onChange={onPassword2Change}
-              onBlur={onPassword2Blur}
-              hasError={password2HasError}
-              errorMessage={`${
-                password2
-                  ? "Password did not match"
-                  : "Please confirm your password"
-              }`}
-            />
-          </Col>
-        </Row>
-              {/* error message */}
-          {
-            error && <Alert variant="danger">
-              {error.message}
-            </Alert>
-          }
-        {/* submit button */}
-        <Form.Group className="mb-3">
-          <Button
-            type="submit"
-            variant="primary"
-            className="btn-lg"
-            disabled={!formIsValid || isLoading}
-          >
-            Create account
-          </Button>
-        </Form.Group>
-      </Form>
-      <div className="mb-3">
-        Already have an account?
-        <Link to="/account/login/" className="ms-2">
-          Log in
-        </Link>
-      </div>
-    </div>
+            <Row xs={2}>
+              {/* password */}
+              <Col>
+                <Input
+                  label={"Password"}
+                  type={`${!showPassword1 ? "password" : "text"}`}
+                  name="password"
+                  icon={
+                    showPassword1 ? (
+                      <BsEye
+                        className="icon clickable"
+                        onClick={toggleShowPassword1}
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        className="icon clickable"
+                        onClick={toggleShowPassword1}
+                      />
+                    )
+                  }
+                  placeholder={"Password"}
+                  value={password}
+                  isValid={isPasswordValid}
+                  onChange={onPasswordChange}
+                  onBlur={onPasswordBlur}
+                  hasError={passwordHasError}
+                  errorMessage={`${
+                    password
+                      ? "More than 5 characters for a password"
+                      : "Please provide a password"
+                  }`}
+                />
+              </Col>
+              {/* confirm password */}
+              <Col>
+                <Input
+                  label={"Confirm password"}
+                  type={`${!showPassword2 ? "password" : "text"}`}
+                  name="password2"
+                  icon={
+                    showPassword2 ? (
+                      <BsEye
+                        className="icon clickable"
+                        onClick={toggleShowPassword2}
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        className="icon clickable"
+                        onClick={toggleShowPassword2}
+                      />
+                    )
+                  }
+                  placeholder={"Confirm password"}
+                  value={password2}
+                  isValid={isPassword2Valid}
+                  onChange={onPassword2Change}
+                  onBlur={onPassword2Blur}
+                  hasError={password2HasError}
+                  errorMessage={`${
+                    password2
+                      ? "Password did not match"
+                      : "Please confirm your password"
+                  }`}
+                />
+              </Col>
+            </Row>
+            {/* error message */}
+            {error && <Alert variant="danger">{error.message}</Alert>}
+            {/* submit button */}
+            <Form.Group className="mb-3">
+              <Button
+                type="submit"
+                variant="primary"
+                className="btn-lg"
+                disabled={!formIsValid || isLoading}
+              >
+                Create account
+              </Button>
+            </Form.Group>
+          </Form>
+          <div className="mb-3">
+            Already have an account?
+            <Link to="/account/login/" className="ms-2">
+              Log in
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <Alert variant="success">
+          <h5>Account created successfully!</h5>
+          <p>
+            A link on how to activate your account has been sent to {email}.
+          </p>
+        </Alert>
+      )}
+    </>
   );
 };
 
