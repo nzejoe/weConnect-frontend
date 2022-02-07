@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import axios from "axios";
 
 import useInput from "../hooks/use-input";
 import { Input } from ".";
@@ -10,6 +11,9 @@ const RegisterForm = () => {
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
+  const [gender, setGender] = useState('male');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // hook
   //   USERNAME
@@ -83,8 +87,14 @@ const RegisterForm = () => {
     onBlur: onPassword2Blur,
   } = useInput(validatePassword2);
 
+  // GENDER
+  const genderHandler = (e) => {
+    setGender(e.target.value);
+  }
+
   const toggleShowPassword1 = () => setShowPassword1(!showPassword1);
   const toggleShowPassword2 = () => setShowPassword2(!showPassword2);
+
 
   // check if all input is valid
   const formValid =
@@ -103,9 +113,51 @@ const RegisterForm = () => {
     }
   }, [formValid]);
 
+// FORM SUBMIT HANDLER
+const submitHanler = (e) => {
+  e.preventDefault();
+  if(formIsValid){
+    const data = {
+      username,
+      email: email.toLowerCase(),
+      first_name: firstname,
+      last_name: firstname,
+      password,
+      password2,
+      gender
+    }
+    sendRequestHander(data)
+  }
+};
+
+
+const sendRequestHander = async(data) => {
+  setIsLoading(true);
+  try {
+    const response = await axios({
+      url: '/users/register/',
+      method: 'POST',
+      headers:{
+        'Content-type': 'application/json',
+      },
+      data: data,
+    })
+
+    if(response.status === 200){
+      console.log(response.data)
+      setIsLoading(false)
+    }
+  } catch (error) {
+    const err = {...error}
+    console.log(err.response.data);
+    setIsLoading(false)
+  }
+}
+
+
   return (
     <div>
-      <Form>
+      <Form onSubmit={submitHanler}>
         <Row xs={2}>
           {/* username */}
           <Col>
@@ -182,7 +234,7 @@ const RegisterForm = () => {
         {/* gender */}
         <Form.Group className="mb-3">
           <Form.Label>Gender</Form.Label>
-          <Form.Select className="w-25">
+          <Form.Select className="w-25" onChange={genderHandler} value={gender}>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </Form.Select>
@@ -260,7 +312,7 @@ const RegisterForm = () => {
             type="submit"
             variant="primary"
             className="btn-lg"
-            disabled={!formIsValid}
+            disabled={!formIsValid || isLoading}
           >
             Create account
           </Button>
