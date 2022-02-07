@@ -15,7 +15,6 @@ const ProfilePage = () => {
   const { isAuthenticated, user, getUserInfo } = useContext(AuthUserContext);
   const { loading, getUserPosts } = useContext(PostContext);
 
-
   useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line
@@ -34,7 +33,7 @@ const ProfilePage = () => {
     <Base>
       {user.last_name && (
         <div className="profile-page">
-          <PageHeader pageTitle={`${user.first_name} ${user.last_name}`} />
+          <PageHeader pageTitle={user.full_name} />
           <Card>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div className="user-container d-flex align-items-center">
@@ -47,12 +46,12 @@ const ProfilePage = () => {
                 />
                 <div className="user-info">
                   <h6 className="d-flex m-0">
-                    {user.first_name} {user.last_name}{" "}
+                    {user.full_name}{" "}
                     <span className="verified-badge bg-primary">
                       <MdDone className="text-white" />
                     </span>
                   </h6>
-                  <p className="text-small">@maya</p>
+                  <p className="text-small">@{user.username}</p>
                 </div>
               </div>
               <div className="btn-follow">

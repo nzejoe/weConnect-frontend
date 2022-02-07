@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Card, Button } from 'react-bootstrap'
 import { UnauthenticatedUser } from '../components';
 
 const PasswordResetPage = () => {
+
   return (
     <UnauthenticatedUser className="password-reset-page">
       <Card className="password-reset-form p-3">

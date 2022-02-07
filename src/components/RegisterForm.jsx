@@ -123,7 +123,7 @@ const submitHanler = (e) => {
       username,
       email: email.toLowerCase(),
       first_name: firstname,
-      last_name: firstname,
+      last_name: lastname,
       password,
       password2,
       gender,
