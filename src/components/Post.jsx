@@ -170,7 +170,7 @@ const Post = ({ post }) => {
             </div>
 
             {/* comment list */}
-            <CommentList comments={comments} />
+            <CommentList post={post} />
           </div>
         </Card>
       </div>

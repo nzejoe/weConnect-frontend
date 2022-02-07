@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FormControl, Form, Modal, Button } from "react-bootstrap";
 import {
   MdAccountCircle,
   MdOutlineArrowBackIosNew,
   MdOutlineSend,
 } from "react-icons/md";
+// context
+import { PostContext } from '../store/post-context'
 
 import { Comment } from ".";
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ post }) => {
+  const comments = post.comments;
+  const { commentCreate } = useContext(PostContext);
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
 
@@ -24,7 +28,8 @@ const CommentList = ({ comments }) => {
     e.preventDefault();
 
     if (text.trim().length !== 0) {
-      console.log(text);
+      const data = {postId: post.id, commentData: { text }}
+      commentCreate(data);
       handleClose();
     }
   };

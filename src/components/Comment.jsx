@@ -15,7 +15,7 @@ const Comment = ({ comment }) => {
           <Card.Title>{comment.author.full_name}</Card.Title>
           <Card.Text className="text-muted">
             {" "}
-            accusantium blanditiis aut esse aliquid culpa cAtque culpa{" "}
+            { comment.text }
           </Card.Text>
         </Card>
       </div>

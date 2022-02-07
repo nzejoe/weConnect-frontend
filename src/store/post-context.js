@@ -1,13 +1,13 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
 
+// REDUCER
 const initialState = {
   authUserPosts: [],
   refresh: 0,
   loading: false,
 };
 
-// REDUCER
 const reducer = (state, actions) => {
   if (actions.type === "SET_USER_POSTS") {
     return { ...state, authUserPosts: actions.payload };
@@ -34,6 +34,7 @@ export const PostContext = createContext({
   postDelete: (postId) => {},
   postLike: (postId) => {},
   postUnlike: (postId) => {},
+  commentCreate: () => {},
 });
 
 // provider
@@ -186,6 +187,32 @@ const PostProvider = ({ children }) => {
     }
   };// UNLIKE POST .//
 
+  // COMMENT CREATE
+  const commentCreate = async (data) => {
+    setLoading(true);
+    const {postId, commentData} = data;
+    
+    try {
+      const response = await axios({
+        url: `/posts/${postId}/comments/`,
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+        data: commentData,
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "REFRESH" });
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };// COMMENT CREATE .//
+
 
   const context = {
     authUserPosts: state.authUserPosts,
@@ -197,6 +224,7 @@ const PostProvider = ({ children }) => {
     postDelete,
     postLike,
     postUnlike,
+    commentCreate,
   };
 
   return (
