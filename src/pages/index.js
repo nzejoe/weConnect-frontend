@@ -11,7 +11,7 @@ import PasswordResetPage from "./PasswordResetPage";
 import PasswordResetComplete from "./PasswordResetComplete";
 import PrivateRoute from './PrivateRoute';
 import AccountActivatePage from "./AccountActivatePage";
-
+import PasswordResetVerification from "./PasswordResetVerification";
 
 export {
   HomePage,
@@ -27,4 +27,5 @@ export {
   PasswordResetComplete,
   PrivateRoute,
   AccountActivatePage,
+  PasswordResetVerification,
 };
