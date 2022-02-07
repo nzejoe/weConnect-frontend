@@ -27,6 +27,7 @@ import "./App.scss";
 
 // set default base url
 axios.defaults.baseURL = baseURL;
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

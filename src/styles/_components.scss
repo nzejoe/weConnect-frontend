@@ -431,6 +431,15 @@ a.user-link:visited {
 }
 // UNAUTHENTICATED_USER .//
 
+
+// LOADING
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  // transform: translate(-50%, -50%);
+}
+
 // MIN HEIGHT
 @media screen and (min-width: 768px) {
   .active-users {
