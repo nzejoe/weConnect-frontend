@@ -15,19 +15,16 @@ const ProfilePage = () => {
   const { isAuthenticated, user, getUserInfo } = useContext(AuthUserContext);
   const { loading, getUserPosts } = useContext(PostContext);
 
+
   useEffect(() => {
-    if(isAuthenticated){
-      getUserInfo();
-    }
+    getUserInfo();
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if(isAuthenticated){
-      getUserPosts();
-    }
+    getUserPosts();
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, []);
 
   const tabIndexHandler = (index) => {
     setTabIndex(index);
@@ -45,7 +42,7 @@ const ProfilePage = () => {
                   fluid
                   roundedCircle
                   width={80}
-                  src={`${debug ? baseURL + user.avatar : user.avatar}`}
+                  src={getProfileImage(user)}
                   className="me-2"
                 />
                 <div className="user-info">
