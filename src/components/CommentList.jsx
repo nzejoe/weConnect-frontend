@@ -6,14 +6,28 @@ import {
   MdOutlineSend,
 } from "react-icons/md";
 
-import { Comment } from '.'
-
+import { Comment } from ".";
 
 const CommentList = ({ comments }) => {
   const [show, setShow] = useState(false);
+  const [text, setText] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const textChangeHandler = (e) => {
+    setText(e.target.value);
+  };
+
+  // SUBMIT HANDLER
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (text.trim().length !== 0) {
+      console.log(text);
+      handleClose();
+    }
+  };
 
   return (
     <>
@@ -29,12 +43,10 @@ const CommentList = ({ comments }) => {
           />
         </Form>
         <div className="comment-list px-2 mt-3">
-          
-          {comments && comments.map(comment => {
-            return (
-              <Comment key={comment.id} comment={comment}/>
-            );
-          })}
+          {comments &&
+            comments.map((comment) => {
+              return <Comment key={comment.id} comment={comment} />;
+            })}
         </div>
       </div>
 
@@ -59,15 +71,17 @@ const CommentList = ({ comments }) => {
             name=""
             id=""
             rows="8"
+            onChange={textChangeHandler}
             className="form-control"
             placeholder="Write your comment"
           ></textarea>
         </Modal.Body>
         <Modal.Footer className="justify-content-center align-items-center">
           <Button
-            onClick={handleClose}
+            onClick={handleSubmit}
             className="d-flex justify-content-center align-items-center btn-primary"
             variant="lg"
+            disabled={text.trim().length === 0}
           >
             Post
             <MdOutlineSend className="d-block ml-1" />
