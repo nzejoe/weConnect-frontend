@@ -159,7 +159,8 @@ const PostProvider = ({ children }) => {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      const err = {...error}
+      console.log(err.response.data);
       setLoading(false);
     }
   };// LIKE POST .//

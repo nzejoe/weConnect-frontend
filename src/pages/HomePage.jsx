@@ -17,19 +17,15 @@ const HomePage = () => {
 
   // user info getter
   useEffect(() => {
-    if (isAuthenticated) {
-      getUserInfo();
-    }
+    getUserInfo();
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
   // user post getter
   useEffect(() => {
-    if (isAuthenticated) {
-      getUserPosts();
-    }
+    getUserPosts();
     // eslint-disable-next-line
-  }, [isAuthenticated, refresh]);
+  }, [refresh]);
 
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);
