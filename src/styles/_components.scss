@@ -440,6 +440,32 @@ a.user-link:visited {
   // transform: translate(-50%, -50%);
 }
 
+
+// USER UPDATE FORM
+.profile-modal{
+  
+  .modal-dialog{
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.user-update-form{
+  .image{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+// USER UPDATE FORM .//
+
 // MIN HEIGHT
 @media screen and (min-width: 768px) {
   .active-users {

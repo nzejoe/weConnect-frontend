@@ -150,12 +150,13 @@ const ProfilePage = () => {
         onHide={() => isUpdateHandler(false)}
         backdrop="static"
         keyboard={false}
+        className="profile-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title className="text-center">Edit profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <UserUpdateForm />
+         <UserUpdateForm isUpdateHandler={isUpdateHandler}/>
         </Modal.Body>
       </Modal>
     </Base>

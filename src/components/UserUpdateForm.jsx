@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, Button, Image } from "react-bootstrap";
+import { Form, Button, Image, Alert } from "react-bootstrap";
 import axios from "axios";
 
 import { AuthUserContext } from "../store/auth-user-context";
@@ -7,14 +7,14 @@ import { getProfileImage } from "../utils";
 import useInput from "../hooks/use-input";
 import { Input } from ".";
 
-const UserUpdateForm = () => {
+const UserUpdateForm = ({ isUpdateHandler }) => {
   const { user } = useContext(AuthUserContext);
 
   const [image, setImage] = useState(user.avatar);
   const [imageURL, setImageURL] = useState(getProfileImage(user));
   const [formIsValid, setFormIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [errorMsg, setErrorMsg] = useState("");
 
   // hook
   //   USERNAME
@@ -28,7 +28,7 @@ const UserUpdateForm = () => {
     hasError: usernameHasError,
     onChange: onUsernameChange,
     onBlur: onUsernameBlur,
-  } = useInput(validateUsername);
+  } = useInput(validateUsername, user.username);
 
   //   EMAIL
   function validateEmail(email) {
@@ -42,7 +42,7 @@ const UserUpdateForm = () => {
     hasError: emailHasError,
     onChange: onEmailChange,
     onBlur: onEmailBlur,
-  } = useInput(validateEmail);
+  } = useInput(validateEmail, user.email);
 
   //   FIRST NAME
   const validate = (value) => {
@@ -54,7 +54,7 @@ const UserUpdateForm = () => {
     hasError: firstnameHasError,
     onChange: onFirstnameChange,
     onBlur: onFirstnameBlur,
-  } = useInput(validate);
+  } = useInput(validate, user.first_name);
 
   //   LAST NAME
   const {
@@ -63,7 +63,7 @@ const UserUpdateForm = () => {
     hasError: lastnameHasError,
     onChange: onLastnameChange,
     onBlur: onLastnameBlur,
-  } = useInput(validate);
+  } = useInput(validate, user.last_name);
 
   // check if all input is valid
   const formValid =
@@ -77,18 +77,52 @@ const UserUpdateForm = () => {
     }
   }, [formValid]);
 
+  // FILE HANDLER
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    // check it is an image file
+    if (file.type.indexOf("image") !== -1) {
+      setImage(file);
+      setErrorMsg("");
+      // create a URL path from image file
+      setImageURL(URL.createObjectURL(file));
+    } else {
+      setFormIsValid(false);
+      setErrorMsg("Sorry only image files allowed");
+    }
+  };
+
   // FORM SUBMIT HANDLER
   const submitHanler = (e) => {
     e.preventDefault();
     if (formIsValid) {
+      const formData = new FormData();
+      formData.append('username', username)
+      formData.append('email', email)
+      formData.append('first_name', firstname)
+      formData.append('last_name', lastname)
+
+      // check if image was uploaded
+      if (image) {
+        if (image.type && image.type.indexOf("image") !== -1) {
+          // if image has been changed
+          formData.append("avatar", image, image.name);
+        }
+      } else {
+        formData.append("avatar", "null");
+        formData.delete("avatar");
+        // add extra attribute to alert the backend that image has been cleared for the post
+      }
+
       const data = {
-        username,
-        email: email.toLowerCase(),
-        first_name: firstname,
-        last_name: lastname,
-        avatar: null,
+        avatar: formData.get("avatar"),
+        username: formData.get("username"),
+        email: formData.get("email"),
+        first_name: formData.get("first_name"),
+        last_name: formData.get("last_name"),
       };
-      console.log(data)
+      console.log(data);
+      isUpdateHandler(false)
       // sendRequestHander(data);
     }
   };
@@ -98,7 +132,7 @@ const UserUpdateForm = () => {
     try {
       const response = await axios({
         url: "/users/register/",
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
@@ -118,17 +152,28 @@ const UserUpdateForm = () => {
   };
 
   return (
-    <Form onSubmit={submitHanler}>
+    <Form onSubmit={submitHanler} className="user-update-form">
       {/* IMAGE PREVIEWER */}
       {image && (
         <div className="m-0 m-2">
-          <Image src={imageURL} width={100} fluid roundedCircle />
+          <div className="image">
+            <Image src={imageURL} />
+          </div>
           <br />
+          {errorMsg && (
+            <Alert variant="danger" className="p-1 w-50">
+              {errorMsg}
+            </Alert>
+          )}
           <Form.Group controlId="formFileSm">
             <Form.Label className="text-muted clickable border border-secondary rounded-pill py-1 px-3">
               Change image
             </Form.Label>
-            <Form.Control type="file" hidden></Form.Control>
+            <Form.Control
+              type="file"
+              hidden
+              onChange={handleFileChange}
+            ></Form.Control>
           </Form.Group>
         </div>
       )}
