@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 
 import useInput from "../hooks/use-input";
 import { Input } from ".";
 
-const PasswordChangeForm = () => {
+const PasswordChangeForm = ({ isUpdateHandler }) => {
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
+    const [formHasError, setFormHasError] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+
   //   PASSWORD
   const validatePassword = (password) => {
     return password.length > 5;
@@ -49,8 +53,35 @@ const toggleShowCurrentPassword = () => setShowCurrentPassword(!showCurrentPassw
 const toggleShowPassword = () => setShowPassword(!showPassword);
 const toggleShowPassword2 = () => setShowPassword2(!showPassword2);
 
+
+useEffect(() => {
+  const formValid =
+    isCurrentPasswordValid && isPasswordValid && isPassword2Valid;
+  if (formValid) {
+    setFormHasError(false);
+  } else {
+    setFormHasError(true);
+  }
+}, [isCurrentPasswordValid, isPasswordValid, isPassword2Valid]);
+
+
+// FORM SUBMIT HANDLER
+const submitHandler = (e) => {
+    e.preventDefault();
+
+    if(!formHasError){
+        const data = {
+            current_password: currentPassword,
+            password,
+            password2
+        }
+        isUpdateHandler(false)
+        console.log(data)
+    }
+}
+
   return (
-    <Form>
+    <Form onSubmit={submitHandler}>
       {/* current password */}
       <Input
         label={"Current password"}
@@ -139,7 +170,7 @@ const toggleShowPassword2 = () => setShowPassword2(!showPassword2);
         }`}
       />
       <Form.Group>
-        <Button type="submit" variant="success">
+        <Button type="submit" variant="success" disabled={formHasError || isLoading}>
           Save password
         </Button>
       </Form.Group>

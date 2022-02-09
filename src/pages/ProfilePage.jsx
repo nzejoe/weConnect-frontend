@@ -182,7 +182,7 @@ const ProfilePage = () => {
           {!isPasswordChange ? (
             <UserUpdateForm isUpdateHandler={isUpdateHandler} />
           ) : (
-            <PasswordChangeForm/>
+            <PasswordChangeForm isUpdateHandler={isUpdateHandler}/>
           )}
         </Modal.Body>
         <Modal.Footer>
