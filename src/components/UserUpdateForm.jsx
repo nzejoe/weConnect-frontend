@@ -101,6 +101,7 @@ const UserUpdateForm = ({ isUpdateHandler }) => {
       formData.append('email', email)
       formData.append('first_name', firstname)
       formData.append('last_name', lastname)
+      formData.append('gender', user.gender)
 
       // check if image was uploaded
       if (image) {
@@ -114,33 +115,28 @@ const UserUpdateForm = ({ isUpdateHandler }) => {
         // add extra attribute to alert the backend that image has been cleared for the post
       }
 
-      const data = {
-        avatar: formData.get("avatar"),
-        username: formData.get("username"),
-        email: formData.get("email"),
-        first_name: formData.get("first_name"),
-        last_name: formData.get("last_name"),
-      };
-      console.log(data);
-      isUpdateHandler(false)
-      // sendRequestHander(data);
+      sendRequestHander(formData);
     }
   };
 
   const sendRequestHander = async (data) => {
     setIsLoading(true);
+    const token = JSON.parse(localStorage.getItem("weConnect_user"));
+
     try {
       const response = await axios({
-        url: "/users/register/",
+        url: "/users/my_details/update/",
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          authorization: token ? `Bearer ${token.access_token}`: null,
         },
         data: data,
       });
 
       if (response.status === 200) {
         console.log(response.data);
+        isUpdateHandler(false);
         setIsLoading(false);
       }
     } catch (error) {
