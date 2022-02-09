@@ -13,18 +13,18 @@ import { getJoinedDate, getProfileImage } from "../utils";
 const ProfilePage = () => {
   const { loading, getUserPosts } = useContext(PostContext);
   const [tabIndex, setTabIndex] = useState(0);
-  const { isAuthenticated, user, getUserInfo } = useContext(AuthUserContext);
+  const { isAuthenticated, user, refresh, getUserInfo } = useContext(AuthUserContext);
   const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isAuthenticated, refresh]);
 
   useEffect(() => {
     getUserPosts();
     // eslint-disable-next-line
-  }, []);
+  }, [refresh]);
 
   const tabIndexHandler = (index) => {
     setTabIndex(index);

@@ -8,7 +8,7 @@ import useInput from "../hooks/use-input";
 import { Input } from ".";
 
 const UserUpdateForm = ({ isUpdateHandler }) => {
-  const { user } = useContext(AuthUserContext);
+  const { user, refreshUser } = useContext(AuthUserContext);
 
   const [image, setImage] = useState(user.avatar);
   const [imageURL, setImageURL] = useState(getProfileImage(user));
@@ -135,7 +135,7 @@ const UserUpdateForm = ({ isUpdateHandler }) => {
       });
 
       if (response.status === 200) {
-        console.log(response.data);
+        refreshUser()
         isUpdateHandler(false);
         setIsLoading(false);
       }

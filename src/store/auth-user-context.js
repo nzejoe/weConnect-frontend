@@ -3,10 +3,12 @@ import axios from 'axios';
 
 const initialState = {
   isAuthenticated: false,
+  refresh: 0,
   user: {},
   posts: [],
 };
 
+// REDUCER
 const reducer = (state, action)=>{
 
     if (action.type === "AUTHENTICATE") {
@@ -16,17 +18,25 @@ const reducer = (state, action)=>{
     if(action.type === "SET_USER"){
         return {...state, user: action.payload }
     }
+
+    if (action.type === "REFRESH") {
+      return { ...state, refresh: Math.random() };
+    }
     return state
 }
 
+// CONTEXT
 export const AuthUserContext = createContext({
   isAuthenticated: false,
+  refresh: 0,
   user: {},
   posts: [],
   getUserInfo: () => {},
   setIsAuthenticated: () => {},
+  refreshUser: () => {},
 });
 
+// PROVIDER
 const AuthUserProvider = ({ children })=>{
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -57,17 +67,23 @@ const AuthUserProvider = ({ children })=>{
 
     }
 
+    const refreshUser = () => {
+      dispatch({type: 'REFRESH'});
+    };
+
     const context = {
       isAuthenticated: state.isAuthenticated,
+      refresh: state.refresh,
       user: state.user,
       posts: state.posts,
       getUserInfo,
       setIsAuthenticated,
+      refreshUser,
     };
 
     return <AuthUserContext.Provider value={context}>
         { children }
     </AuthUserContext.Provider>
-}
+} // PROVIDER .//
 
 export default AuthUserProvider;
