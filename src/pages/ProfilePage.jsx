@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Card, Image, Button, Spinner } from "react-bootstrap";
+import { Card, Image, Button, Spinner, Modal } from "react-bootstrap";
 import { MdDone, MdOutlineLink, MdOutlineCalendarToday } from "react-icons/md";
 import { Link } from "react-router-dom";
 // context
@@ -8,12 +8,13 @@ import { PostContext } from "../store/post-context";
 import { PageHeader, ProfileTabs, PostList, Base } from "../components";
 
 // utils
-import { getJoinedDate, debug, baseURL, getProfileImage } from "../utils";
+import { getJoinedDate, getProfileImage } from "../utils";
 
 const ProfilePage = () => {
+  const { loading, getUserPosts } = useContext(PostContext);
   const [tabIndex, setTabIndex] = useState(0);
   const { isAuthenticated, user, getUserInfo } = useContext(AuthUserContext);
-  const { loading, getUserPosts } = useContext(PostContext);
+  const [isUpdate, setIsUpdate] = useState(true);
 
   useEffect(() => {
     getUserInfo();
@@ -29,11 +30,16 @@ const ProfilePage = () => {
     setTabIndex(index);
   };
 
+  const isUpdateHandler = (bool) => {
+    setIsUpdate(bool);
+  };
+
   return (
     <Base>
       {user.last_name && (
         <div className="profile-page">
           <PageHeader pageTitle={user.full_name} />
+
           <Card>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div className="user-container d-flex align-items-center">
@@ -55,7 +61,10 @@ const ProfilePage = () => {
                 </div>
               </div>
               <div className="btn-follow">
-                <Button variant="outline-primary d-flex align-items-center">
+                <Button
+                  variant="outline-primary d-flex align-items-center"
+                  onClick={() => isUpdateHandler(true)}
+                >
                   Edit profile
                 </Button>
               </div>
@@ -135,6 +144,26 @@ const ProfilePage = () => {
           )}
         </div>
       )}
+      <Modal
+        show={isUpdate}
+        onHide={() => isUpdateHandler(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header >
+          <Modal.Title className="text-center w-100">Edit profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          I will not close if you click outside me. Don't even try to press
+          escape key.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => isUpdateHandler(false)}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
     </Base>
   );
 };
