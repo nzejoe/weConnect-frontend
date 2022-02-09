@@ -171,6 +171,7 @@ const UserUpdateForm = ({ isUpdateHandler }) => {
           ></Form.Control>
         </Form.Group>
       </div>
+      <hr />
       {/* username */}
       <Input
         label={"Username"}

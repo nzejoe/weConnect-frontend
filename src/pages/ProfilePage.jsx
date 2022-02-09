@@ -1,11 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Card, Image, Button, Spinner, Modal } from "react-bootstrap";
-import { MdDone, MdOutlineLink, MdOutlineCalendarToday } from "react-icons/md";
+import {
+  MdDone,
+  MdOutlineLink,
+  MdOutlineCalendarToday,
+  MdOutlineKeyboardBackspace,
+  MdOutlineClose,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 // context
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
-import { PageHeader, ProfileTabs, PostList, Base, UserUpdateForm } from "../components";
+import {
+  PageHeader,
+  ProfileTabs,
+  PostList,
+  Base,
+  UserUpdateForm,
+} from "../components";
 
 // utils
 import { getJoinedDate, getProfileImage } from "../utils";
@@ -13,8 +25,10 @@ import { getJoinedDate, getProfileImage } from "../utils";
 const ProfilePage = () => {
   const { loading, getUserPosts } = useContext(PostContext);
   const [tabIndex, setTabIndex] = useState(0);
-  const { isAuthenticated, user, refresh, getUserInfo } = useContext(AuthUserContext);
+  const { isAuthenticated, user, refresh, getUserInfo } =
+    useContext(AuthUserContext);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isPasswordChange, setIsPasswordChange] = useState(false);
 
   useEffect(() => {
     getUserInfo();
@@ -32,6 +46,11 @@ const ProfilePage = () => {
 
   const isUpdateHandler = (bool) => {
     setIsUpdate(bool);
+    setIsPasswordChange(false);
+  };
+
+  const passwordChangeHandler = (bool) => {
+    setIsPasswordChange(bool);
   };
 
   return (
@@ -152,12 +171,44 @@ const ProfilePage = () => {
         keyboard={false}
         className="profile-modal"
       >
-        <Modal.Header closeButton>
-          <Modal.Title className="text-center">Edit profile</Modal.Title>
+        <Modal.Header >
+          <Modal.Title className="text-center">
+            {!isPasswordChange ? "Edit profile" : "Password change"}
+          </Modal.Title>
+            <MdOutlineClose className="clickable close-icon" onClick={()=>isUpdateHandler(false)}/>
         </Modal.Header>
         <Modal.Body>
-         <UserUpdateForm isUpdateHandler={isUpdateHandler}/>
+          {!isPasswordChange ? (
+            <UserUpdateForm isUpdateHandler={isUpdateHandler} />
+          ) : (
+            <p>password change</p>
+          )}
         </Modal.Body>
+        <Modal.Footer>
+          {!isPasswordChange ? (
+            <p className="d-flex align-items-center text-small">
+              To change your password use{" "}
+              <Button
+                variant=""
+                className="px-1 text-primary"
+                onClick={() => passwordChangeHandler(true)}
+              >
+                this form
+              </Button>
+            </p>
+          ) : (
+            <p className="d-flex align-items-center text-small">
+              <MdOutlineKeyboardBackspace className="back-icon text-muted"/>
+              <Button
+                variant=""
+                className="px-1 text-primary"
+                onClick={() => passwordChangeHandler(false)}
+              >
+                Go back
+              </Button>
+            </p>
+          )}
+        </Modal.Footer>
       </Modal>
     </Base>
   );

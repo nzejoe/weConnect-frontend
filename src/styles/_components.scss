@@ -448,6 +448,10 @@ a.user-link:visited {
     max-width: 30rem;
     margin-left: auto;
     margin-right: auto;
+
+    .back-icon, .close-icon{
+      font-size: 1.5rem;
+    }
   }
 }
 .user-update-form{
