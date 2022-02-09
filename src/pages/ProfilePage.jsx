@@ -5,13 +5,7 @@ import { Link } from "react-router-dom";
 // context
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
-import {
-  PageHeader,
-  ProfileTabs,
-  PostList,
-  Base,
-  UserUpdateForm,
-} from "../components";
+import { PageHeader, ProfileTabs, PostList, Base, UserUpdateForm } from "../components";
 
 // utils
 import { getJoinedDate, getProfileImage } from "../utils";
@@ -20,7 +14,7 @@ const ProfilePage = () => {
   const { loading, getUserPosts } = useContext(PostContext);
   const [tabIndex, setTabIndex] = useState(0);
   const { isAuthenticated, user, getUserInfo } = useContext(AuthUserContext);
-  const [isUpdate, setIsUpdate] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     getUserInfo();
@@ -157,11 +151,11 @@ const ProfilePage = () => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header>
-          <Modal.Title className="text-center w-100">Edit profile</Modal.Title>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-center">Edit profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <UserUpdateForm />
+         <UserUpdateForm />
         </Modal.Body>
       </Modal>
     </Base>

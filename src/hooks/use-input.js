@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const useInput = (validateValue)=>{
-    const [value, setValue] = useState('');
+const useInput = (validateValue, defaultValue=null)=>{
+    const [value, setValue] = useState(defaultValue ? defaultValue : '');
     // check if input has been touched
     const [isTouched, setIsTouched] = useState(false);
 
