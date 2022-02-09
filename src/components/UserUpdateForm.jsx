@@ -150,29 +150,27 @@ const UserUpdateForm = ({ isUpdateHandler }) => {
   return (
     <Form onSubmit={submitHanler} className="user-update-form">
       {/* IMAGE PREVIEWER */}
-      {image && (
-        <div className="m-0 m-2">
-          <div className="image">
-            <Image src={imageURL} />
-          </div>
-          <br />
-          {errorMsg && (
-            <Alert variant="danger" className="p-1 w-50">
-              {errorMsg}
-            </Alert>
-          )}
-          <Form.Group controlId="formFileSm">
-            <Form.Label className="text-muted clickable border border-secondary rounded-pill py-1 px-3">
-              Change image
-            </Form.Label>
-            <Form.Control
-              type="file"
-              hidden
-              onChange={handleFileChange}
-            ></Form.Control>
-          </Form.Group>
+      <div className="m-0 m-2">
+        <div className="image">
+          <Image src={imageURL} />
         </div>
-      )}
+        <br />
+        {errorMsg && (
+          <Alert variant="danger" className="p-1 w-50">
+            {errorMsg}
+          </Alert>
+        )}
+        <Form.Group controlId="formFileSm">
+          <Form.Label className="text-muted clickable border border-secondary rounded-pill py-1 px-3">
+            Change image
+          </Form.Label>
+          <Form.Control
+            type="file"
+            hidden
+            onChange={handleFileChange}
+          ></Form.Control>
+        </Form.Group>
+      </div>
       {/* username */}
       <Input
         label={"Username"}
