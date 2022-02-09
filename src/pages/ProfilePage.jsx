@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 // context
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
-import { PageHeader, ProfileTabs, PostList, Base } from "../components";
+import {
+  PageHeader,
+  ProfileTabs,
+  PostList,
+  Base,
+  UserUpdateForm,
+} from "../components";
 
 // utils
 import { getJoinedDate, getProfileImage } from "../utils";
@@ -144,25 +150,19 @@ const ProfilePage = () => {
           )}
         </div>
       )}
+      {/* USER UPDATE MODAL */}
       <Modal
         show={isUpdate}
         onHide={() => isUpdateHandler(false)}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header >
+        <Modal.Header>
           <Modal.Title className="text-center w-100">Edit profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
+          <UserUpdateForm />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => isUpdateHandler(false)}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button>
-        </Modal.Footer>
       </Modal>
     </Base>
   );
