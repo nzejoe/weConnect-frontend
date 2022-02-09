@@ -17,6 +17,7 @@ import {
   PostList,
   Base,
   UserUpdateForm,
+  PasswordChangeForm,
 } from "../components";
 
 // utils
@@ -181,7 +182,7 @@ const ProfilePage = () => {
           {!isPasswordChange ? (
             <UserUpdateForm isUpdateHandler={isUpdateHandler} />
           ) : (
-            <p>password change</p>
+            <PasswordChangeForm/>
           )}
         </Modal.Body>
         <Modal.Footer>

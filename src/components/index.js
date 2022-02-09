@@ -24,6 +24,7 @@ import ClickOutsideDetector from "./ClickOutsideDetector";
 import PostUpdateForm from "./PostUpdateForm";
 import Comment from "./Comment";
 import UserUpdateForm from "./UserUpdateForm";
+import PasswordChangeForm from "./PasswordChangeForm";
 
 export {
   CusNav,
@@ -52,4 +53,5 @@ export {
   PostUpdateForm,
   Comment,
   UserUpdateForm,
+  PasswordChangeForm,
 };
