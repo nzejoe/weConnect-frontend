@@ -22,8 +22,6 @@ const CusNav = ({ show, setShow }) => {
   const[loggedOut, setLoggedOut] = useState(false);
   const navigate = useNavigate()
 
-  console.log(user)
-
   const handleLogout = () => {
     localStorage.removeItem('weConnect_user');
     setIsAuthenticated(false);

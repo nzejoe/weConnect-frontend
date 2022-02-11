@@ -27,20 +27,25 @@ import { getJoinedDate, getProfileImage } from "../utils";
 const ProfilePage = () => {
   // context
   const { loading } = useContext(PostContext);
-  const { profileUser, profilePosts, getProfileUser } = useContext(UserProfileContext);
+  const { profileUser, profilePosts, getProfileUser, getProfilePost } = useContext(UserProfileContext);
 
   const [tabIndex, setTabIndex] = useState(0);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isPasswordChange, setIsPasswordChange] = useState(false);
 
   const { username } = useParams();
-  console.log(username);
+
 
   // PROFILE USER
   useEffect(()=>{
-    // getProfileUser(user.id);
+    getProfileUser(username);
     // eslint-disable-next-line
-  },[])
+  },[username])
+
+  useEffect(()=>{
+    getProfilePost(username);
+    // eslint-disable-next-line
+  },[username])
   // PROFILE USER ..//
 
   const tabIndexHandler = (index) => {
@@ -58,6 +63,7 @@ const ProfilePage = () => {
 
   return (
     <Base>
+    {}
       {profileUser.last_name && (
         <div className="profile-page">
           <PageHeader pageTitle={profileUser.full_name} />
