@@ -54,11 +54,11 @@ export const isLiked = (user, post) => {
 }
 
 // this will check if logged in user is following a particular user
-export const isFollowing = (user, otherUser) => {
-  const followers = otherUser.followers;
+export const isFollowing = (user, username) => {
+  const following = user.following;
 
-  for (let x = 0; x < followers.length; x++) {
-    if (user.username === followers[x].follower.username) {
+  for (let x = 0; x < following.length; x++) {
+    if (username === following[x].following.username) {
       return true;
     }
   }

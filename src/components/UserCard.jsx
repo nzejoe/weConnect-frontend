@@ -8,7 +8,6 @@ import { getProfileImage, isFollowing } from "../utils";
 
 const UserCard = ({ user }) => {
   const { user: authUser } = useContext(AuthUserContext);
-
   return (
     <Card className="user-card d-flex flex-column justify-content-between align-items-center py-3 px-4 text-dark">
       <Image
@@ -23,7 +22,7 @@ const UserCard = ({ user }) => {
           <small>@{user.username}</small>
         </Card.Text>
       </Link>
-      {isFollowing(authUser, user) ? (
+      {authUser && isFollowing(authUser, user.username) ? (
         <Button variant="sm" className="btn-primary">
           Following
         </Button>

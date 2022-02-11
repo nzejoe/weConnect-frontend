@@ -7,11 +7,13 @@ import {
   MdOutlineCalendarToday,
   MdOutlineKeyboardBackspace,
   MdOutlineClose,
+  MdAdd,
 } from "react-icons/md";
 import { Link } from "react-router-dom";
 // context
 import { PostContext } from "../store/post-context";
 import { UsersContext } from "../store/users-context";
+import { AuthUserContext } from "../store/auth-user-context";
 
 import { NotFound } from "../pages";
 import {
@@ -24,11 +26,12 @@ import {
 } from "../components";
 
 // utils
-import { getJoinedDate, getProfileImage } from "../utils";
+import { getJoinedDate, getProfileImage, isFollowing } from "../utils";
 
 const ProfilePage = () => {
   // context
   const { refresh } = useContext(PostContext);
+  const { user } = useContext(AuthUserContext);
   const {
     profileUser,
     profileNotFound,
@@ -99,12 +102,30 @@ const ProfilePage = () => {
                     </div>
                   </div>
                   <div className="btn-follow">
-                    <Button
-                      variant="outline-primary d-flex align-items-center"
-                      onClick={() => isUpdateHandler(true)}
-                    >
-                      Edit profile
-                    </Button>
+                    {user && user.username === username ? (
+                      <Button
+                        variant="outline-primary d-flex align-items-center"
+                        onClick={() => isUpdateHandler(true)}
+                      >
+                        Edit profile
+                      </Button>
+                    ) : (
+                      <>
+                        {isFollowing(user, username) ? (
+                          <Button variant="sm" className="btn-primary">
+                            Following
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="sm"
+                            className="btn-outline-primary btn-follow px-3"
+                          >
+                            <MdAdd />
+                            Follow
+                          </Button>
+                        )}
+                      </>
+                    )}
                   </div>
                 </Card.Body>
                 <Card.Body>
