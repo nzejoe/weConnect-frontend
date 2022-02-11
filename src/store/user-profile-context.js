@@ -12,7 +12,11 @@ const initialState = {
 const reducer = (state, action) => {
 
   if (action.type === "SET_USER") {
-    return { ...state, profileUser: action.payload };
+    return { ...state, profileUser: action.payload, profileNotFound: false };
+  }
+
+  if (action.type === "SET_PROFILE_NOT_FOUND") {
+    return { ...state, profileUser: {}, profileNotFound: true, profilePosts: [] };
   }
 
   if (action.type === "SET_PROFILE_POST") {
@@ -29,6 +33,7 @@ const reducer = (state, action) => {
 export const UserProfileContext = createContext({
   profileRefresh: 0,
   profileUser: {},
+  profileNotFound: false,
   profilePosts: [],
   getProfileUser: () => {},
   getProfilePost: () => {},
@@ -78,6 +83,7 @@ const UserProfileProvider = ({ children }) => {
       }
     } catch (error) {
       const err = { ...error };
+      dispatch({ type: "SET_PROFILE_NOT_FOUND" });
       console.log(err.response.data);
     }
   };
@@ -89,6 +95,7 @@ const UserProfileProvider = ({ children }) => {
   const context = {
     profileRefresh: state.profileRefresh,
     profileUser: state.profileUser,
+    profileNotFound: state.profileNotFound,
     profilePosts: state.profilePosts,
     getProfileUser,
     getProfilePost,
