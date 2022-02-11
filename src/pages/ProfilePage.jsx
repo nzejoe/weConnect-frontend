@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Image, Button, Spinner, Modal } from "react-bootstrap";
+import { Card, Image, Button, Modal } from "react-bootstrap";
 import {
   MdDone,
   MdOutlineLink,
@@ -11,9 +11,9 @@ import {
 import { Link } from "react-router-dom";
 // context
 import { PostContext } from "../store/post-context";
-import { UserProfileContext } from "../store/user-profile-context";
+import { UsersContext } from "../store/users-context";
 
-import { NotFound } from '../pages'
+import { NotFound } from "../pages";
 import {
   PageHeader,
   ProfileTabs,
@@ -28,8 +28,14 @@ import { getJoinedDate, getProfileImage } from "../utils";
 
 const ProfilePage = () => {
   // context
-  const { loading } = useContext(PostContext);
-  const { profileUser, profileNotFound, profilePosts, getProfileUser, getProfilePost } = useContext(UserProfileContext);
+  const { refresh } = useContext(PostContext);
+  const {
+    profileUser,
+    profileNotFound,
+    profilePosts,
+    getProfileUser,
+    getProfilePost,
+  } = useContext(UsersContext);
 
   const [tabIndex, setTabIndex] = useState(0);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -38,15 +44,15 @@ const ProfilePage = () => {
   const { username } = useParams();
 
   // PROFILE USER
-  useEffect(()=>{
+  useEffect(() => {
     getProfileUser(username);
     // eslint-disable-next-line
-  },[username])
+  }, [username]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getProfilePost(username);
     // eslint-disable-next-line
-  },[username])
+  }, [username, refresh]);
   // PROFILE USER ..//
 
   const tabIndexHandler = (index) => {
@@ -167,16 +173,10 @@ const ProfilePage = () => {
                 </Card.Body>
               </Card>
               <ProfileTabs getTabIndex={tabIndexHandler} />
-              {!loading ? (
-                <div className="tab-contents">
-                  {tabIndex === 0 && <PostList postList={profilePosts} />}
-                  {tabIndex === 1 && <PostList postList={profilePosts} />}
-                </div>
-              ) : (
-                <div className="w-100 text-center">
-                  <Spinner animation="grow" />
-                </div>
-              )}
+              <div className="tab-contents">
+                {tabIndex === 0 && <PostList postList={profilePosts} />}
+                {tabIndex === 1 && <PostList postList={profilePosts} />}
+              </div>
             </div>
           )}
           {/* USER UPDATE MODAL */}

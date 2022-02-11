@@ -6,14 +6,24 @@ import { MdPeople } from "react-icons/md";
 
 // context
 import { AuthUserContext } from "../store/auth-user-context";
+import { UsersContext } from "../store/users-context";
 
 const Base = ({ children }) => {
   const { isAuthenticated, getUserInfo } = useContext(AuthUserContext);
+  const { userList, getUserList } = useContext(UsersContext);
   const [show, setShow] = useState(false);
+
+  console.log(userList)
 
   // user info getter
   useEffect(() => {
     getUserInfo();
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
+
+  // user info getter
+  useEffect(() => {
+    getUserList();
     // eslint-disable-next-line
   }, [isAuthenticated]);
 

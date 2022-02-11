@@ -20,7 +20,7 @@ import {
 // store context
 import AuthUserProvider from "./store/auth-user-context";
 import PostProvider from "./store/post-context";
-import UserProfileProvider from "./store/user-profile-context";
+import UserProfileProvider from "./store/users-context";
 
 // utils
 import { baseURL } from "./utils";
