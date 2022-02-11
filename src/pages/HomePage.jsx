@@ -25,7 +25,7 @@ const HomePage = () => {
   useEffect(() => {
     getUserPosts();
     // eslint-disable-next-line
-  }, [refresh]);
+  }, [refresh, isAuthenticated]);
 
   const handleTabIndex = useCallback((index) => {
     setTabIndex(index);

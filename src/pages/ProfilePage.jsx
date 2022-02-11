@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 // context
 import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
+import { UserProfileContext } from "../store/user-profile-context";
 import {
   PageHeader,
   ProfileTabs,
@@ -24,10 +25,14 @@ import {
 import { getJoinedDate, getProfileImage } from "../utils";
 
 const ProfilePage = () => {
+  // context
   const { loading, getUserPosts } = useContext(PostContext);
+  const { isAuthenticated, user, refresh, getUserInfo } = useContext(AuthUserContext);
+  const { profileUser } = useContext(UserProfileContext);
+
+  console.log(profileUser)
+
   const [tabIndex, setTabIndex] = useState(0);
-  const { isAuthenticated, user, refresh, getUserInfo } =
-    useContext(AuthUserContext);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isPasswordChange, setIsPasswordChange] = useState(false);
 
