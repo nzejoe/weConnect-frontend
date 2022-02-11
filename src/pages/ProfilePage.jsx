@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Card, Image, Button, Spinner, Modal } from "react-bootstrap";
 import {
   MdDone,
@@ -9,7 +10,6 @@ import {
 } from "react-icons/md";
 import { Link } from "react-router-dom";
 // context
-import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
 import { UserProfileContext } from "../store/user-profile-context";
 import {
@@ -26,34 +26,21 @@ import { getJoinedDate, getProfileImage } from "../utils";
 
 const ProfilePage = () => {
   // context
-  const { loading, getUserPosts } = useContext(PostContext);
-  const { isAuthenticated, user, refresh, getUserInfo } =
-    useContext(AuthUserContext);
-  const { profileUser, getProfileUser } = useContext(UserProfileContext);
-
-  console.log(profileUser);
+  const { loading } = useContext(PostContext);
+  const { profileUser, profilePosts, getProfileUser } = useContext(UserProfileContext);
 
   const [tabIndex, setTabIndex] = useState(0);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isPasswordChange, setIsPasswordChange] = useState(false);
 
-  // AUTH USER MONITOR
-  useEffect(() => {
-    getUserInfo();
-    // eslint-disable-next-line
-  }, [isAuthenticated, refresh]);
-
-  useEffect(() => {
-    getUserPosts();
-    // eslint-disable-next-line
-  }, [refresh]);
-  // AUTH USER MONITOR
+  const { username } = useParams();
+  console.log(username);
 
   // PROFILE USER
   useEffect(()=>{
-    getProfileUser(user.id);
+    // getProfileUser(user.id);
     // eslint-disable-next-line
-  },[user])
+  },[])
   // PROFILE USER ..//
 
   const tabIndexHandler = (index) => {
@@ -169,8 +156,8 @@ const ProfilePage = () => {
           <ProfileTabs getTabIndex={tabIndexHandler} />
           {!loading ? (
             <div className="tab-contents">
-              {tabIndex === 0 && <PostList />}
-              {tabIndex === 1 && <PostList />}
+              {tabIndex === 0 && <PostList postList={profilePosts} />}
+              {tabIndex === 1 && <PostList postList={profilePosts} />}
             </div>
           ) : (
             <div className="w-100 text-center">

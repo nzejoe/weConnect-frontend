@@ -12,15 +12,10 @@ import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
 const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const {isAuthenticated, getUserInfo } = useContext(AuthUserContext);
+  const {isAuthenticated } = useContext(AuthUserContext);
   const { getUserPosts, refresh } = useContext(PostContext);
 
-  // user info getter
-  useEffect(() => {
-    getUserInfo();
-    // eslint-disable-next-line
-  }, [isAuthenticated]);
-
+  
   // user post getter
   useEffect(() => {
     getUserPosts();
