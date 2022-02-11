@@ -10,10 +10,8 @@ import { UsersContext } from "../store/users-context";
 
 const Base = ({ children }) => {
   const { isAuthenticated, getUserInfo } = useContext(AuthUserContext);
-  const { userList, getUserList } = useContext(UsersContext);
+  const { getUserList } = useContext(UsersContext);
   const [show, setShow] = useState(false);
-
-  console.log(userList)
 
   // user info getter
   useEffect(() => {
@@ -21,7 +19,7 @@ const Base = ({ children }) => {
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
-  // user info getter
+  // user list getter
   useEffect(() => {
     getUserList();
     // eslint-disable-next-line

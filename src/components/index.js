@@ -25,6 +25,7 @@ import PostUpdateForm from "./PostUpdateForm";
 import Comment from "./Comment";
 import UserUpdateForm from "./UserUpdateForm";
 import PasswordChangeForm from "./PasswordChangeForm";
+import UserCard from "./UserCard";
 
 export {
   CusNav,
@@ -54,4 +55,5 @@ export {
   Comment,
   UserUpdateForm,
   PasswordChangeForm,
+  UserCard,
 };
