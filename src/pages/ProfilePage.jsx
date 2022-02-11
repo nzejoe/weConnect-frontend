@@ -27,15 +27,17 @@ import { getJoinedDate, getProfileImage } from "../utils";
 const ProfilePage = () => {
   // context
   const { loading, getUserPosts } = useContext(PostContext);
-  const { isAuthenticated, user, refresh, getUserInfo } = useContext(AuthUserContext);
-  const { profileUser } = useContext(UserProfileContext);
+  const { isAuthenticated, user, refresh, getUserInfo } =
+    useContext(AuthUserContext);
+  const { profileUser, getProfileUser } = useContext(UserProfileContext);
 
-  console.log(profileUser)
+  console.log(profileUser);
 
   const [tabIndex, setTabIndex] = useState(0);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isPasswordChange, setIsPasswordChange] = useState(false);
 
+  // AUTH USER MONITOR
   useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line
@@ -45,6 +47,14 @@ const ProfilePage = () => {
     getUserPosts();
     // eslint-disable-next-line
   }, [refresh]);
+  // AUTH USER MONITOR
+
+  // PROFILE USER
+  useEffect(()=>{
+    getProfileUser(user.id);
+    // eslint-disable-next-line
+  },[user])
+  // PROFILE USER ..//
 
   const tabIndexHandler = (index) => {
     setTabIndex(index);
@@ -61,9 +71,9 @@ const ProfilePage = () => {
 
   return (
     <Base>
-      {user.last_name && (
+      {profileUser.last_name && (
         <div className="profile-page">
-          <PageHeader pageTitle={user.full_name} />
+          <PageHeader pageTitle={profileUser.full_name} />
 
           <Card>
             <Card.Body className="d-flex justify-content-between align-items-center">
@@ -72,17 +82,17 @@ const ProfilePage = () => {
                   fluid
                   roundedCircle
                   width={80}
-                  src={getProfileImage(user)}
+                  src={getProfileImage(profileUser)}
                   className="me-2"
                 />
                 <div className="user-info">
                   <h6 className="d-flex m-0">
-                    {user.full_name}{" "}
+                    {profileUser.full_name}{" "}
                     <span className="verified-badge bg-primary">
                       <MdDone className="text-white" />
                     </span>
                   </h6>
-                  <p className="text-small">@{user.username}</p>
+                  <p className="text-small">@{profileUser.username}</p>
                 </div>
               </div>
               <div className="btn-follow">
@@ -111,7 +121,7 @@ const ProfilePage = () => {
                 <span className="text-small">
                   {" "}
                   <MdOutlineCalendarToday className="me-1" /> Joined on{" "}
-                  {getJoinedDate(user.date_joined)}
+                  {getJoinedDate(profileUser.date_joined)}
                 </span>
               </p>
             </Card.Body>
@@ -120,10 +130,10 @@ const ProfilePage = () => {
               <div className="user-follow d-flex">
                 <div className="followers me-5">
                   <p className="text-small m-0">
-                    {user.followers.length} Followers
+                    {profileUser.followers.length} Followers
                   </p>
                   <div className="images">
-                    {user.followers.slice(0, 4).map((fw, idx) => {
+                    {profileUser.followers.slice(0, 4).map((fw, idx) => {
                       return (
                         <Image
                           key={idx}
@@ -138,10 +148,10 @@ const ProfilePage = () => {
                 {/* following */}
                 <div className="followering">
                   <p className="text-small m-0">
-                    {user.following.length} Following
+                    {profileUser.following.length} Following
                   </p>
                   <div className="images">
-                    {user.following.slice(0, 4).map((fw, idx) => {
+                    {profileUser.following.slice(0, 4).map((fw, idx) => {
                       return (
                         <Image
                           key={idx}
@@ -177,17 +187,20 @@ const ProfilePage = () => {
         keyboard={false}
         className="profile-modal"
       >
-        <Modal.Header >
+        <Modal.Header>
           <Modal.Title className="text-center">
             {!isPasswordChange ? "Edit profile" : "Password change"}
           </Modal.Title>
-            <MdOutlineClose className="clickable close-icon" onClick={()=>isUpdateHandler(false)}/>
+          <MdOutlineClose
+            className="clickable close-icon"
+            onClick={() => isUpdateHandler(false)}
+          />
         </Modal.Header>
         <Modal.Body>
           {!isPasswordChange ? (
             <UserUpdateForm isUpdateHandler={isUpdateHandler} />
           ) : (
-            <PasswordChangeForm isUpdateHandler={isUpdateHandler}/>
+            <PasswordChangeForm isUpdateHandler={isUpdateHandler} />
           )}
         </Modal.Body>
         <Modal.Footer>
@@ -204,7 +217,7 @@ const ProfilePage = () => {
             </p>
           ) : (
             <p className="d-flex align-items-center text-small">
-              <MdOutlineKeyboardBackspace className="back-icon text-muted"/>
+              <MdOutlineKeyboardBackspace className="back-icon text-muted" />
               <Button
                 variant=""
                 className="px-1 text-primary"

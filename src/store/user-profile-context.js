@@ -36,22 +36,25 @@ const UserProfileProvider = ({ children }) => {
   const getProfileUser = async (userId) => {
     const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
-    try {
-      const response = await axios({
-        url: `/users/${userId}/`,
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${accessToken.access_token}`,
-        },
-      });
+   if(userId){
+     try {
+       const response = await axios({
+         url: `/users/${userId}/`,
+         method: "GET",
+         headers: {
+           authorization: `Bearer ${accessToken.access_token}`,
+         },
+       });
+       if (response.status === 200) {
+         dispatch({ type: "SET_USER", payload: response.data });
+       }
+     } catch (error) {
+       const err = { ...error };
+       console.log(err.response.data);
+     }
+   }
 
-      if (response.status === 200) {
-        dispatch({ type: "SET_USER", payload: response.data });
-      }
-    } catch (error) {
-      const err = { ...error };
-      console.log(err.response.data);
-    }
+    
   };
 
   const refreshProfile = () => {
