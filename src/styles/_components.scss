@@ -479,6 +479,11 @@ a.user-link:visited {
           flex: 0 0 calc((100% / 3) - 1rem);
           height: 13rem;
           margin-right: 0.5rem;
+          text-decoration: none;
+
+          a{
+            text-decoration: none;
+          }
         }
       }
     }
