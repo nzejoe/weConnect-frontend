@@ -2,7 +2,8 @@ import { createContext, useReducer } from "react";
 import axios from "axios";
 
 const initialState = {
-  profileRefresh: 0,
+  refresh: 0,
+  isLoading: false,
   profileNotFound: false,
   userList: [],
   profileUser: {},
@@ -11,6 +12,10 @@ const initialState = {
 
 // REDUCER
 const reducer = (state, action) => {
+
+  if (action.type === "LOADING") {
+    return { ...state, isLoading: action.payload };
+  }
 
   if (action.type === "SET_USER") {
     return { ...state, profileUser: action.payload, profileNotFound: false };
@@ -25,7 +30,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "REFRESH") {
-    return { ...state, profileRefresh: Math.random() };
+    return { ...state, refresh: Math.random() };
   }
 
   if (action.type === "SET_USER_LIST") {
@@ -36,7 +41,8 @@ const reducer = (state, action) => {
 
 // CONTEXT
 export const UsersContext = createContext({
-  profileRefresh: 0,
+  refresh: 0,
+  isLoading: false,
   userList: [],
   profileUser: {},
   profileNotFound: false,
@@ -45,35 +51,41 @@ export const UsersContext = createContext({
   getProfilePost: () => {},
   getUserList: () => {},
   refreshProfile: () => {},
+  userFollow: () => {},
+  userUnfollow: () => {},
 });
+
 
 // PROVIDER
 const UsersProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // LOADING HANDLER FUNCTION
+  const setLoading = (status) => {
+    dispatch({ type: "LOADING", payload: status });
+  };
+
   const getProfileUser = async (username) => {
     const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
-   try {
-     const response = await axios({
-       url: `/users/${username}/`,
-       method: "GET",
-       headers: {
-         authorization: `Bearer ${accessToken.access_token}`,
-       },
-     });
-     if (response.status === 200) {
-       dispatch({ type: "SET_USER", payload: response.data });
-     }
-   } catch (error) {
-     const err = { ...error };
-     console.log(err.response.data);
-   }
-
-    
+    try {
+      const response = await axios({
+        url: `/users/${username}/`,
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${accessToken.access_token}`,
+        },
+      });
+      if (response.status === 200) {
+        dispatch({ type: "SET_USER", payload: response.data });
+      }
+    } catch (error) {
+      const err = { ...error };
+      console.log(err.response.data);
+    }
   };
 
-
+  // PROFILE POST GETTER
   const getProfilePost = async (username) => {
     const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
@@ -99,7 +111,8 @@ const UsersProvider = ({ children }) => {
     dispatch({ type: "REFRESH" });
   };
 
-  const getUserList = async() => {
+  // USERS LIST GETTER
+  const getUserList = async () => {
     const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
 
     try {
@@ -117,10 +130,57 @@ const UsersProvider = ({ children }) => {
       const err = { ...error };
       console.log(err.response.data);
     }
-  }
+  };
+
+  // USER FOLLOW HANDLER
+  const userFollow = async (userId) => {
+    const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: `/users/${userId}/follow/`,
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${accessToken.access_token}`,
+        },
+      });
+      if (response.status === 200) {
+        setLoading(false);
+        refreshProfile();
+      }
+    } catch (error) {
+      setLoading(false);
+      const err = { ...error };
+      console.log(err.response.data);
+    }
+  };
+
+  // USER UNFOLLOW HANDLER
+  const userUnfollow = async (userId) => {
+    const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: `/users/${userId}/follow/`,
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${accessToken.access_token}`,
+        },
+      });
+      if (response.status === 200) {
+        refreshProfile();
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      const err = { ...error };
+      console.log(err.response.data);
+    }
+  };
 
   const context = {
-    profileRefresh: state.profileRefresh,
+    refresh: state.refresh,
+    isLoading: state.isLoading,
     userList: state.userList,
     profileUser: state.profileUser,
     profileNotFound: state.profileNotFound,
@@ -129,12 +189,12 @@ const UsersProvider = ({ children }) => {
     getUserList,
     getProfilePost,
     refreshProfile,
+    userFollow,
+    userUnfollow,
   };
 
   return (
-    <UsersContext.Provider value={context}>
-      {children}
-    </UsersContext.Provider>
+    <UsersContext.Provider value={context}>{children}</UsersContext.Provider>
   );
 }; // PROVIDER .//
 

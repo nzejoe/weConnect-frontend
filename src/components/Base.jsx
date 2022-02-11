@@ -10,7 +10,7 @@ import { UsersContext } from "../store/users-context";
 
 const Base = ({ children }) => {
   const { isAuthenticated, getUserInfo } = useContext(AuthUserContext);
-  const { getUserList } = useContext(UsersContext);
+  const { refresh, getUserList } = useContext(UsersContext);
   const [show, setShow] = useState(false);
 
   // user info getter
@@ -23,7 +23,7 @@ const Base = ({ children }) => {
   useEffect(() => {
     getUserList();
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isAuthenticated, refresh]);
 
   useEffect(() => {
     if (show) {

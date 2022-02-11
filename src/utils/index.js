@@ -26,7 +26,7 @@ export const debug = true;
 
 export const getProfileImage = (user) => {
   const defaultImg = "/img/profile/default.jpg";
-  
+
   if (user.avatar) {
     const userImg = debug ? baseURL + user.avatar : user.avatar;
     return userImg;
@@ -36,31 +36,31 @@ export const getProfileImage = (user) => {
 };
 
 // this will return post image url
-export const getImageURL = (data)=>{
+export const getImageURL = (data) => {
   const imageURL = debug ? baseURL + data.image : data.image;
-  return imageURL
-}
+  return imageURL;
+};
 
 // this will check if logged in user liked a particular post
 export const isLiked = (user, post) => {
   const likes = post.likes;
 
-  for (let x=0; x<likes.length; x++){
+  for (let x = 0; x < likes.length; x++) {
     if (user.username === likes[x].user) {
-      return true;
-    };
-  }
-  return false
-}
-
-// this will check if logged in user is following a particular user
-export const isFollowing = (user, username) => {
-  const following = user.following;
-
-  for (let x = 0; x < following.length; x++) {
-    if (username === following[x].following.username) {
       return true;
     }
   }
-  return false
-}
+  return false;
+};
+
+// this will check if logged in user is following a particular user
+export const isFollowing = (user, otherUser) => {
+  const followers = otherUser.followers;
+
+  for (let x = 0; x < followers.length; x++) {
+    if (user.username === followers[x].follower.username) {
+      return true;
+    }
+  }
+  return false;
+};

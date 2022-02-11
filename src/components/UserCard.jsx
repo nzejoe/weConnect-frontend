@@ -4,10 +4,14 @@ import { Card, Image, Button } from "react-bootstrap";
 import { MdAdd } from "react-icons/md";
 // context
 import { AuthUserContext } from "../store/auth-user-context";
+import { UsersContext } from "../store/users-context";
+//utils
 import { getProfileImage, isFollowing } from "../utils";
 
 const UserCard = ({ user }) => {
   const { user: authUser } = useContext(AuthUserContext);
+  const { userFollow, userUnfollow } = useContext(UsersContext);
+
   return (
     <Card className="user-card d-flex flex-column justify-content-between align-items-center py-3 px-4 text-dark">
       <Image
@@ -22,12 +26,20 @@ const UserCard = ({ user }) => {
           <small>@{user.username}</small>
         </Card.Text>
       </Link>
-      {authUser && isFollowing(authUser, user.username) ? (
-        <Button variant="sm" className="btn-primary">
+      {isFollowing(authUser, user) ? (
+        <Button
+          variant="sm"
+          className="btn-primary"
+          onClick={() => userUnfollow(user.id)}
+        >
           Following
         </Button>
       ) : (
-        <Button variant="sm" className="btn-outline-primary btn-follow px-3">
+        <Button
+          variant="sm"
+          className="btn-outline-primary btn-follow px-3"
+          onClick={() => userFollow(user.id)}
+        >
           <MdAdd />
           Follow
         </Button>

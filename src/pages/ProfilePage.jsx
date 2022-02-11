@@ -33,11 +33,14 @@ const ProfilePage = () => {
   const { refresh } = useContext(PostContext);
   const { user } = useContext(AuthUserContext);
   const {
+    refresh: userRefresh,
     profileUser,
     profileNotFound,
     profilePosts,
     getProfileUser,
     getProfilePost,
+    userFollow,
+    userUnfollow,
   } = useContext(UsersContext);
 
   const [tabIndex, setTabIndex] = useState(0);
@@ -50,7 +53,7 @@ const ProfilePage = () => {
   useEffect(() => {
     getProfileUser(username);
     // eslint-disable-next-line
-  }, [username]);
+  }, [username, userRefresh]);
 
   useEffect(() => {
     getProfilePost(username);
@@ -111,14 +114,19 @@ const ProfilePage = () => {
                       </Button>
                     ) : (
                       <>
-                        {isFollowing(user, username) ? (
-                          <Button variant="sm" className="btn-primary">
+                        {isFollowing(user, profileUser) ? (
+                          <Button
+                            variant="sm"
+                            className="btn-primary"
+                            onClick={() => userUnfollow(profileUser.id)}
+                          >
                             Following
                           </Button>
                         ) : (
                           <Button
                             variant="sm"
                             className="btn-outline-primary btn-follow px-3"
+                            onClick={() => userFollow(profileUser.id)}
                           >
                             <MdAdd />
                             Follow
