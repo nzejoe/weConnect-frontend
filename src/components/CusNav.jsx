@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Nav, NavItem, NavLink } from "react-bootstrap";
+import { Nav, NavItem, NavLink, Card, Image } from "react-bootstrap";
 import { NavLink as RLink, useNavigate } from "react-router-dom";
 
 // react icons
@@ -16,23 +16,25 @@ import {
 
 // context
 import { AuthUserContext } from "../store/auth-user-context";
+// utils
+import { getProfileImage } from "../utils";
 
 const CusNav = ({ show, setShow }) => {
   const { setIsAuthenticated, user } = useContext(AuthUserContext);
-  const[loggedOut, setLoggedOut] = useState(false);
-  const navigate = useNavigate()
+  const [loggedOut, setLoggedOut] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('weConnect_user');
+    localStorage.removeItem("weConnect_user");
     setIsAuthenticated(false);
     setLoggedOut(true);
-  }
+  };
 
-  useEffect(()=>{
-    if(loggedOut){
+  useEffect(() => {
+    if (loggedOut) {
       navigate("/account/login/", { replace: true });
     }
-  },[loggedOut, navigate])
+  }, [loggedOut, navigate]);
 
   return (
     <aside className={`cus__col cus__nav ${show ? "show" : "hide"}`}>
@@ -104,6 +106,16 @@ const CusNav = ({ show, setShow }) => {
             <MdOutlineLocalFireDepartment className="icon" /> Trending
           </NavLink>
         </NavItem>
+        <hr />
+        {user && (
+          <Card className="p-2 flex-row">
+            <Image src={getProfileImage(user)} width={70} fluid roundedCircle />
+            <div className="ms-2">
+              <h6 className="m-0">{user.full_name}</h6>
+              <p className="m-0 text-small">@{user.username}</p>
+            </div>
+          </Card>
+        )}
       </Nav>
     </aside>
   );
