@@ -26,6 +26,7 @@ import Comment from "./Comment";
 import UserUpdateForm from "./UserUpdateForm";
 import PasswordChangeForm from "./PasswordChangeForm";
 import UserCard from "./UserCard";
+import ChatLog from "./ChatLog";
 
 export {
   CusNav,
@@ -56,4 +57,5 @@ export {
   UserUpdateForm,
   PasswordChangeForm,
   UserCard,
+  ChatLog,
 };

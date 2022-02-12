@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { CusNav, SideBlog } from ".";
+import { CusNav, SideBlog, ChatLog } from ".";
 import { MdPeople } from "react-icons/md";
 
 // context
@@ -70,6 +70,7 @@ const Base = ({ children }) => {
           </Col>
         </Row>
       </Container>
+      <ChatLog/>
     </div>
   );
 };
