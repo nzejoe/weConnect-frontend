@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import AccountActivatePage from "./AccountActivatePage";
 import PasswordResetVerification from "./PasswordResetVerification";
 import MessagesPage from "./MessagesPage";
+import DirectMessagePage from "./DirectMessagePage";
 
 export {
   HomePage,
@@ -28,4 +29,5 @@ export {
   AccountActivatePage,
   PasswordResetVerification,
   MessagesPage,
+  DirectMessagePage,
 };

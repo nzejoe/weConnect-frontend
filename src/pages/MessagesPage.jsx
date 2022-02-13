@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Card, Image } from "react-bootstrap";
 import { BsEnvelope } from "react-icons/bs";
 import { AuthUserContext } from "../store/auth-user-context";
@@ -22,21 +23,20 @@ const MessagesPage = () => {
                 })
                 const otherUserLast = otherUser[otherUser.length - 1];
                 return (
-                  <Card.Body
-                    key={thread.id}
-                    className="thread d-flex clickable border-bottom"
-                  >
-                    <Image
-                      src={otherUserLast.user.avatar}
-                      width={50}
-                      height={50}
-                      roundedCircle
-                    />
-                    <div className="ms-4">
-                      <h6 className="mb-0">{otherUserLast.user.username}</h6>
-                      <p className="text-muted">{otherUserLast.message}</p>
-                    </div>
-                  </Card.Body>
+                  <Link key={thread.id} to={`/messages/${thread.id}/`}>
+                    <Card.Body className="thread d-flex clickable border-bottom">
+                      <Image
+                        src={otherUserLast.user.avatar}
+                        width={50}
+                        height={50}
+                        roundedCircle
+                      />
+                      <div className="ms-4">
+                        <h6 className="mb-0">{otherUserLast.user.username}</h6>
+                        <p className="text-muted">{otherUserLast.message}</p>
+                      </div>
+                    </Card.Body>
+                  </Link>
                 );
             })}
         </Card.Body>

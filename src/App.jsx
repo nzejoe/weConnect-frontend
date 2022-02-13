@@ -15,6 +15,7 @@ import {
   AccountActivatePage,
   PasswordResetVerification,
   MessagesPage,
+  DirectMessagePage,
 } from "./pages";
 
 // store context
@@ -82,7 +83,11 @@ function App() {
               />
               <Route
                 path="/messages/:thread/"
-                element={<PrivateRoute></PrivateRoute>}
+                element={
+                  <PrivateRoute>
+                    <DirectMessagePage />
+                  </PrivateRoute>
+                }
               />
 
               {/* PUBLIC ROUTES */}
