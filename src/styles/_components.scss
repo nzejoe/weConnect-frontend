@@ -501,6 +501,15 @@ a.user-link:visited {
 }
 // CHAT LOG .//
 
+// MESSAGES PAGE
+.messages{
+  min-height: 90%;
+  svg{
+    font-size: 1.5rem;
+  }
+}
+// MESSAGES PAGE .//
+
 // MIN HEIGHT
 @media screen and (min-width: 768px) {
   .active-users {

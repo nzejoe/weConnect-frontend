@@ -6,7 +6,6 @@ import {
   NotFound,
   ExplorePage,
   TrendingPage,
-  LanguagePage,
   PublicRoute,
   LoginPage,
   RegisterPage,
@@ -15,6 +14,7 @@ import {
   PrivateRoute,
   AccountActivatePage,
   PasswordResetVerification,
+  MessagesPage,
 } from "./pages";
 
 // store context
@@ -76,17 +76,13 @@ function App() {
                 path="/messages/"
                 element={
                   <PrivateRoute>
-                    <LanguagePage />
+                    <MessagesPage />
                   </PrivateRoute>
                 }
               />
               <Route
                 path="/messages/:thread/"
-                element={
-                  <PrivateRoute>
-                    
-                  </PrivateRoute>
-                }
+                element={<PrivateRoute></PrivateRoute>}
               />
 
               {/* PUBLIC ROUTES */}

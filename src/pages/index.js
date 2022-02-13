@@ -3,7 +3,6 @@ import ProfilePage from "./ProfilePage";
 import NotFound from "./NotFound";
 import ExplorePage from "./ExplorePage";
 import TrendingPage from "./TrendingPage";
-import LanguagePage from "./LanguagePage";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
@@ -12,6 +11,7 @@ import PasswordResetComplete from "./PasswordResetComplete";
 import PrivateRoute from './PrivateRoute';
 import AccountActivatePage from "./AccountActivatePage";
 import PasswordResetVerification from "./PasswordResetVerification";
+import MessagesPage from "./MessagesPage";
 
 export {
   HomePage,
@@ -19,7 +19,6 @@ export {
   NotFound,
   ExplorePage,
   TrendingPage,
-  LanguagePage,
   PublicRoute,
   LoginPage,
   RegisterPage,
@@ -28,4 +27,5 @@ export {
   PrivateRoute,
   AccountActivatePage,
   PasswordResetVerification,
+  MessagesPage,
 };

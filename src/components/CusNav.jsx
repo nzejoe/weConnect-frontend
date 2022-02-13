@@ -7,7 +7,6 @@ import {
   MdHome,
   MdAccountCircle,
   MdExplore,
-  MdOutlineTranslate,
   MdOutlineLogout,
   MdOutlineWeb,
   MdOutlineLocalFireDepartment,
