@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Card, Form, Image, InputGroup } from "react-bootstrap";
 import { MdOutlineKeyboardBackspace, MdSend } from "react-icons/md";
@@ -9,7 +9,10 @@ import { Base } from "../components";
 
 const DirectMessagePage = () => {
   const { user } = useContext(AuthUserContext);
+  const [messages, setMessages] = useState([]);
   const [chatMessage, setChatMessage] = useState("");
+  const logRef = useRef(null);
+
   const { thread } = useParams();
 
   const thisThread = chatMessages.find((chat) => chat.id === thread);
@@ -25,12 +28,26 @@ const DirectMessagePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(chatMessage)
+    const message = {
+      user: { username: user && user.username, avatar: user && user.avatar },
+      message: chatMessage,
+    };
+    setMessages((prevMessages) => [...prevMessages, message]);
+    setChatMessage("");
   };
+
+  useEffect(() => {
+    setMessages(thisThread.messages);
+  }, [thisThread]);
+
+  // this wiil make sure the chat log scrolls to the bottom
+  useEffect(()=>{
+      logRef.current.scrollTop = logRef.current.scrollHeight;
+  },[messages])
 
   return (
     <Base>
-      <Card className={`messages p-0`}>
+      <Card className={`direct-message-page p-0`}>
         <Card.Header className="d-flex align-items-center">
           <Link to={"/messages/"}>
             <MdOutlineKeyboardBackspace />
@@ -47,9 +64,10 @@ const DirectMessagePage = () => {
             </div>
           </Card.Title>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="messages" ref={logRef}>
           {user &&
-            thisThread.messages.map((chat, idx) => {
+            messages &&
+            messages.map((chat, idx) => {
               if (chat.user.username === user.username) {
                 return (
                   <div key={idx} className="my-chat">
@@ -70,7 +88,6 @@ const DirectMessagePage = () => {
               );
             })}
         </Card.Body>
-
         <Form onSubmit={handleSubmit}>
           <InputGroup>
             <Form.Control
@@ -78,7 +95,10 @@ const DirectMessagePage = () => {
               onChange={messageHandler}
               placeholder="Start a new message"
             />
-            <InputGroup.Text className="bg-white text-primary clickable" onClick={handleSubmit}>
+            <InputGroup.Text
+              className="bg-white text-primary clickable"
+              onClick={handleSubmit}
+            >
               <MdSend />
             </InputGroup.Text>
           </InputGroup>

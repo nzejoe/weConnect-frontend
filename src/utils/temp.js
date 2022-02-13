@@ -111,7 +111,7 @@ export const chatMessages = [
       },
       {
         user: { username: "jennifer", avatar: "/img/profile/profile-6.jpg" },
-        message: "not much! how?",
+        message: "is something wrong?",
       },
     ],
   },

@@ -502,37 +502,50 @@ a.user-link:visited {
 // CHAT LOG .//
 
 // MESSAGES PAGE
-.messages{
-  min-height: 90%;
-  svg{
+.message-page {
+  .messages {
+    height: 35rem;
+    overflow-y: scroll;
+  }
+  svg {
     font-size: 1.5rem;
   }
+}
 
-  a{
-    text-decoration: none;
+.direct-message-page {
+  svg {
+    font-size: 1.5rem;
   }
-  .thread:hover{
-    background: $bg-light;
-  }
+  .messages {
+    height: 35rem;
+    overflow-y: scroll;
 
-  .my-chat{
-    display: flex;
-    justify-content: end;
-    p{
-      display: inline-block;
-      background: rgba($secondary-color-trans-2, .3);
-      border-radius: 10rem;
-      width: auto;
-      max-width: 75%;
+    a {
+      text-decoration: none;
     }
-  }
+    .thread:hover {
+      background: $bg-light;
+    }
 
-  .other-chat{
-    p{
-      background: $secondary-color-trans-1;
-      border-radius: 10rem;
-      width: auto;
-      max-width: 75%;
+    .my-chat {
+      display: flex;
+      justify-content: end;
+      p {
+        display: inline-block;
+        background: rgba($secondary-color-trans-2, 0.3);
+        border-radius: 10rem;
+        width: auto;
+        max-width: 75%;
+      }
+    }
+
+    .other-chat {
+      p {
+        background: $secondary-color-trans-1;
+        border-radius: 10rem;
+        width: auto;
+        max-width: 75%;
+      }
     }
   }
 }
