@@ -12,6 +12,7 @@ import {
   MdOutlineWeb,
   MdOutlineLocalFireDepartment,
   MdPeople,
+  MdMailOutline,
 } from "react-icons/md";
 
 // context
@@ -73,10 +74,10 @@ const CusNav = ({ show, setShow }) => {
         <NavItem className="mb-2">
           <NavLink
             as={RLink}
-            to="/language/"
+            to="/messages/"
             className="text-dark text-upper text-muted align-items-center d-flex p-3"
           >
-            <MdOutlineTranslate className="icon" /> Language
+            <MdMailOutline className="icon" /> Messages
           </NavLink>
         </NavItem>
         <NavItem className="mb-2">

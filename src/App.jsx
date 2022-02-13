@@ -73,10 +73,18 @@ function App() {
                 }
               />
               <Route
-                path="/language/"
+                path="/messages/"
                 element={
                   <PrivateRoute>
                     <LanguagePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/messages/:thread/"
+                element={
+                  <PrivateRoute>
+                    
                   </PrivateRoute>
                 }
               />
