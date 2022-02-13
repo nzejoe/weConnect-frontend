@@ -507,8 +507,33 @@ a.user-link:visited {
   svg{
     font-size: 1.5rem;
   }
+
+  a{
+    text-decoration: none;
+  }
   .thread:hover{
     background: $bg-light;
+  }
+
+  .my-chat{
+    display: flex;
+    justify-content: end;
+    p{
+      display: inline-block;
+      background: rgba($secondary-color-trans-2, .3);
+      border-radius: 10rem;
+      width: auto;
+      max-width: 75%;
+    }
+  }
+
+  .other-chat{
+    p{
+      background: $secondary-color-trans-1;
+      border-radius: 10rem;
+      width: auto;
+      max-width: 75%;
+    }
   }
 }
 // MESSAGES PAGE .//

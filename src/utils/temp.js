@@ -94,7 +94,7 @@ export const chatMessages = [
         message: "hi",
       },
       {
-        user: { username: "nzejoe", avatar: "/img/profile/profile-2.jpg" },
+        user: { username: "jennifer", avatar: "/img/profile/profile-6.jpg" },
         message: "hi",
       },
       {
@@ -102,7 +102,7 @@ export const chatMessages = [
         message: "how are you?",
       },
       {
-        user: { username: "nzejoe", avatar: "/img/profile/profile-2.jpg" },
+        user: { username: "jennifer", avatar: "/img/profile/profile-6.jpg" },
         message: "i'm good and you?",
       },
       {
@@ -110,7 +110,7 @@ export const chatMessages = [
         message: "not much",
       },
       {
-        user: { username: "nzejoe", avatar: "/img/profile/profile-2.jpg" },
+        user: { username: "jennifer", avatar: "/img/profile/profile-6.jpg" },
         message: "not much! how?",
       },
     ],
