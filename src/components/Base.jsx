@@ -41,6 +41,7 @@ const Base = ({ children }) => {
     });
   }, []);
 
+
   return (
     <div className="main py-4">
       <div className="cus__navbar w-100 pe-3">
@@ -70,7 +71,8 @@ const Base = ({ children }) => {
           </Col>
         </Row>
       </Container>
-      <ChatLog/>
+      {/* only render if not in messages page */}
+      {document.location.pathname.indexOf('messages') === -1 &&  <ChatLog/>}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const DirectMessagePage = () => {
               roundedCircle
             />
             <div className="ms-2">
-              <h6 className="mb-0">{otherUser.user.username}</h6>
+              <h3 className="mb-0 text-muted">{otherUser.user.username}</h3>
             </div>
           </Card.Title>
         </Card.Header>
