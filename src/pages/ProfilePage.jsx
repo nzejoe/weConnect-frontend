@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Card, Image, Button, Modal } from "react-bootstrap";
 import {
   MdDone,
@@ -8,8 +8,8 @@ import {
   MdOutlineKeyboardBackspace,
   MdOutlineClose,
   MdAdd,
+  MdOutlineMailOutline,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
 // context
 import { PostContext } from "../store/post-context";
 import { UsersContext } from "../store/users-context";
@@ -85,7 +85,7 @@ const ProfilePage = () => {
               <PageHeader pageTitle={profileUser.full_name} />
 
               <Card>
-                <Card.Body className="d-flex justify-content-between align-items-center">
+                <Card.Body className="d-flex justify-content-between">
                   <div className="user-container d-flex align-items-center">
                     <Image
                       fluid
@@ -113,7 +113,10 @@ const ProfilePage = () => {
                         Edit profile
                       </Button>
                     ) : (
-                      <>
+                      <div className="d-flex">
+                        <Link to={`/messages/${user.id}-${profileUser.id}/`} className="me-2 h-100">
+                          <MdOutlineMailOutline className="message-icon" />
+                        </Link>
                         {isFollowing(user, profileUser) ? (
                           <Button
                             variant="sm"
@@ -132,7 +135,7 @@ const ProfilePage = () => {
                             Follow
                           </Button>
                         )}
-                      </>
+                      </div>
                     )}
                   </div>
                 </Card.Body>
