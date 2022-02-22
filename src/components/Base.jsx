@@ -9,19 +9,23 @@ import { AuthUserContext } from "../store/auth-user-context";
 import { UsersContext } from "../store/users-context";
 
 const Base = ({ children }) => {
-  const { isAuthenticated, getUserInfo } = useContext(AuthUserContext);
+  const {isAuthenticated, getUserInfo } = useContext(AuthUserContext);
   const { refresh, getUserList } = useContext(UsersContext);
   const [show, setShow] = useState(false);
-
+  
   // user info getter
   useEffect(() => {
-    getUserInfo();
+    if(isAuthenticated){
+      getUserInfo();
+    }
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
   // user list getter
   useEffect(() => {
-    getUserList();
+    if(isAuthenticated){
+      getUserList();
+    }
     // eslint-disable-next-line
   }, [isAuthenticated, refresh]);
 

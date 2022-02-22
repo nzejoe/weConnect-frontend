@@ -11,13 +11,13 @@ import { Input } from ".";
 import useInput from "../hooks/use-input";
 
 const LoginForm = () => {
-  const {isAuthenticated, setIsAuthenticated } = useContext(AuthUserContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthUserContext);
   const [show, setShow] = useState(false);
   const [formHasError, setFormHasError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState({error: false, msg: ''});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleShow = () => {
     setShow(!show);
@@ -65,16 +65,23 @@ const LoginForm = () => {
       const user = {
         access_token: response.data.access_token,
         refresh_token: response.data.refresh_token,
+        expires_in: response.data.expires_in,
       };
       // save user access token to localstorage
       localStorage.setItem('weConnect_user', JSON.stringify(user));
+      localStorage.removeItem("isSessionExpired");
       setLoading(false);
-      setIsAuthenticated(true);
+      setIsAuthenticated();
     } catch (error) {
       setLoading(false);
-      const resError = { ...error }
-      setLoginError({ error: true, msg: resError.response.data.error_description });
-      console.log(resError.response);
+      const resError = { ...error };
+      if(resError.response){
+        setLoginError({
+          error: true,
+          msg: resError.response.data.error_description,
+        });
+        console.log(resError.response);
+      }
     }
   }
 
@@ -111,6 +118,11 @@ const LoginForm = () => {
 
   return (
     <div>
+      {JSON.parse(localStorage.getItem("isSessionExpired")) && (
+        <Alert variant="danger">
+          Your session has expired. Please login again.
+        </Alert>
+      )}
       <Form onSubmit={submitHandler}>
         <Input
           type="email"
@@ -139,7 +151,11 @@ const LoginForm = () => {
             )
           }
         />
-        {loginError.error && <Alert variant="danger" className="p-1">{loginError.msg}</Alert>}
+        {loginError.error && (
+          <Alert variant="danger" className="p-1">
+            {loginError.msg}
+          </Alert>
+        )}
         <FormGroup className="mb-3">
           <Button
             type="submit"

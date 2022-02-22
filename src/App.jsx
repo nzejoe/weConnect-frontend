@@ -18,6 +18,8 @@ import {
   DirectMessagePage,
 } from "./pages";
 
+import Chat from "./pages/Chat";
+
 // store context
 import AuthUserProvider from "./store/auth-user-context";
 import PostProvider from "./store/post-context";
@@ -78,6 +80,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <MessagesPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/chat/:room/"
+                element={
+                  <PrivateRoute>
+                    <Chat />
                   </PrivateRoute>
                 }
               />

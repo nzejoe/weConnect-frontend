@@ -20,13 +20,14 @@ import { AuthUserContext } from "../store/auth-user-context";
 import { getProfileImage } from "../utils";
 
 const CusNav = ({ show, setShow }) => {
-  const { setIsAuthenticated, user } = useContext(AuthUserContext);
+  const { user, setIsAuthenticated } = useContext(AuthUserContext);
   const [loggedOut, setLoggedOut] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("weConnect_user");
-    setIsAuthenticated(false);
+    setIsAuthenticated();
     setLoggedOut(true);
   };
 
