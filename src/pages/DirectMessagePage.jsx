@@ -13,14 +13,18 @@ const DirectMessagePage = () => {
   const [chatMessage, setChatMessage] = useState("");
   const logRef = useRef(null);
 
-  const { thread } = useParams();
+  const { username } = useParams();
 
-  const thisThread = chatMessages.find((chat) => chat.id === thread);
+  // const thisThread = chatMessages.find((chat) => chat.id === room_id);
 
   // this will return list of all messages from other user but be sliced down to just one
-  const otherUser = thisThread.messages.filter(
-    (chat) => chat.user.username !== user.username
-  )[0];
+  // const otherUser = thisThread.messages.filter(
+  //   (chat) => chat.user.username !== user.username
+  // )[0];
+
+  
+   const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user.id}`;
+   const sockect = new WebSocket(endpoint);
 
   const messageHandler = (e) => {
     setChatMessage(e.target.value);
@@ -36,9 +40,9 @@ const DirectMessagePage = () => {
     setChatMessage("");
   };
 
-  useEffect(() => {
-    setMessages(thisThread.messages);
-  }, [thisThread]);
+  // useEffect(() => {
+  //   setMessages(thisThread.messages);
+  // }, [thisThread]);
 
   // this wiil make sure the chat log scrolls to the bottom
   useEffect(()=>{
@@ -52,7 +56,7 @@ const DirectMessagePage = () => {
           <Link to={"/messages/"}>
             <MdOutlineKeyboardBackspace />
           </Link>
-          <Card.Title className="d-flex ms-5">
+          {/* <Card.Title className="d-flex ms-5">
             <Image
               src={otherUser.user.avatar}
               width={50}
@@ -62,7 +66,7 @@ const DirectMessagePage = () => {
             <div className="ms-2">
               <h3 className="mb-0 text-muted">{otherUser.user.username}</h3>
             </div>
-          </Card.Title>
+          </Card.Title> */}
         </Card.Header>
         <Card.Body className="messages" ref={logRef}>
           {user &&

@@ -114,7 +114,7 @@ const ProfilePage = () => {
                       </Button>
                     ) : (
                       <div className="d-flex">
-                        <Link to={`/messages/${user.id}-${profileUser.id}/`} className="me-2 h-100">
+                        <Link to={`/messages/${profileUser.username}/`} className="me-2 h-100">
                           <MdOutlineMailOutline className="message-icon" />
                         </Link>
                         {isFollowing(user, profileUser) ? (

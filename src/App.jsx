@@ -92,7 +92,7 @@ function App() {
                 }
               />
               <Route
-                path="/messages/:thread/"
+                path="/messages/:username/"
                 element={
                   <PrivateRoute>
                     <DirectMessagePage />

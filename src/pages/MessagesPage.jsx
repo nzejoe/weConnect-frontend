@@ -17,7 +17,7 @@ const MessagesPage = () => {
           <BsEnvelope />
         </Card.Header>
         <Card.Body className={`messages`}>
-          {chatMessages.map((thread) => {
+          {/* {chatMessages.map((thread) => {
             const otherUser =
               user &&
               thread.messages.filter((chat) => {
@@ -40,7 +40,7 @@ const MessagesPage = () => {
                 </Card.Body>
               </Link>
             );
-          })}
+          })} */}
         </Card.Body>
       </Card>
     </Base>
