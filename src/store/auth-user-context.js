@@ -59,6 +59,7 @@ const AuthUserProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
+        localStorage.setItem("__weconnect_user__", JSON.stringify(response.data));
         dispatch({ type: "SET_USER", payload: response.data });
       }
     } catch (error) {

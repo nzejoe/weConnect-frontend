@@ -8,7 +8,7 @@ import { chatMessages } from "../utils/temp";
 import { Base } from "../components";
 
 const DirectMessagePage = () => {
-  const { user } = useContext(AuthUserContext);
+  // const { user } = useContext(AuthUserContext);
   const [messages, setMessages] = useState([]);
   const [chatMessage, setChatMessage] = useState("");
   const logRef = useRef(null);
@@ -22,6 +22,7 @@ const DirectMessagePage = () => {
   //   (chat) => chat.user.username !== user.username
   // )[0];
 
+  const user = JSON.parse(localStorage.getItem("__weconnect_user__"));
   
    const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user.id}`;
    const sockect = new WebSocket(endpoint);
