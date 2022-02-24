@@ -23,9 +23,29 @@ const DirectMessagePage = () => {
   // )[0];
 
   const user = JSON.parse(localStorage.getItem("__weconnect_user__"));
-  
-   const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user.id}`;
-   const sockect = new WebSocket(endpoint);
+
+  const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user.id}`;
+  const sockect = new WebSocket(endpoint);
+
+  // useEffect(() => {
+  //   setMessages(thisThread.messages);
+  // }, [thisThread]);
+
+  // this wiil make sure the chat log scrolls to the bottom
+  useEffect(() => {
+    logRef.current.scrollTop = logRef.current.scrollHeight;
+  }, [messages]);
+
+  // this function wait for websocket connection before sending message
+  const waitForConnection = (message, interval) => {
+    if (sockect.readyState === 1) {
+      sockect.send(message);
+    } else {
+      setTimeout(() => {
+        sockect.send(message);
+      }, interval);
+    }
+  };
 
   const messageHandler = (e) => {
     setChatMessage(e.target.value);
@@ -33,22 +53,20 @@ const DirectMessagePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = {
-      user: { username: user && user.username, avatar: user && user.avatar },
-      message: chatMessage,
-    };
-    setMessages((prevMessages) => [...prevMessages, message]);
+    // const message = {
+    //   user: { username: user && user.username, avatar: user && user.avatar },
+    //   message: chatMessage,
+    // };
+
+    waitForConnection(JSON.stringify({ message: chatMessage }), 1000);
     setChatMessage("");
   };
 
-  // useEffect(() => {
-  //   setMessages(thisThread.messages);
-  // }, [thisThread]);
-
-  // this wiil make sure the chat log scrolls to the bottom
-  useEffect(()=>{
-      logRef.current.scrollTop = logRef.current.scrollHeight;
-  },[messages])
+  sockect.onmessage = (e)=>{
+    const chat = JSON.parse(e.data);
+    console.log(chat.message)
+    setMessages((prevMessages) => [...prevMessages, chat.message]);
+  }
 
   return (
     <Base>
