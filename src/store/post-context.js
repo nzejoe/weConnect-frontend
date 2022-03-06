@@ -4,13 +4,15 @@ import axios from "axios";
 // REDUCER
 const initialState = {
   authUserPosts: [],
+  next: null,
   refresh: 0,
   loading: false,
 };
 
 const reducer = (state, actions) => {
   if (actions.type === "SET_USER_POSTS") {
-    return { ...state, authUserPosts: actions.payload };
+    const { results, next } = actions.payload;
+    return { ...state, authUserPosts: results, next: next };
   }
 
   if (actions.type === "LOADING") {
@@ -26,6 +28,7 @@ const reducer = (state, actions) => {
 // context
 export const PostContext = createContext({
   authUserPosts: [],
+  next: null,
   loading: false,
   refresh: 0,
   getUserPosts: () => {},
@@ -217,6 +220,7 @@ const PostProvider = ({ children }) => {
 
   const context = {
     authUserPosts: state.authUserPosts,
+    next: state.next,
     loading: state.loading,
     refresh: state.refresh,
     getUserPosts,

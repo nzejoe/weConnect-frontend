@@ -4,11 +4,11 @@ import { Card, Form, Image, InputGroup } from "react-bootstrap";
 import { MdOutlineKeyboardBackspace, MdSend } from "react-icons/md";
 import { AuthUserContext } from "../store/auth-user-context";
 // temp
-import { chatMessages } from "../utils/temp";
+import { getProfileImage } from "../utils/";
 import { Base } from "../components";
 
 const DirectMessagePage = () => {
-  // const { user } = useContext(AuthUserContext);
+  const { user } = useContext(AuthUserContext);
   const [messages, setMessages] = useState([]);
   const [chatMessage, setChatMessage] = useState("");
   const logRef = useRef(null);
@@ -22,9 +22,9 @@ const DirectMessagePage = () => {
   //   (chat) => chat.user.username !== user.username
   // )[0];
 
-  const user = JSON.parse(localStorage.getItem("__weconnect_user__"));
+  const user_id = JSON.parse(localStorage.getItem("__weconnect_user__"));
 
-  const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user.id}`;
+  const endpoint = `ws://localhost:8000/ws/chat/${username}/?user_id=${user_id.id}`;
   const sockect = new WebSocket(endpoint);
 
   // useEffect(() => {
@@ -53,11 +53,6 @@ const DirectMessagePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const message = {
-    //   user: { username: user && user.username, avatar: user && user.avatar },
-    //   message: chatMessage,
-    // };
-
     waitForConnection(JSON.stringify({ message: chatMessage }), 1000);
     setChatMessage("");
   };
@@ -75,17 +70,17 @@ const DirectMessagePage = () => {
           <Link to={"/messages/"}>
             <MdOutlineKeyboardBackspace />
           </Link>
-          {/* <Card.Title className="d-flex ms-5">
+          <Card.Title className="d-flex ms-5">
             <Image
-              src={otherUser.user.avatar}
+              src={''}
               width={50}
               height={50}
               roundedCircle
             />
             <div className="ms-2">
-              <h3 className="mb-0 text-muted">{otherUser.user.username}</h3>
+              <h3 className="mb-0 text-muted">{user.username}</h3>
             </div>
-          </Card.Title> */}
+          </Card.Title>
         </Card.Header>
         <Card.Body className="messages" ref={logRef}>
           {user &&
@@ -101,7 +96,7 @@ const DirectMessagePage = () => {
               return (
                 <div key={idx} className="other-chat d-flex">
                   <Image
-                    src={chat.user.avatar}
+                    src={getProfileImage(chat.user)}
                     width={40}
                     height={40}
                     roundedCircle

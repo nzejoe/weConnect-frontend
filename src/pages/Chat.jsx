@@ -24,20 +24,26 @@ const Chat = () => {
   };
 
   // this function wait for websocket connection before sending message
-  const waitForConnection = (message, interval) => {
-    if (sockect.readyState === 1) {
-      sockect.send(message);
-    } else {
-      setTimeout(() => {
-        sockect.send(message);
-      }, interval);
-    }
-  };
+  // const waitForConnection = (message, interval) => {
+  //   if (sockect.readyState === 1) {
+  //     sockect.send(message);
+  //   } else {
+  //     setTimeout(() => {
+  //       sockect.send(message);
+  //     }, interval);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(chatMessage.trim()){
-      waitForConnection(chatMessage, 1000);
+      if (sockect.readyState === 1) {
+        sockect.send(chatMessage);
+      } else {
+        setTimeout(() => {
+          sockect.send(chatMessage);
+        }, 1000);
+      }
       setChatMessage("");
     }
   };

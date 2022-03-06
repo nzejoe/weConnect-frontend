@@ -9,12 +9,9 @@ import {
   MdOutlineSend,
 } from "react-icons/md";
 
-// utils
-import { getImageURL } from "../utils";
-
 const PostUpdateForm = ({ isEditing, handleEditing, postData }) => {
   const [image, setImage] = useState(postData.image);
-  const [imageURL, setImageURL] = useState(getImageURL(postData));
+  const [imageURL, setImageURL] = useState(postData.image);
   const [text, setText] = useState(postData.text);
   const [formTouched, setFormTouched] = useState(true);
   const [formValid, setFormValid] = useState(false);

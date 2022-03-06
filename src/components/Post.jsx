@@ -11,7 +11,7 @@ import { AuthUserContext } from "../store/auth-user-context";
 import { PostContext } from "../store/post-context";
 
 // utils
-import { debug, getProfileImage, baseURL, isLiked } from "../utils";
+import { isLiked } from "../utils";
 
 import { CommentList, ClickOutsideDetector, PostUpdateForm } from ".";
 
@@ -64,7 +64,7 @@ const Post = ({ post }) => {
                 fluid
                 roundedCircle
                 width={60}
-                src={getProfileImage(post.author)}
+                src={post.author.avatar}
               />
               <div className="author-info ms-2">
                 <Card.Title className="m-0">{post.author.full_name}</Card.Title>
@@ -144,7 +144,7 @@ const Post = ({ post }) => {
             {post.image && (
               <Card.Img
                 className="post-img"
-                src={debug ? `${baseURL + post.image}` : `${post.image}`}
+                src={`${post.image}`}
               ></Card.Img>
             )}
           </div>
