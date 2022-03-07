@@ -4,14 +4,14 @@ import { PostForm, PostList, ActiveUsersCard } from "../components";
 import { PostContext } from "../store/post-context";
 
 const Feeds = () => {
-  const { authUserPosts } = useContext(PostContext);
-  
+  const { authUserPosts, next, getNext } = useContext(PostContext);
+
   return (
     <>
       <div className="feed-content">
         <PostForm />
         <ActiveUsersCard />
-        <PostList postList={authUserPosts} />
+        <PostList postList={authUserPosts} next={next} getNext={getNext} />
       </div>
     </>
   );

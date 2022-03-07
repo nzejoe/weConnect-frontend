@@ -1,17 +1,14 @@
-import { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "react-bootstrap";
 
-import { PostContext } from "../store/post-context";
 import { Post } from ".";
 
-const PostList = () => {
-  const { authUserPosts, next, getNext } = useContext(PostContext);
+const PostList = ({ postList, next, getNext }) => {
 
   return (
     <div className="post-list my-4">
       <InfiniteScroll
-        dataLength={authUserPosts.length}
+        dataLength={postList.length}
         next={getNext}
         hasMore={Boolean(next)}
         loader={
@@ -25,8 +22,8 @@ const PostList = () => {
           </div>
         }
       >
-        {authUserPosts &&
-          authUserPosts.map((post) => {
+        {postList &&
+          postList.map((post) => {
             return <Post key={post.id} post={post} />;
           })}
       </InfiniteScroll>
