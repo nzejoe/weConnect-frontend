@@ -14,7 +14,6 @@ const HomePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { user, isAuthenticated } = useContext(AuthUserContext);
   const { getUserPosts, refresh } = useContext(PostContext);
-  
   // user post getter
   useEffect(() => {
     if (isAuthenticated) {

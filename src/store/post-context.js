@@ -15,11 +15,16 @@ const reducer = (state, actions) => {
     return { ...state, authUserPosts: results, next: next };
   }
 
+  if (actions.type === "SET_NEXT_POSTS") {
+    const { results, next } = actions.payload;
+    return { ...state, authUserPosts: [...state.authUserPosts, ...results], next: next };
+  }
+
   if (actions.type === "LOADING") {
     return { ...state, loading: actions.payload };
   }
 
-  if(actions.type === 'REFRESH'){
+  if (actions.type === "REFRESH") {
     return { ...state, refresh: Math.random() };
   }
   return state;
@@ -32,6 +37,7 @@ export const PostContext = createContext({
   loading: false,
   refresh: 0,
   getUserPosts: () => {},
+  getNext: () => {},
   postCreate: (formData) => {},
   postUpdate: (data) => {},
   postDelete: (postId) => {},
@@ -71,33 +77,59 @@ const PostProvider = ({ children }) => {
     }
   }; // GET USER POST .//
 
+  // GET NEXT
+  const getNext = async () => {
+    const cursor = state.next && state.next.split("=")[1];
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: "/posts/",
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${token && token.access_token}`,
+        },
+        params: { cursor: cursor },
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "SET_NEXT_POSTS", payload: response.data });
+        console.log(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+  // GET NEXT
+
   // CREATE POST
-  const postCreate = async(formData) => {
+  const postCreate = async (formData) => {
     setLoading(true);
     try {
       const response = await axios({
         url: "/posts/",
         method: "POST",
         headers: {
-          'Content-type': 'json/application',
+          "Content-type": "json/application",
           authorization: `Bearer ${token && token.access_token}`,
         },
         data: formData,
       });
 
       if (response.status === 200) {
-        dispatch({ type: "REFRESH"});
+        dispatch({ type: "REFRESH" });
         setLoading(false);
-        console.log(response.data)
+        console.log(response.data);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
-  };// CREATE POST .//
+  }; // CREATE POST .//
 
   // UPDATE POST
-  const postUpdate = async(data) => {
+  const postUpdate = async (data) => {
     setLoading(true);
     const { postId, formData } = data;
     try {
@@ -112,17 +144,17 @@ const PostProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        dispatch({ type: "REFRESH"});
+        dispatch({ type: "REFRESH" });
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
-  };// UPDATE POST .//
+  }; // UPDATE POST .//
 
   // DELETE POST
-  const postDelete = async(postId) => {
+  const postDelete = async (postId) => {
     setLoading(true);
     try {
       const response = await axios({
@@ -135,17 +167,17 @@ const PostProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        dispatch({ type: "REFRESH"});
+        dispatch({ type: "REFRESH" });
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
-  };// DELETE POST .//
+  }; // DELETE POST .//
 
   // LIKE POST
-  const postLike = async(postId) => {
+  const postLike = async (postId) => {
     setLoading(true);
     try {
       const response = await axios({
@@ -158,18 +190,18 @@ const PostProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        dispatch({ type: "REFRESH"});
+        dispatch({ type: "REFRESH" });
         setLoading(false);
       }
     } catch (error) {
-      const err = {...error}
+      const err = { ...error };
       console.log(err.response.data);
       setLoading(false);
     }
-  };// LIKE POST .//
+  }; // LIKE POST .//
 
   // UNLIKE POST
-  const postUnlike = async(postId) => {
+  const postUnlike = async (postId) => {
     setLoading(true);
     try {
       const response = await axios({
@@ -182,20 +214,20 @@ const PostProvider = ({ children }) => {
       });
 
       if (response.status === 200) {
-        dispatch({ type: "REFRESH"});
+        dispatch({ type: "REFRESH" });
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
-  };// UNLIKE POST .//
+  }; // UNLIKE POST .//
 
   // COMMENT CREATE
   const commentCreate = async (data) => {
     setLoading(true);
-    const {postId, commentData} = data;
-    
+    const { postId, commentData } = data;
+
     try {
       const response = await axios({
         url: `/posts/${postId}/comments/`,
@@ -215,8 +247,7 @@ const PostProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
-  };// COMMENT CREATE .//
-
+  }; // COMMENT CREATE .//
 
   const context = {
     authUserPosts: state.authUserPosts,
@@ -224,6 +255,7 @@ const PostProvider = ({ children }) => {
     loading: state.loading,
     refresh: state.refresh,
     getUserPosts,
+    getNext,
     postCreate,
     postUpdate,
     postDelete,
