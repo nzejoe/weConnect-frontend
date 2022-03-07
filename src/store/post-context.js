@@ -93,7 +93,6 @@ const PostProvider = ({ children }) => {
 
       if (response.status === 200) {
         dispatch({ type: "SET_NEXT_POSTS", payload: response.data });
-        console.log(response.data);
         setLoading(false);
       }
     } catch (error) {

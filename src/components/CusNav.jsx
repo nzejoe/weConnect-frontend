@@ -40,7 +40,7 @@ const CusNav = ({ show, setShow }) => {
   return (
     <aside className={`cus__col cus__nav ${show ? "show" : "hide"}`}>
       <div className="backdrop" onClick={() => setShow(false)}></div>
-      <div className="brand py-5 px-2 d-flex align-items-center">
+      <div className="brand pb-4 px-2 d-flex align-items-center">
         <MdPeople className="brand-icon text-primary" /> weConnect
       </div>
       <Nav className="content navbar-nav">
