@@ -37,8 +37,10 @@ const ProfilePage = () => {
     profileUser,
     profileNotFound,
     profilePosts,
+    next,
     getProfileUser,
     getProfilePost,
+    getNext,
     userFollow,
     userUnfollow,
   } = useContext(UsersContext);
@@ -114,7 +116,10 @@ const ProfilePage = () => {
                       </Button>
                     ) : (
                       <div className="d-flex">
-                        <Link to={`/messages/${profileUser.username}/`} className="me-2 h-100">
+                        <Link
+                          to={`/messages/${profileUser.username}/`}
+                          className="me-2 h-100"
+                        >
                           <MdOutlineMailOutline className="message-icon" />
                         </Link>
                         {isFollowing(user, profileUser) ? (
@@ -206,8 +211,20 @@ const ProfilePage = () => {
               </Card>
               <ProfileTabs getTabIndex={tabIndexHandler} />
               <div className="tab-contents">
-                {tabIndex === 0 && <PostList postList={profilePosts} />}
-                {tabIndex === 1 && <PostList postList={profilePosts} />}
+                {tabIndex === 0 && (
+                  <PostList
+                    postList={profilePosts}
+                    next={next}
+                    getNext={() => getNext(username)}
+                  />
+                )}
+                {tabIndex === 1 && (
+                  <PostList
+                    postList={profilePosts}
+                    next={next}
+                    getNext={() => getNext(username)}
+                  />
+                )}
               </div>
             </div>
           )}

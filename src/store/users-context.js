@@ -8,6 +8,7 @@ const initialState = {
   userList: [],
   profileUser: {},
   profilePosts: [],
+  next: null,
 };
 
 // REDUCER
@@ -26,7 +27,13 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "SET_PROFILE_POST") {
-    return { ...state, profilePosts: action.payload };
+    const { results, next} = action.payload
+    return { ...state, profilePosts: results, next: next};
+  }
+
+  if (action.type === "SET_NEXT_POSTS") {
+    const { results, next } = action.payload;
+    return { ...state, profilePosts:[...state.profilePosts, ...results], next: next };
   }
 
   if (action.type === "REFRESH") {
@@ -47,8 +54,10 @@ export const UsersContext = createContext({
   profileUser: {},
   profileNotFound: false,
   profilePosts: [],
+  next: null,
   getProfileUser: () => {},
   getProfilePost: () => {},
+  getNext: () => {},
   getUserList: () => {},
   refreshProfile: () => {},
   userFollow: () => {},
@@ -106,6 +115,32 @@ const UsersProvider = ({ children }) => {
       console.log(err.response.data);
     }
   };
+
+  // GET NEXT
+  const getNext = async (username) => {
+    const accessToken = JSON.parse(localStorage.getItem("weConnect_user"));
+    const cursor = state.next && state.next.split("=")[1];
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: `/posts/${username}/`,
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${accessToken.access_token}`,
+        },
+        params: { cursor: cursor },
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: "SET_NEXT_POSTS", payload: response.data });
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+  // GET NEXT
 
   const refreshProfile = () => {
     dispatch({ type: "REFRESH" });
@@ -185,9 +220,11 @@ const UsersProvider = ({ children }) => {
     profileUser: state.profileUser,
     profileNotFound: state.profileNotFound,
     profilePosts: state.profilePosts,
+    next: state.next,
     getProfileUser,
     getUserList,
     getProfilePost,
+    getNext,
     refreshProfile,
     userFollow,
     userUnfollow,
